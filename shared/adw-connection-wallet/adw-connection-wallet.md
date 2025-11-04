@@ -65,11 +65,15 @@ The first of two methods we'll learn for establishing a secure SQL Developer con
 
 When you provisioned your autonomous database instance with a network access type of "Secure access from everywhere", by default, mTLS authentication was required, and the only ways to enable TLS in addition to mTLS are either to define an access control list (ACL) or to use a private endpoint. For this lab, you will configure an **IP ACL** (access control list). Then you will be able to uncheck the "Require mutual TLS" checkbox, which in turn will enable TLS for connecting without a wallet.
 
->**Note**: For detailed information on allowing TLS connections, see the [Update your Autonomous Database Instance to Allow both TLS and mTLS Authentication] (https://docs.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/autonomous-data-warehouse-cloud/cswgs&id=ADBSA-GUID-6A34B30A-3692-4D1F-8458-FD8F32736199) documentation.
+For detailed information on allowing TLS connections, see the [Update your Autonomous Database Instance to Allow both TLS and mTLS Authentication] (https://docs.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/autonomous-data-warehouse-cloud/cswgs&id=ADBSA-GUID-6A34B30A-3692-4D1F-8458-FD8F32736199) documentation.
 
-To create a new TLS connection to Autonomous Database:
+<if type="livelabs">
+>**Note:** If you are using a Sandbox reservation environment (green button), then your database name will be a little different than what is shown in this lab. 
+</if>
 
-1. Define an **IP ACL** (access control list). Navigate to your **`ADW_Finance_Mart`** Autonomous Database instance details page. On the **Autonomous Database Information** tab, scroll-down to the **Network** section, and then click **Edit** next to **Access control list** field.
+To create a new TLS connection to Autonomous AI Database:
+
+1. Define an **IP ACL** (access control list). Navigate to your **`ADW_Finance_Mart`** Autonomous AI Database instance details page. On the **Autonomous AI Database Information** tab, scroll-down to the **Network** section, and then click **Edit** next to **Access control list** field.
 
     ![Click the Edit button next to Access control list](./images/click-edit-to-create-acl.png =65%x*)
 
@@ -83,7 +87,7 @@ To create a new TLS connection to Autonomous Database:
 
 4. Click **Save**. Wait a minute for the database status to change from **UPDATING** to **AVAILABLE**.
 
-5. On the **Autonomous Database details** page, in the **Network** section, note that the **Access type** has automatically changed from the default access type that you used when provisioning the database, **Allow secure access from everywhere**, to **Allow secure access from specified IPs and VCNs**. Click the **Edit** link next to **Mutual TLS (mTLS) authentication**.
+5. On the **Autonomous Database details** page, in the **Network** section, note that the **Access type** has automatically changed from the default access type that you used when provisioning the database, **Allow secure access from everywhere**, to **Allow secure access from specified IPs and VCNs**. Click the **Edit** button next to **Mutual TLS (mTLS) authentication**.
 
     ![Click the Edit button next to Mutual TLS authentication](./images/click-edit-to-uncheck-mtls.png =65%x*)
 
@@ -105,7 +109,7 @@ Next, perform the following steps to obtain the **TLS connection string**.
 
 9. Choose one of the displayed connection strings, such as **`adwfinance_high`**. Next, click the **Actions** icon (ellipsis) and then click **Copy** to copy that connection string. Paste the connection string to a text editor of your choice such as notepad in MS-Windows as you will need this information later.
 
-    ![Edit the Connection Strings section](./images/edit-connection-strings.png =65%x*)
+    ![Edit the Connection Strings section](./images/edit-connection-strings.png " ")
 
     ![Copy a connection string and paste it in an editor](./images/copy-connection-strings.png " ")
 
@@ -240,7 +244,7 @@ You may now **proceed to the next lab**.
 * [Network configuration options](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/autonomous-network-access.html#GUID-D2D468C3-CA2D-411E-92BC-E122F795A413)
 * [Connecting to Your Autonomous Database Has Never Been Easier](https://blogs.oracle.com/datawarehousing/post/connecting-your-autonomous-database-has-never-been-easier)
 
-## **Acknowledgements**
+## Acknowledgements
 
 * **Author:** Lauran K. Serhal, Consulting User Assistance Developer
-* **Last Updated By/Date** - Lauran K. Serhal, August 2025
+* **Last Updated By/Date** - Lauran K. Serhal, October 2025
