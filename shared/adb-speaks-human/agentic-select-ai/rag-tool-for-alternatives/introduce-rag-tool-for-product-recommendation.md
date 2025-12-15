@@ -45,7 +45,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-- This lab requires completion of the previous labs in the **Contents** menu on the left.
+This lab requires completion of the previous labs in the **Contents** menu on the left.
 
 ## Task 1: Create a profile for RAG
 Define an AI Profile that has your LLM and database objects and is ready to use RAG once a vector index exists.
@@ -62,8 +62,8 @@ Define an AI Profile that has your LLM and database objects and is ready to use 
       DBMS_CLOUD_AI.create_profile(                                              
           profile_name => 'SALES_AGENT_RAG_PROFILE',                                                                 
           attributes   => '{"provider": "oci",   
-                            "credential_name": "OCI_CRED",          
-                            "vector_index_name": "SALES_AGENT_VECTOR_INDEX"}');  
+                            "credential_name": "AI_CREDENTIAL",          
+                            "vector_index_name": "SALES_AGENT_VECTOR_INDEX2"}');  
     END;
       </copy>
 ```
@@ -90,40 +90,52 @@ DBMS_CLOUD.create_credential(
 END;
 </copy>
 ```
-3. Build a vector index over product docs stored in Object Storage. The index is used by RAG.
+3. List the document stored in the Object Storage.
+
+```
+<copy>
+select * from
+  DBMS_CLOUD.LIST_OBJECTS(
+    credential_name => 'AI_CREDENTIAL',
+    location_uri    => 'https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/b9UsLs4CwZi9iorADMTK9c-ziXkhmME6m7kcdJ9ypjqFTzzZmHSLqNve0t_Vi1du/n/adwc4pm/b/oaiw25-sales-agent-rag-documents/o/'
+</copy>
+```
+
+4. Build a vector index over product docs stored in Object Storage. The index is used by RAG.
 ```
 <copy>
 %script
 
 BEGIN
   DBMS_CLOUD_AI.DROP_VECTOR_INDEX(
-  index_name  => 'SALES_AGENT_VECTOR_INDEX',
+  index_name  => 'SALES_AGENT_VECTOR_INDEX2',
   include_data => TRUE);
   EXCEPTION WHEN OTHERS THEN NULL;
 END;
 /
 BEGIN
   DBMS_CLOUD_AI.CREATE_VECTOR_INDEX(
-    index_name  => 'SALES_AGENT_VECTOR_INDEX',
+    index_name  => 'SALES_AGENT_VECTOR_INDEX2',
     attributes  => '{"vector_db_provider": "oracle",
                     "location": "https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/b9UsLs4CwZi9iorADMTK9c-ziXkhmME6m7kcdJ9ypjqFTzzZmHSLqNve0t_Vi1du/n/adwc4pm/b/oaiw25-sales-agent-rag-documents/o/",
-                    "object_storage_credential_name": "OCI_SALES_CRED",
+                    "object_storage_credential_name": "AI_CREDENTIAL",
                     "profile_name": "SALES_AGENT_RAG_PROFILE", 
                     "vector_distance_metric": "cosine",
                     "chunk_overlap":50,
-                    "chunk_size":450}',
+                    "chunk_size":450,
+                    "match_limit": 2}',
       description => 'Vector index for sales return agent scenario');
 END;
   </copy>
 ```
-4. Set the AI profile in the current session.
+5. Set the AI profile in the current session.
   ```
   <copy>
   %script
   EXEC DBMS_CLOUD_AI.SET_PROFILE(profile_name => 'SALES_AGENT_RAG_PROFILE');
   </copy>
   ```
-5. Use natural language prompts to run a test using our LLM and specific content. Ask for alternate product recommendations.
+6. Use natural language prompts to run a test using our LLM and specific content. Ask for alternate product recommendations.
   ```
   <copy>
   select ai narrate what are alternatives for the smartphone case
@@ -192,7 +204,7 @@ BEGIN
                     '   c. If a refund, inform customer to print out the return shipping label for the defective product, return the product, and update the order status to refund' ||
                     '   d. If consider alternative recommendations, use the RAG tool to present 2 alternatives to the customer and let them decide if they want this product or the original one' || 
                     '5. After the completion of a return or refund, ask if you can help with anything else.' ||
-                    '   End the task and generatea a final answer only if user does not need help on anything else",
+                    '   End the task and generate a a final answer only if user does not need help on anything else",
                     "tools": ["Update_Order_Status_Tool","sales_rag_tool"]}'
   );
 END;

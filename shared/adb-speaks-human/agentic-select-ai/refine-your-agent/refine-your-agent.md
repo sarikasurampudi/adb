@@ -17,7 +17,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-- This lab requires completion of the first three labs in the **Contents** menu on the left.
+- This lab requires completion of Lab 1 in the **Contents** menu on the left.
 
 
 ## Task 1: Refine the Role of the Customer Agent
@@ -102,7 +102,7 @@ END;
 
 ## Task 4: Interact with the Refined Agent - Part 1
 
-You can start interacting with the refined Select AI agent team by using natural language prompt on the SQL command line. To do so, you first clear any previous conversation and then set the agent team for the current session.
+You can start interacting with the refined Select AI agent team by using natural language prompt on the SQL paragraph. To do so, you first clear any previous conversation and then set the agent team for the current session.
 
 1. Set the agent team in the current session.
 
@@ -153,30 +153,35 @@ You can start interacting with the refined Select AI agent team by using natural
     select ai agent I''ll take a refund; 
     </copy>
     ```
+    > SQL requires escaping single quotes with ''.
+
 **Result:**
-    ```
-    RESPONSE
-    I'm happy to process your refund for the smartphone cord. Could you please confirm your name and order number so I can update the status and provide you with a return shipping label to send the product back?
-    ```
 
     ```
-    <copy>
-    select ai agent I''m Eva Green with order number 5019
-    </copy>
+    RESPONSE
+    I'm happy to process your refund for the smartphone cord. Could you please confirm your name and order number so I can update the status and provide you with a return shipping label to send the   product back?
     ```
+```
+<copy>
+select ai agent I''m Eva Green with order number 5019
+    </copy>
+```
+
 **Result:**
+
     ```
     RESPONSE
     Thank you, Eva. Your refund process has been initiated. Please print out the return shipping label that will be provided to you, and use it to send the defective product back to us. Once we receive it, the refund will be finalized. Is there anything else I can help you with?
     ```
-    ```
+
+```
     <copy>
     select ai agent No, not at the moment
     </copy>
-    ```
+```
 **Result:**
-    ```
-    RESPONSE                                                                                                                                                                                                                                                                                                                                                               
+```
+    RESPONSE
     Subject: Return Confirmation for Order #5019 - Smartphone Cord
 
     Dear Eva Green,
@@ -195,7 +200,7 @@ You can start interacting with the refined Select AI agent team by using natural
     [Company Name]  
     [Contact Information]    
 
-    ```
+```
 
 This result relied on the LLM to generate a form letter using its own *creativity*. The specific content may differ from customer to customer as is typical for LLMs. To ensure we have a consistent form letter response, you will define a function that generates exactly the text you want in the next lab.
 
@@ -204,7 +209,7 @@ You may now proceed to the next lab.
 ## Learn More
 
 * [OML Notebooks](https://docs.oracle.com/en/database/oracle/machine-learning/oml-notebooks/index.html)
-* [Using Oracle Autonomous Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/index.html)
+* [Using Oracle Autonomous AI Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/index.html)
 * [How to help AI models generate better natural language queries](https://blogs.oracle.com/datawarehousing/post/how-to-help-ai-models-generate-better-natural-language-queries-in-autonomous-database)
 
 ## Acknowledgements

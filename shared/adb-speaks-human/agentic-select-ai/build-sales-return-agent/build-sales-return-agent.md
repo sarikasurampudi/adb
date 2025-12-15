@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you’ll turn a common customer service workflow - returning a purchased item - into an agentic workflow using Oracle Autonomous Database Select AI. The agent will converse with you the customer, collect the reason for return, and run an update to the order record.
+In this lab, you’ll turn a common customer service workflow - returning a purchased item - into an agentic workflow using Oracle Autonomous AI Database Select AI. The agent will converse with you the customer, collect the reason for return, and run an update to the order record.
 
 Estimated Time: 30 minutes.
 
@@ -10,12 +10,12 @@ Estimated Time: 30 minutes.
 
 In this lab, you will:
 
-* Download and import the Sales Return Notebook into OML.
+* Download and import the Sales Return Notebook into Oracle Machine Learning Notebooks.
 * Review the sample customer data and create a PL/SQL function to update the order status.
 * Create a tool that uses that function to update the return status in the database.
 * Create a task that coordinates the return action.
 * Create a customer agent that defines the persona/role of the customer return agent.
-* Create an agent team and run it from the SQL command line, providing responses the agent’s questions.
+* Create an agent team and run it from the SQL command line, providing responses to the agent's questions.
 * Use DBMS\_CLOUD\_AI\_AGENT.RUN\_TEAM function to run a multi-step interaction.
 
 ### Prerequisites
@@ -35,13 +35,13 @@ Replace _`USER`_ with your user name.
 
 ## Task 1: Download and Import a Notebook into OML
 
-You can import a notebook from a local disk or from a remote location if you provide the URL. A notebook named **SelectAI4SQL - AI Agents - Sales Return Agent** contains all the steps for setting up the **Sales Return Agent** for processing the product return from a customer. In this task, you will first download the **`SelectAI4SQL - AI Agents - Sales Return Agent.dsnb`** OML notebook to your local machine, and then import this notebook into OML.
+You can import a notebook from a local disk or on GitHub. A notebook named **SelectAI4SQL - AI Agents - Sales Return Agent** contains all the steps for setting up the **Sales Return Agent** for processing the product return from a customer. In this task, you will first download the **`SelectAI4SQL - AI Agents - Sales Return Agent.dsnb`** OML notebook to your local machine, and then import this notebook into OML.
 
 1. Click the button below to download the notebook:
 
     <a href="https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/1C_VWEcNHyMoV10mPLbRvJmxDOyCR0ogX4LijMCidf5MxL5xuhnnMvwuQ5tll4uR/n/adwc4pm/b/oaiw25-select-ai-agent-notebook/o/SelectAI4SQL%20-%20AI%20Agents%20-%20Sales%20Return%20Agent.dsnb" class="tryit-button">Download Notebook</a>
 
-2. On your Oracle Machine Learning home page, click the top left navigation menu. Click **Notebooks**. Click **Import**. The **Open** dialog box is displayed. Navigate to your local folder where you downloaded the OML notebook, and select the **`SelectAI4SQL - AI Agents - Sales Return Agent.dsnb`** notebook file. The file is displayed in the **File Name** field. Make sure that the **Custom Files (*.dsnb;\*.ipynb;\*.json;\*.zpln)** type is selected in the second drop-down field, and then click **Open**.
+2. On your Oracle Machine Learning home page, click the top left navigation menu. Click **Notebooks**. Click **Import** and click **File**. The **Open** dialog box is displayed. Navigate to your local folder where you downloaded the OML notebook, and select the **`SelectAI4SQL - AI Agents - Sales Return Agent.dsnb`** notebook file. The file is displayed in the **File Name** field. Make sure that the **Custom Files (*.dsnb;\*.ipynb;\*.json;\*.zpln)** type is selected in the second drop-down field, and then click **Open**.
 
     ![The Open dialog box is displayed](../build-sales-return-agent/images/notebook-open-dialog.png " ")
 
@@ -57,11 +57,11 @@ You can import a notebook from a local disk or from a remote location if you pro
 
 You'll view the sample table for the scenario.
 
-1. View the contents of the customer table.
+1. Run the paragraphs that create `customers` and `customer_order_status` tables and view the contents of the customers table.
 
     ```
     <copy>
-    select * from customer;
+    select * from customers;
     </copy>
     ```
 
@@ -84,34 +84,34 @@ You will create a SQL function to update a customer’s order status and return 
     %script
 
     CREATE OR REPLACE FUNCTION update_customer_order_status (
-        p_customer_name IN VARCHAR2,
-        p_order_number  IN VARCHAR2,
-        p_status        IN VARCHAR2
-    ) RETURN VARCHAR2 IS
-        v_customer_id  customer.customer_id%TYPE;
-        v_row_count    NUMBER;
+    p_customer_name IN VARCHAR2,
+    p_order_number  IN VARCHAR2,
+    p_status        IN VARCHAR2
+    ) RETURN CLOB IS
+    v_customer_id  customers.customer_id%TYPE;
+    v_row_count    NUMBER;
     BEGIN
-        -- Find customer_id from customer_name
-        SELECT customer_id
-        INTO v_customer_id
-        FROM customer
-        WHERE name = p_customer_name;
-        
-        UPDATE customer_order_status
-        SET status = p_status
-        WHERE customer_id = v_customer_id
-          AND order_number = p_order_number;
+    -- Find customer_id from customer_name
+    SELECT customer_id
+    INTO v_customer_id
+    FROM customers
+    WHERE name = p_customer_name;
+    
+    UPDATE customer_order_status
+    SET status = p_status
+    WHERE customer_id = v_customer_id
+      AND order_number = p_order_number;
 
-        v_row_count := SQL%ROWCOUNT;
+    v_row_count := SQL%ROWCOUNT;
 
-        IF v_row_count = 0 THEN
-            RETURN 'No matching record found to update.';
-        ELSE
-            RETURN 'Update successful.';
-        END IF;
+    IF v_row_count = 0 THEN
+        RETURN 'No matching record found to update.';
+    ELSE
+        RETURN 'Update successful.';
+    END IF;
     EXCEPTION
-        WHEN OTHERS THEN
-            RETURN 'Error: ' || SQLERRM;
+    WHEN OTHERS THEN
+        RETURN 'Error: ' || SQLERRM;
     END;
     </copy>
     ```
@@ -141,7 +141,7 @@ You will create a SQL function to update a customer’s order status and return 
 
 ## Task 4: Create a Tool to Update Database
 
-You'll create a tool that a task will use. Each tool is identified by a unique name and includes attributes that define its purpose, instruction logic, and metadata. You'll verify the tool by querying a corresponding view.
+Tools are what allow agents to perform tasks in the "real" world. You'll create a tool that a task will use. Each tool is identified by a unique name and includes attributes that define its purpose, instruction logic, and metadata. You'll verify the tool by querying a corresponding view.
 
 1. Create Update\_Order\_Status\_Tool.
 
@@ -173,7 +173,7 @@ You'll create a tool that a task will use. Each tool is identified by a unique n
 
 ## Task 5: Create a Task to Handle the Product Return
 
-You'll define a task that your Select AI agent will perform. Each task has a unique name and a set of attributes that specify  its behavior when planning and performing the task. In this scenario, you'll describe the interaction with the customer and how to respond in various cases.
+We use a task to specify the instructions for performing actions using tools. You'll define a task that your Select AI agent will perform. Each task has a unique name and a set of attributes that specify  its behavior when planning and performing the task. In this scenario, you'll describe the interaction with the customer and how to respond in various cases.
 
 Create Handle\_Product\_Return\_Task.
 
@@ -208,7 +208,7 @@ Create Handle\_Product\_Return\_Task.
   ```
 
 ## Task 6: Create OCI Credentials
-Before you create and use an AI profile, you must create your AI provider credentials. In this task you will gather the required parameters for OCI Gen AI credential and create a credential that will be used in the next task to create an AI profile.
+Before you create and use an AI profile, you must create your OCI credential. In this task you will gather the required parameters for OCI Gen AI credential and create a credential that will be used in the next task to create an AI profile.
 
 Follow these steps to create your OCI credentials:
 1. User OCID
@@ -251,13 +251,13 @@ Follow these steps to create your OCI credentials:
     %script
 
     begin
-      DBMS_CLOUD.drop_credential(credential_name => 'OCI_CRED');
+      DBMS_CLOUD.drop_credential(credential_name => 'AI_CREDENTIAL');
       EXCEPTION WHEN OTHERS THEN NULL; END;
     end;
     /
     BEGIN
       DBMS_CLOUD.create_credential(
-        credential_name => 'OCI_CRED',
+        credential_name => 'AI_CREDENTIAL',
         user_ocid       => '<ocid>',
         tenancy_ocid    => '<tenancy ocid>',
         private_key     => '<private key>',
@@ -281,7 +281,7 @@ BEGIN
       profile_name => 'OCI_GENAI_GROK',
       attributes   => '{
           "provider": "oci",
-          "credential_name": "OCI_CRED",
+          "credential_name": "AI_CREDENTIAL",
           "model": "xai.grok-3",
           "embedding_model": "cohere.embed-english-v3.0"
       }',
@@ -346,7 +346,9 @@ Let's test it:
     <copy>
     %script
 
-    EXEC DBMS_CLOUD_AI.clear_conversation_id; 
+    BEGIN DBMS_CLOUD_AI_AGENT.clear_team();
+    EXCEPTION WHEN OTHERS THEN NULL; END;
+    / 
     EXEC DBMS_CLOUD_AI_AGENT.set_team(team_name  => 'Return_Agency_Team');
     </copy>
     ```
@@ -543,7 +545,7 @@ You may now proceed to the next lab.
 ## Learn More
 
 * [OML Notebooks](https://docs.oracle.com/en/database/oracle/machine-learning/oml-notebooks/index.html)
-* [Using Oracle Autonomous Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/index.html)
+* [Using Oracle Autonomous AI Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/index.html)
 * [Example of creating an OCI Gen AI Select AI Profile](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai-examples.html#GUID-BD10A668-42A6-4B44-BC77-FE5E5592DE27)
 * [How to help AI models generate better natural language queries](https://blogs.oracle.com/datawarehousing/post/how-to-help-ai-models-generate-better-natural-language-queries-in-autonomous-database)
 

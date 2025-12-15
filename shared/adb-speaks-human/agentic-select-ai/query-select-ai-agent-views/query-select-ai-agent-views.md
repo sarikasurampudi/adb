@@ -19,7 +19,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-- This lab requires completion of the first two labs in the **Contents** menu on the left.
+- This lab requires completion of the previous labs in the **Contents** menu on the left.
 - Typical grants to run DBMS\_CLOUD\_AI\_AGENT Package are (run as ADMIN once):
 
 ```
@@ -30,11 +30,11 @@ GRANT EXECUTE ON DBMS_CLOUD_AI_AGENT TO <USER>;
 ```
 Replace _`USER`_ with your user name.
 
-## Task 1: Create a Procedure to View the Team Processing
+## Task 1: Query the Latest Team Processing Details
 
-You are building a helper procedure that prints a readable timeline of a conversation: team, agent, task, prompt, and final response.
+You are building a quick debugging query that shows a readable timeline of a conversation: team, agent, task, prompt, and final response.
 
-Create the team processing procedure and run it.
+Run the following query:
 ```
 <copy>
 WITH latest_team AS (
@@ -117,10 +117,10 @@ You may now proceed to the next lab.
 
 ## Learn More
 
-* [Select AI Agents](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai-agents1.html)
-* [Select AI Agents Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [Select AI Agent](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai-agent1.html)
+* [Select AI Agent Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
 * [OML Notebooks](https://docs.oracle.com/en/database/oracle/machine-learning/oml-notebooks/index.html)
-* [Using Oracle Autonomous Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/index.html)
+* [Using Oracle Autonomous AI Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/index.html)
 
 
 ## Acknowledgements
