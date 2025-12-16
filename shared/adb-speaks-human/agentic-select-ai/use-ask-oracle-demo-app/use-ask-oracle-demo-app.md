@@ -21,7 +21,7 @@ In this lab, you will:
 
 ## Task 1: Access the Application
 
-1. Launch the demo app. Paste the URL in a new tab in your Web browser, and then click **[ENTER]**. In the **Ask Oracle** page, enter the username (`select_ai_user`) and password (`Welcome12345`), and then click **Sign In**.
+1. Launch the demo app. Paste the URL in a new tab in your Web browser, and then click **[ENTER]**. In the **Ask Oracle** page, enter the username and password, and then click **Sign In**.
 
   ![Enter Ask Oracle Chatbot credentials](./images/ask-oracle-login.png =70%x*)
 
