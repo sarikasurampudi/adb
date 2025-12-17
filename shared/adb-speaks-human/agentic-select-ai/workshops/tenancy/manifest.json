@@ -18,8 +18,8 @@
         {
             "title": "Lab 1: Set up Your Workshop Environment",
             "type": "tenancy",
-            "description": "Set up an Autonomous Database and Install Ask Oracle app",
-            "filename": "/setup-environment/setup-environment.md"
+            "description": "Set up an Autonomous AI Database and Install Ask Oracle app",
+            "filename": "../../setup-environment/setup-environment.md"
         },
         {
             "title": "Lab 2: Build a Sales Return Agent",

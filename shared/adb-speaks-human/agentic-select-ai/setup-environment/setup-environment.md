@@ -6,7 +6,7 @@ comments syntax
 
 ## Introduction
 
-This workshop focuses on teaching you how to setup your Autonomous AI Database and use Select AI Ask Oracle Chatbot application to query your data using natural language. The **Ask Oracle** APEX application, powered by Select AI and running on Autonomous AI Database, offers a conversational interface for interacting with your data. 
+This workshop focuses on teaching you how to setup your Autonomous AI Database and install Select AI Ask Oracle Chatbot application to query your data using natural language. The **Ask Oracle** APEX application, powered by Select AI running on Autonomous AI Database, offers a conversational interface for interacting with your data. 
 
 This short demo showcases how the app leverages Natural Language to SQL (NL2SQL), Retrieval-Augmented Generation (RAG), and AI agents to transform natural language queries into actionable insights.
 
@@ -26,18 +26,17 @@ In this lab, you will:
 * Install the Select AI Ask Oracle Chatbot application
 
 
-## Task 1: Provision an Oracle Autonomous AI Database
-
+## Task 1: Create the Autonomous AI Database Instance
 [](include:adb-provision-body.md)
-
-## Task 2: TEST
-
-[](include:oml-prov-an-adb.md)
 
 ## Task 2: Grant Privileges
 
-1. Login to **Database Actions** -> **SQL** as an `ADMIN`.
-2. Grant the following to the schema user:
+1. Click on your database instance and navigate to the **Tool Configuration**. 
+2. Click **Copy** to copy the **Database Actions** URL. 
+3. Paste the URL in your browser.
+4. Login as an `ADMIN` user. 
+5. Click **Development** tab and click **SQL** on the left-hand navigation in the Database    Actions|Launchpad screen. This opens the SQL worksheet.
+6. Grant the following to the schema user:
 
     ```
     <copy>
