@@ -27,7 +27,12 @@ In this lab, you will:
 
 
 ## Task 1: Provision an Oracle Autonomous AI Database
-[](include:provision-body.md)
+
+[](include:adb-provision-body.md)
+
+## Task 2: TEST
+
+[](include:oml-prov-an-adb.md)
 
 ## Task 2: Grant Privileges
 
