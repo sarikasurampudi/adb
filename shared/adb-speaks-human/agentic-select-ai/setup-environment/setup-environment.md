@@ -31,7 +31,7 @@ In this lab, you will:
 
 ## Task 2: Grant Privileges
 
-1. Click on your database instance and navigate to the **Tool Configuration**. 
+1. Click on your database instance and navigate to the **Tool Configuration** tab. 
 2. Click **Copy** to copy the **Database Actions** URL. 
 3. Paste the URL in your browser.
 4. Login as an `ADMIN` user. 
