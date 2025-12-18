@@ -4,6 +4,7 @@
     "include": {
         "adb-provision-body.md":"/common/building-blocks/tasks/adb/provision-body.md"
     },
+    "variables":["./variables.json"],
     "tutorials": [
         {
             "title": "Introduction",
