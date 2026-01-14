@@ -87,9 +87,14 @@ Update the customer agent to include both the tasks.
 <copy>
 %script
 
+BEGIN DBMS_CLOUD_AI_AGENT.clear_team();
+EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+
 BEGIN DBMS_CLOUD_AI_AGENT.drop_team('Return_Agency_Team');
 EXCEPTION WHEN OTHERS THEN NULL; END;
 /
+
 BEGIN                                                                 
   DBMS_CLOUD_AI_AGENT.create_team(  
     team_name  => 'Return_Agency_Team',                                                
@@ -108,7 +113,6 @@ You can start interacting with the refined Select AI agent team by using natural
 
     ```
     <copy>
-    EXEC DBMS_CLOUD_AI.clear_conversation_id;
     EXEC DBMS_CLOUD_AI_AGENT.set_team(team_name  => 'Return_Agency_Team');
     </copy>
     ```

@@ -29,7 +29,31 @@ In this lab, you will:
 ## Task 1: Create the Autonomous AI Database Instance
 [](include:adb-provision-body.md)
 
-## Task 2: Grant Privileges
+## Task 2: Create an Autonomous AI Database User
+To create a user:
+1. If you are not already signed in, sign into your OCI account, click the cloud menu on the left to open the left navigation pane, and click **Oracle AI Database**. On the right, click **Autonomous AI Database**.
+2. Click the Oracle Autonomous AI Database that you have provisioned for this workshop. Here, click the instance `Training-Database`.
+3. On the Autonomous AI Database details page, click **Database Actions**, and then select the **Database Users** option.
+4. Before you get to the Oracle Database Actions Launchpad page, you might be asked to log in, depending on the browser you are using. If this is the case make sure to enter `ADMIN` and the password you gave the administrator user.
+5. Click **Create User**. The Create User dialog opens. 
+6. On the Create User dialog, enter the following details and click **Create User**: 
+
+    ![Create ADB_USER](./images/create_adb_user.png =70%x*)
+    
+    - **User Name**: Enter the user name ADB_USER.
+    - **Password**: Enter a password for this user. The password must be 12 to 30 characters and contain at least one uppercase letter, one lowercase letter, and one number. The password cannot contain the double quote (") character or the username itself.
+    - **Confirm Password**: Re-enter the password that you entered in the Password field.
+    - **Quota of tablespace data**: Click on the drop-down list and select an option. For this lab and a typical Always Free ADB, UNLIMITED is selected.
+    - **Password Expired**: Select this option if you want the user to reset their own password.
+    - **Account is locked**: Use this option to lock the account.
+    - **OML**: Select this option to allow this user to access Oracle Machine Learning. This is a required field.
+    - **Graph**: Optionally, select this option to enable graph for this user.
+    - **Web Access**: Select this option to allow Web and DB Actions access to this user via its own url. This is an optional field.
+    - **Show Code**: Click this option to view the code to create the user and grant roles to the user. You also have the option to copy the code.
+
+7. After the user is created successfully, the message _User ADB\_USER created successfully_ is displayed.    
+
+## Task 3: Grant Privileges
 
 1. Click on your database instance and navigate to the **Tool Configuration** tab. 
 2. Click **Copy** to copy the **Database Actions** URL. 
@@ -40,14 +64,14 @@ In this lab, you will:
 
     ```
     <copy>
-    GRANT EXECUTE on DBMS_CLOUD_AI to <USER>;
-    GRANT EXECUTE on DBMS_CLOUD_AI_AGENT to <USER>;
-    GRANT EXECUTE on DBMS_CLOUD_PIPELINE to <USER>;
-    GRANT EXECUTE on DBMS_VECTOR to <USER>;
-    GRANT CREATE ANY INDEX to <USER>;
+    GRANT EXECUTE on DBMS_CLOUD_AI to <ADB_USER>;
+    GRANT EXECUTE on DBMS_CLOUD_AI_AGENT to <ADB_USER>;
+    GRANT EXECUTE on DBMS_CLOUD_PIPELINE to <ADB_USER>;
+    GRANT EXECUTE on DBMS_VECTOR to <ADB_USER>;
+    GRANT CREATE ANY INDEX to <ADB_USER>;
     </copy>
     ```
-> Replace `<USER>` with the schema user name.
+> Replace `<ADB_USER>` with the schema user name.
 
 ## Task 2: Install Ask Oracle Chatbot Application
 Perform the following steps to install the Ask Oracle Chatbot app. The application is available on GitHub.
@@ -57,7 +81,7 @@ Perform the following steps to install the Ask Oracle Chatbot app. The applicati
 2. From your Autonomous AI Database console, navigate to **Tool configuration** and copy the APEX URL.
 
 3. Paste the URL in your web browser and **Sign In** with the workspace associated with the created schema.
-    >If you haven't created your workspace, click **Administration Services** on the APEX workspace login screen and create one.
+    > If you have not created an APEX workspace, the URL copied from **Tool Configuration** opens Administrative Services. Only the `ADMIN` user can access this page. The `ADMIN` user must first create an APEX workspace, along with a workspace username and password. For guidance, see [Get Started with Oracle APEX on the Oracle Autonomous AI Database](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3509). Once the workspace exists, the **Tool Configuration** URL opens the APEX login screen, where a schema user can sign in.
 
 4. In APEX, go to **App Builder** → **Import**.
 
@@ -71,7 +95,7 @@ Perform the following steps to install the Ask Oracle Chatbot app. The applicati
 
 9. Next screen shows a confirmation screen with the supporting objects installed, click **Run Application**.
 
-10. You'll be prompted with a login screen. Enter the **Ask Oracle** username and password. You are ready with a prompt screen.
+10. You'll be prompted with a login screen. Enter the APEX username and password. You are ready with a prompt screen.
 
 Here is a video that walks you through the **Ask Oracle** chatbot app installation:
 [Ask Oracle App Installation](youtube:kjeQ2AC3TFo:medium)

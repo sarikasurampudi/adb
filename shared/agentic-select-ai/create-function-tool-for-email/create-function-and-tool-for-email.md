@@ -184,6 +184,10 @@ Update the Return\_Agency\_Team.
 ```
 <copy>%script
 
+BEGIN DBMS_CLOUD_AI_AGENT.clear_team();
+EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+
 BEGIN DBMS_CLOUD_AI_AGENT.drop_team('Return_Agency_Team');
 EXCEPTION WHEN OTHERS THEN NULL; END;
 /

@@ -58,7 +58,7 @@ Define an AI Profile that has your LLM and database objects and is ready to use 
     
       -- default LLM: meta.llama-3.1-70b-instruct
       -- default transformer: cohere.embed-english-v3.0
-
+    BEGIN
       DBMS_CLOUD_AI.create_profile(                                              
           profile_name => 'SALES_AGENT_RAG_PROFILE',                                                                 
           attributes   => '{"provider": "oci",   
@@ -68,20 +68,20 @@ Define an AI Profile that has your LLM and database objects and is ready to use 
       </copy>
 ```
 
-2. Create credentials to access Object Storage.
+2. Create credentials to access Object Storage. Skip this step if you have already created `AI_CREDENTIAL` in Lab 2 -> Task 6.
 
 ```
 <copy>
 %script
 
 begin
-DBMS_CLOUD.drop_credential(credential_name => 'OCI_SALES_CRED');
+DBMS_CLOUD.drop_credential(credential_name => 'AI_CREDENTIAL');
 EXCEPTION WHEN OTHERS THEN NULL; END;
 end;
 /
 BEGIN
 DBMS_CLOUD.create_credential(
-  credential_name => 'OCI_SALES_CRED',
+  credential_name => 'AI_CREDENTIAL',
   user_ocid       => '<ocid>',
   tenancy_ocid    => '<tenancy ocid>',
   private_key     => '<private key>',
@@ -219,6 +219,10 @@ Update the `Return_Agent_Team`.
 <copy>
 %script
 
+BEGIN DBMS_CLOUD_AI_AGENT.clear_team();
+EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+
 BEGIN DBMS_CLOUD_AI_AGENT.drop_team('Return_Agency_Team');
 EXCEPTION WHEN OTHERS THEN NULL; END;
 /
@@ -236,8 +240,6 @@ Start interacting with the updated RAG agent with natural language prompts.
 ```
 <copy>
 %script
-
-EXEC DBMS_CLOUD_AI.clear_conversation_id;
 
 EXEC DBMS_CLOUD_AI_AGENT.set_team(team_name  => 'Return_Agency_Team');
 	</copy>

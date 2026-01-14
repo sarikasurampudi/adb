@@ -41,7 +41,12 @@ You can import a notebook from a local disk or on GitHub. A notebook named **Sel
 
     <a href="https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/1C_VWEcNHyMoV10mPLbRvJmxDOyCR0ogX4LijMCidf5MxL5xuhnnMvwuQ5tll4uR/n/adwc4pm/b/oaiw25-select-ai-agent-notebook/o/SelectAI4SQL%20-%20AI%20Agents%20-%20Sales%20Return%20Agent.dsnb" class="tryit-button">Download Notebook</a>
 
-2. On your Oracle Machine Learning home page, click the top left navigation menu. Click **Notebooks**. Click **Import** and click **File**. The **Open** dialog box is displayed. Navigate to your local folder where you downloaded the OML notebook, and select the **`SelectAI4SQL - AI Agents - Sales Return Agent.dsnb`** notebook file. The file is displayed in the **File Name** field. Make sure that the **Custom Files (*.dsnb;\*.ipynb;\*.json;\*.zpln)** type is selected in the second drop-down field, and then click **Open**.
+2. To access the URL for the Oracle Machine Learning sign in page, go to your Autonomous AI Database details page and click **Tool configuration**.
+
+3. Go to the **Oracle Machine Learning user interface** section and click **Copy**. Paste the URL on the browser to sign into Oracle Machine Learning user interface.
+  ![Access OML User Interface URL](../build-sales-return-agent/images/oml-notebook-url.png)
+
+4. On your Oracle Machine Learning home page, click the top left navigation menu. Click **Notebooks**. Click **Import** and click **File**. The **Open** dialog box is displayed. Navigate to your local folder where you downloaded the OML notebook, and select the **`SelectAI4SQL - AI Agents - Sales Return Agent.dsnb`** notebook file. The file is displayed in the **File Name** field. Make sure that the **Custom Files (*.dsnb;\*.ipynb;\*.json;\*.zpln)** type is selected in the second drop-down field, and then click **Open**.
 
     ![The Open dialog box is displayed](../build-sales-return-agent/images/notebook-open-dialog.png " ")
 
@@ -188,7 +193,7 @@ Create Handle\_Product\_Return\_Task.
     DBMS_CLOUD_AI_AGENT.create_task(
       task_name => 'Handle_Product_Return_Task',
       attributes => '{"instruction": "Process a product return request from a customer:{query}' || 
-                      '1. Ask customer the order reason for return (no longer needed, arrived too late, box broken, or defective)' || 
+                      '1. Ask customer the reason for return (no longer needed, arrived too late, box broken, or defective)' || 
                       '2. If no longer needed:' ||
                       '   a. Inform customer to ship the product at their expense back to us.' ||
                       '   b. Update the order status to return_shipment_pending using Update_Order_Status_Tool.' ||
@@ -412,7 +417,7 @@ d. _select ai agent No, I''m all set. Thanks_
 
 ## Task 11: Use `DBMS_CLOUD_AI_AGENT.RUN_TEAM`
 
-First, you'll create Select AI conversation and then use the `DBMS_CLOUD_AI_AGENT.RUN_TEAM` function to run the agent team and interact with the Return Agency team. Creating a conversation helps the agent team to keep track of the customer conversation context and history.
+The RUN_TEAM procedure enables you to use your agent team from PL/SQL - as opposed to the SQL command line. This procedure is mainly to enable you to build your own agentic applications where you may need greater control over individual conversations. First, you'll create Select AI conversation and then use the `DBMS_CLOUD_AI_AGENT.RUN_TEAM` function to run the agent team and interact with the Return Agency team. Creating a conversation helps the agent team to keep track of the customer conversation context and history.
 
 1. Create Select AI conversation.
 
