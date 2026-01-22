@@ -50,6 +50,8 @@ This lab requires completion of the previous labs in the **Contents** menu on th
 ## Task 1: Create a profile for RAG
 Define an AI Profile that has your LLM and database objects and is ready to use RAG once a vector index exists.
 
+> Note: The default values are listed as comments.
+
 1. Create an AI profile for RAG usage.
 ```
     <copy>
@@ -68,7 +70,7 @@ Define an AI Profile that has your LLM and database objects and is ready to use 
       </copy>
 ```
 
-2. Create credentials to access Object Storage. Skip this step if you have already created `AI_CREDENTIAL` in Lab 2 -> Task 6.
+2. Create credentials to access Object Storage. If you haven't already created your credential, see **Lab 2** -> **Task 6** for instructions on how to create your OCI credential.
 
 ```
 <copy>
@@ -97,7 +99,7 @@ END;
 select * from
   DBMS_CLOUD.LIST_OBJECTS(
     credential_name => 'AI_CREDENTIAL',
-    location_uri    => 'https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/b9UsLs4CwZi9iorADMTK9c-ziXkhmME6m7kcdJ9ypjqFTzzZmHSLqNve0t_Vi1du/n/adwc4pm/b/oaiw25-sales-agent-rag-documents/o/'
+    location_uri    => 'https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/b9UsLs4CwZi9iorADMTK9c-ziXkhmME6m7kcdJ9ypjqFTzzZmHSLqNve0t_Vi1du/n/adwc4pm/b/oaiw25-sales-agent-rag-documents/o/')
 </copy>
 ```
 
@@ -288,7 +290,7 @@ You may now proceed to the next lab.
 -->
 
 
-Copyright (c) 2025 Oracle Corporation.
+Copyright (c) 2026 Oracle Corporation.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3

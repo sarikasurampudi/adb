@@ -32,10 +32,18 @@ In this lab, you will:
 ## Task 2: Create an Autonomous AI Database User
 To create a user:
 1. If you are not already signed in, sign into your OCI account, click the cloud menu on the left to open the left navigation pane, and click **Oracle AI Database**. On the right, click **Autonomous AI Database**.
+    ![Create Autonomous AI Database](./images/select-adb.png =70%x*)
+
 2. Click the Oracle Autonomous AI Database that you have provisioned for this workshop. Here, click the instance `Training-Database`.
+    ![Click Training-Database](./images/click-dbinstance.png =70%x*)
+
 3. On the Autonomous AI Database details page, click **Database Actions**, and then select the **Database Users** option.
+    ![Click Database Users](./images/db-user.png =70%x*)
+
 4. Before you get to the Oracle Database Actions Launchpad page, you might be asked to log in, depending on the browser you are using. If this is the case make sure to enter `ADMIN` and the password you gave the administrator user.
 5. Click **Create User**. The Create User dialog opens. 
+    ![Click Create User](./images/db-actions-create-user.png =70%x*)
+
 6. On the Create User dialog, enter the following details and click **Create User**: 
 
     ![Create ADB_USER](./images/create_adb_user.png =70%x*)
@@ -57,6 +65,8 @@ To create a user:
 
 1. Click on your database instance and navigate to the **Tool Configuration** tab. 
 2. Click **Copy** to copy the **Database Actions** URL. 
+    ![Copy the Database Actions URL](./images/db-actions-url.png =70%x*)
+
 3. Paste the URL in your browser.
 4. Login as an `ADMIN` user. 
 5. Click **Development** tab and click **SQL** on the left-hand navigation in the Database    Actions|Launchpad screen. This opens the SQL worksheet.
@@ -73,7 +83,10 @@ To create a user:
     ```
 > Replace `<ADB_USER>` with the schema user name.
 
-## Task 2: Install Ask Oracle Chatbot Application
+## Task 4: Install Ask Oracle Chatbot Application
+Here is a video that walks you through the **Ask Oracle** chatbot app installation:
+[Ask Oracle App Installation](youtube:kjeQ2AC3TFo:medium)
+
 Perform the following steps to install the Ask Oracle Chatbot app. The application is available on GitHub.
 
 1. Download the `ADB-AskOracle-Chatbot-yyyy-mm-dd.sql` file from the [GitHub repository](https://github.com/oracle-devrel/oracle-autonomous-database-samples/tree/main/apex/Ask-Oracle) and store it in your local directory. 
@@ -97,8 +110,7 @@ Perform the following steps to install the Ask Oracle Chatbot app. The applicati
 
 10. You'll be prompted with a login screen. Enter the APEX username and password. You are ready with a prompt screen.
 
-Here is a video that walks you through the **Ask Oracle** chatbot app installation:
-[Ask Oracle App Installation](youtube:kjeQ2AC3TFo:medium)
+
 
 
 
@@ -117,7 +129,7 @@ You may now proceed to the next lab.
 -->
 
 
-Copyright (c) 2025 Oracle Corporation.
+Copyright (c) 2026 Oracle Corporation.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3

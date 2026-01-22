@@ -131,7 +131,7 @@ You may now proceed to the next lab.
 -->
 
 
-Copyright (c) 2025 Oracle Corporation.
+Copyright (c) 2026 Oracle Corporation.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3

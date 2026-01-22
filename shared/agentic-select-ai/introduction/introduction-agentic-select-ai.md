@@ -25,7 +25,7 @@ There are several phases to this solution:
 * Third, define a function to populate a standard email form that accepts parameters.
 * Fourth, create a tool supporting retrieval augmented generation (RAG) to give recommendations to the customer.
 
-At the conclusion, you'll see how Select AI Agent can be used to make structured database updates and have natural language interactions with a user while exploring how to create and integrate various types of tools.
+You'll see how Select AI Agent can be used to make structured database updates and have natural language interactions with a user while exploring how to create and integrate various types of tools.
 
 ### Concepts of Agentic AI with Select AI
 Before we begin, let's review some important terms:
@@ -33,7 +33,7 @@ Before we begin, let's review some important terms:
 * **Agent**: An actor with a clearly-defined role that performs tasks using an LLM configured by an AI profile.
 * **Task**: A step in a process or responsibility assigned to an agent. A task has a clearly defined set of instructions that may rely on one or more tools (for example, processing a sales return).
 * **Tool**: A resource that an agent task uses to interact with systems such as databases, email servers, web services, and other applications.
-* **ReAct Framework (Reasoning and Acting)**: The logic where the agent reasons about the request, chooses tools, performs actions, and evaluates results to accomplish a goal.
+* **ReAct Pattern**: This refers to _reasoning and acting_. This pattern provides the logic where the agent reasons about the request, chooses tools, performs actions, and evaluates results to accomplish a goal.
 <!--* **RAG Tool**: A retrieval mechanism that lets the agent pull in external or domain-specific knowledge to make better decisions.-->
 
 >**NOTE:** This workshop requires access to a Large Language Model (LLM). You can use LLMs from a wide range of AI providers, including OCI GenAI, OpenAI, Azure, and Google Gemini, among others. See the [Select AI Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai-about.html#GUID-7574F1D1-CE6F-41BC-AE95-6281EB23C7BE) for more details.
@@ -69,7 +69,7 @@ You may now proceed to the next lab.
 -->
 
 
-Copyright (c) 2025 Oracle Corporation.
+Copyright (c) 2026 Oracle Corporation.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3

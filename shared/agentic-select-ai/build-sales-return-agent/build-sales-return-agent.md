@@ -33,9 +33,12 @@ GRANT EXECUTE ON DBMS_CLOUD_AI_AGENT TO <USER>;
 ```
 Replace _`USER`_ with your user name.
 
-## Task 1: Download and Import a Notebook into OML
+## Task 1: Download and Import the Provided Notebook into OML
 
-You can import a notebook from a local disk or on GitHub. A notebook named **SelectAI4SQL - AI Agents - Sales Return Agent** contains all the steps for setting up the **Sales Return Agent** for processing the product return from a customer. In this task, you will first download the **`SelectAI4SQL - AI Agents - Sales Return Agent.dsnb`** OML notebook to your local machine, and then import this notebook into OML.
+Oracle provides a ready-to-use OML notebook that walks through the complete setup of the **Sales Return Agent** that includes all required steps to define agents, tools, tasks, teams, and interactions for processing the product return from a customer using Select AI.
+This notebook named **SelectAI4SQL - AI Agents - Sales Return Agent** contains all the steps for setting up the **Sales Return Agent**.
+
+In this task, you will first download the **`SelectAI4SQL - AI Agents - Sales Return Agent.dsnb`** OML notebook to your local machine, and then import this notebook into OML. <!--You can import the provided notebook from a local disk or on GitHub-->.
 
 1. Click the button below to download the notebook:
 
@@ -62,7 +65,33 @@ You can import a notebook from a local disk or on GitHub. A notebook named **Sel
 
 You'll view the sample table for the scenario.
 
-1. Run the paragraphs that create `customers` and `customer_order_status` tables and view the contents of the customers table.
+1. Run the paragraph that creates `customers` table. 
+    ```
+    <copy>
+      %script
+
+    BEGIN EXECUTE IMMEDIATE 'DROP TABLE customers';
+    EXCEPTION WHEN OTHERS THEN NULL; END;
+    /
+    CREATE TABLE customers (
+        customer_id  NUMBER(10) PRIMARY KEY,
+        name         VARCHAR2(100),
+        email        VARCHAR2(100),
+        phone        VARCHAR2(20),
+        state        VARCHAR2(2),
+        zip          VARCHAR2(10)
+    );
+
+    INSERT INTO customers (customer_id, name, email, phone, state, zip) VALUES
+    (1, 'Alice Thompson', 'alice.thompson@example.com', '555-1234', 'NY', '10001'),
+    (2, 'Bob Martinez', 'bob.martinez@example.com', '555-2345', 'CA', '94105'),
+    (3, 'Carol Chen', 'carol.chen@example.com', '555-3456', 'TX', '73301'),
+    (4, 'David Johnson', 'david.johnson@example.com', '555-4567', 'IL', '60601'),
+    (5, 'Eva Green', 'eva.green@example.com', '555-5678', 'FL', '33101');
+    </copy>
+    ```
+
+2. View the contents of the `customers` table. 
 
     ```
     <copy>
@@ -70,6 +99,47 @@ You'll view the sample table for the scenario.
     </copy>
     ```
 
+3. Run the paragraph that creates `customer_order_status` table.
+
+    ```
+    <copy>
+      %script
+
+    BEGIN EXECUTE IMMEDIATE 'DROP TABLE customer_order_status';
+    EXCEPTION WHEN OTHERS THEN NULL; END;
+    /
+    CREATE TABLE customer_order_status (
+        customer_id     NUMBER(10),
+        order_number    VARCHAR2(20),
+        status          VARCHAR2(30),
+        product_name    VARCHAR2(100)
+
+    );
+
+    INSERT INTO customer_order_status (customer_id, order_number, status, product_name) VALUES
+    (2, '7734', 'delivered', 'smartphone charging cord'),
+    (1, '4381', 'pending_delivery', 'smartphone protective case'),
+    (2, '7820', 'delivered', 'smartphone charging cord'),
+    (3, '1293', 'pending_return', 'smartphone stand (metal)'),
+    (4, '9842', 'returned', 'smartphone backup storage'),
+    (5, '5019', 'delivered', 'smartphone protective case'),
+    (2, '6674', 'pending_delivery', 'smartphone charging cord'),
+    (1, '3087', 'returned', 'smartphone stand (metal)'),
+    (3, '7635', 'pending_return', 'smartphone backup storage'),
+    (4, '3928', 'delivered', 'smartphone protective case'),
+    (5, '8421', 'pending_delivery', 'smartphone charging cord'),
+    (1, '2204', 'returned', 'smartphone stand (metal)'),
+    (2, '7031', 'pending_delivery', 'smartphone backup storage'),
+    (3, '1649', 'delivered', 'smartphone protective case'),
+    (4, '9732', 'pending_return', 'smartphone charging cord'),
+    (5, '4550', 'delivered', 'smartphone stand (metal)'),
+    (1, '6468', 'pending_delivery', 'smartphone backup storage'),
+    (2, '3910', 'returned', 'smartphone protective case'),
+    (3, '2187', 'delivered', 'smartphone charging cord'),
+    (4, '8023', 'pending_return', 'smartphone stand (metal)'),
+    (5, '5176', 'delivered', 'smartphone backup storage');
+    </copy>
+    ```
 2. View the order status table.
 
     ```
@@ -220,23 +290,41 @@ Follow these steps to create your OCI credentials:
 
    a. Go to the OCI Console.
 
-   b. Open the profile menu (top right, click your user name) -> **User Settings**.
+   b. Open the profile menu (top right, click your profile icon) -> **User Settings**.
 
    c. Copy the OCID shown there.
+   ![Copy your user OCID](./images/copy-your-ocid.png =70%x*)
 
 2. Tenancy OCID
 
    a. From the same user menu -> go to **Tenancy**.
+   ![Click Tenancy from profile menu](./images/click-tenancy.png =70%x*)
 
    b. Copy the **OCID** shown there.
+   ![Copy the tenancy OCID](./images/copy-tenancy-ocid.png =70%x*)
 
 3. Fingerprint
 
    This comes from the public key you upload when you create an API key.
 
-   a. Navigate to **User Settings** -> **Tokens and Keys** -> **API Keys**.
+   a. Navigate to **User Settings** -> **Tokens and Keys** -> click **Add API key**.
 
-   b. After creating or uploading a public key, OCI generates a fingerprint for it. Copy that value.
+   ![Click User settings in your profile](./images/profile-user-settings.png =70%x*)
+   ![Navigate to Tokens and Keys tab](./images/tokens-and-keys-tab.png)
+   
+   b. After creating and uploading a public key, OCI generates a fingerprint for it. Copy that value. 
+   If you already have a public key on your system, skip the first step below:
+
+   b1. If you are creating a new API key, select **Generate API key pair** and click **Download public key** and **Download private key** to download both public and private keys to your local system.
+   ![Create your API key pair](./images/gen-api-key-pair.png)
+  
+   b2. Come back to the Add API key screen and select **Choose public key file** and upload the file from your system or drag and drop the file. Once your file is uploaded, the **Add** button is enabled. Click **Add**.
+   ![Choose public key file](./images/upload-public-key.png)
+
+   b3. OCI generates a fingerprint and a Configuration file preview is displayed. Copy the fingerprint value and click **Close**.
+
+   You can also copy the fingerprint value after closing the Configuration file preview screen under the API Keys section in the console.
+
 
 4. Private Key
 
@@ -327,22 +415,23 @@ Create the Return\_Agency\_Team.
 ```
 <copy>
 %script
-
 BEGIN DBMS_CLOUD_AI_AGENT.drop_team('Return_Agency_Team');
 EXCEPTION WHEN OTHERS THEN NULL; END;
 /
 BEGIN                                                                 
   DBMS_CLOUD_AI_AGENT.create_team(  
     team_name  => 'Return_Agency_Team',                                                            
-    attributes => '{"agents": [{"name" : "Customer_Return_Agent", "task" : "Handle_Product_Return_Task"}],
+    attributes => '{"agents": [{"name" : "Customer_Return_Agent", 
+                                "task" : "Handle_Product_Return_Task"}],
                     "process": "sequential"}');                                                                 
 END;
+
 </copy>
 ```
 
 ## Task 10: Interact with the Return Agency Agent
 
-You can start interacting with the Select AI agent team by using natural language prompt on the SQL command line. To do so, you must set the agent team for the current session. Then, prefix your prompt with `Select AI agent`. In this scenario, the agent team interacts with you in natural language. Behind the scenes, the ReAct agent pattern is used by Select AI Agent to get needed information from you, the customer, engage the LLM, call the needed tools, and respond.
+You can start interacting with the Select AI agent team by using natural language prompt on the SQL command line. To do so, you must set the agent team for the current stateful session. Then, prefix your prompt with `select ai agent`. You'll interact with the agent team using natural language. Behind the scenes, the ReAct agent pattern is used by Select AI Agent to get needed information from you, the customer, engage the LLM, call the needed tools, and respond.
 Let's test it:
 
 1. Set the agent team in the current session.
@@ -562,7 +651,7 @@ You may now proceed to the next lab.
 -->
 
 
-Copyright (c) 2025 Oracle Corporation.
+Copyright (c) 2026 Oracle Corporation.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3

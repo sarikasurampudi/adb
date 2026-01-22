@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Before you create your own Select AI agents, this quick lab is your hands-on tour of the demo chatbot app that showcases the agentic chatbot running on Oracle Autonomous Database using Select AI Agent. While we’ll focus on interacting with an agent team, the chatbot also supports asking natural language questions of your LLM, your database data for SQL query generation, and LLM responses enhanced with your private document content using retrieval augmented generation (RAG). You’ll open the app, review at the settings, specify NL2SQL and RAG AI profiles, and pick an AI Agent. Then, try a few prompts — no heavy setup, just click and chat.
+Before creating your own Select AI agents, this lab provides a hands-on tour of the “Ask Oracle” demo chatbot app. Here, you’ll use the chatbot to run the agent team created and enhanced in the previous labs. While we’ll focus on interacting with an agent team, this APEX-based app allows you to interact with your data using natural language prompts for RAG and NL2SQL with AI profiles already defined. You’ll open the app, review at the settings, specify NL2SQL   and RAG AI profiles, and pick an AI Agent. Then, try a few prompts — no heavy setup, just click and chat.
 
 
 Estimated Time: 10 minutes.
@@ -19,7 +19,32 @@ In this lab, you will:
 - This lab requires the completion of all the preceding labs in the **Contents** menu on the left.
 - Autonomous Database is reachable from your browser environment.
 
-## Task 1: Access the Application
+## Task 1: Create NL2SQL Profile
+To create NL2SQL profile:
+1. Add a paragraph in your OML Notebook by clicking the **+** symbol.
+![Add a paragraph](./images/add-paragraph.png)
+
+2. Create a NL2SQL Profile by pasting the following code.
+  ```
+  <copy>
+  BEGIN
+    DBMS_CLOUD_AI.CREATE_PROFILE(
+        profile_name >'OCI_GENAI',
+        attributes   =>'{"provider": "oci",
+      "credential_name": "AI_CREDENTIAL",
+      "object_list": [{"owner": "SH", "name": "customers"},
+                      {"owner": "SH", "name": "countries"},
+                      {"owner": "SH", "name": "supplementary_demographics"},
+                      {"owner": "SH", "name": "profits"},
+                      {"owner": "SH", "name": "promotions"},
+                      {"owner": "SH", "name": "products"}]
+        }');
+ END;
+ /
+  </copy>
+  ```
+
+## Task 2 Access the Application
 
 1. Launch the demo app. Paste the URL in a new tab in your Web browser, and then click **[ENTER]**. In the **Ask Oracle** page, enter the username and password, and then click **Sign In**.
 
@@ -37,8 +62,8 @@ In this lab, you will:
 
       ![Select OCI_GENAI in NL2SQL Profile tab](./images/ask-oracle-nl2sql.png =70%x*)
 
-  b. RAG Profile – `OCI_GENAI_RAG`
-      ![Select OCI_GENAI_RAG in RAG Profile tab](./images/ask-oracle-rag.png =70%x*)
+  b. RAG Profile – `SALES_AGENT_RAG_PROFILE`
+      ![Select SALES_AGENT_RAG_PROFILE in RAG Profile tab](./images/ask-oracle-rag.png =70%x*)
 
   c. AI Agent Teams – `RETURN_AGENCY_TEAM`
       ![Select RETURN_AGENCY_TEAM in AI Agent Teams tab](./images/ask-oracle-ai-agent-teams.png =70%x*)
@@ -55,7 +80,7 @@ For example, pick the agent team **`RETURN_AGENCY_TEAM`** and click the **X** in
 You are now ready to ask questions at the Ask question prompt!
 
 
-## Task 2: Interact with the Sales Return Agent
+## Task 3: Interact with the Sales Return Agent
 
 For example, follow this script:
 - “I want to return a smartphone case”
@@ -64,7 +89,7 @@ For example, follow this script:
 - “I'm Bob Martinez and my order number is 7820”
 - “No thank you”
 
-## Task 3: (Optional) Ask Natural Language and Database Questions Using the Application
+## Task 4: (Optional) Ask Natural Language and Database Questions Using the Application
 
 You can use this application to interact with the LLM and your database in a variety of ways:
 
@@ -78,7 +103,9 @@ Click the **+** and select **NL2SQL**. _Uncheck the  **Database** checkbox_ to p
   ![Ask the LLM](./images/ask-oracle-llm.png =70%x*)
 
 - **Ask your Database :**
-Click the **+** and select **NL2SQL**. _Select the **Database** checkbox_ to ask questions about your database data based on the user and tables in the database that you specified when you created the profile.
+Click the **+** and select **NL2SQL**. _Select the **Database** checkbox_ to ask questions about your database data based on the user and tables in the database that you specified when you created the profile such as:
+
+  _How many customers do I have in each country?_
 
   ![Ask your database](./images/ask-oracle-database.png =70%x*)
 
@@ -112,7 +139,7 @@ _Check the **Database** and **Narrate** checkbox_ to ask questions about your da
 
 
 - **Use RAG:**
-Click **+** and select **RAG** to ask questions using retrieval augmented generation (RAG). Ask questions relative to the corresponding vector index content for Select AI to augment your prompt with relevant content for the LLM. Here, we have a vector index created using blogs from [Oracle Machine Learning Blogs](blogs.oracle.com/machinelearning), which covers both Oracle Machine Learning and Oracle Select AI.
+Click **+** and select **RAG** to ask questions using retrieval augmented generation (RAG). Ask questions relative to the corresponding vector index content for Select AI to augment your prompt with relevant content for the LLM. Here, we have a vector index created in **Lab 5** -> **Task 1**.
 
 1. First, we’ll just ask our LLM without RAG, so select the **Chat** checkbox.
 
@@ -122,7 +149,7 @@ Click **+** and select **RAG** to ask questions using retrieval augmented genera
 
 2. Uncheck **Chat**
 
-  _How do I create a vector index in Select AI?_
+  _what are alternatives for the smartphone case_
 
 3. Let’s see the specific chunks provided to the LLM, so select the **Show chunk details** checkbox.
 
@@ -151,7 +178,7 @@ Click **+** and select **RAG** to ask questions using retrieval augmented genera
 <!--* **Last Updated By/Date:** Sarika Surampudi, August 2025
 -->
 
-Copyright (c) 2025 Oracle Corporation.
+Copyright (c) 2026 Oracle Corporation.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3
