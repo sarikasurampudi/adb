@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Before creating your own Select AI agents, this lab provides a hands-on tour of the “Ask Oracle” demo chatbot app. Here, you’ll use the chatbot to run the agent team created and enhanced in the previous labs. While we’ll focus on interacting with an agent team, this APEX-based app allows you to interact with your data using natural language prompts for RAG and NL2SQL with AI profiles already defined. You’ll open the app, review at the settings, specify NL2SQL   and RAG AI profiles, and pick an AI Agent. Then, try a few prompts — no heavy setup, just click and chat.
+Before creating your own Select AI agents, this lab provides a hands-on tour of the “Ask Oracle” demo chatbot app. Here, you’ll use the chatbot to run the agent team created and enhanced in the previous labs. While we’ll focus on interacting with an agent team, this APEX-based app allows you to interact with your data using natural language prompts for RAG and NL2SQL with AI profiles already defined. You’ll open the app, review at the settings, specify NL2SQL   and RAG AI profiles, and pick an AI Agent. Then, try a few prompts - just click and chat.
 
 
 Estimated Time: 10 minutes.
@@ -27,11 +27,12 @@ To create NL2SQL profile:
 2. Create a NL2SQL Profile by pasting the following code.
   ```
   <copy>
-  BEGIN
-    DBMS_CLOUD_AI.CREATE_PROFILE(
-        profile_name >'OCI_GENAI',
-        attributes   =>'{"provider": "oci",
+BEGIN
+  DBMS_CLOUD_AI.CREATE_PROFILE(
+      profile_name >'GENAI',
+      attributes   =>'{"provider": "oci",
       "credential_name": "AI_CREDENTIAL",
+      "conversation": "true",
       "object_list": [{"owner": "SH", "name": "customers"},
                       {"owner": "SH", "name": "countries"},
                       {"owner": "SH", "name": "supplementary_demographics"},
@@ -46,7 +47,7 @@ To create NL2SQL profile:
 
 ## Task 2 Access the Application
 
-1. Launch the demo app. Paste the URL in a new tab in your Web browser, and then click **[ENTER]**. In the **Ask Oracle** page, enter the username and password, and then click **Sign In**.
+1. Launch the demo app. Paste the URL in a new tab in your Web browser, and then click **[ENTER]**. In the **Ask Oracle** page, enter the username and password, and then click **Sign In**. Refer to **Lab 1 -> Task 4**.
 
   ![Enter Ask Oracle Chatbot credentials](./images/ask-oracle-login.png =70%x*)
 
@@ -94,7 +95,7 @@ For example, follow this script:
 You can use this application to interact with the LLM and your database in a variety of ways:
 
 - **Ask the LLM Directly:**
-Click the **+** and select **NL2SQL**. _Uncheck the  **Database** checkbox_ to provide free-form prompts to your LLM about anything such as:
+Click the **+** and select **NL2SQL**. _Uncheck the  **Database** checkbox_ to provide direct prompts to your LLM about anything such as:
 
   _What is Oracle Autonomous Database?_
   
@@ -110,22 +111,34 @@ Click the **+** and select **NL2SQL**. _Select the **Database** checkbox_ to ask
   ![Ask your database](./images/ask-oracle-database.png =70%x*)
 
 - **Generate narrated result:**
-_Check the **Database** and **Narrate** checkbox_ to ask questions about your database data based on the user and tables in the database specified in the AI profile.
+_Check the **Database** and **Narrate** checkbox_ to ask questions about your database data based on the user and tables in the database specified in the AI profile such as:
+
+  _How many customers are females?_
 
     ![Select Database and Narrate checkboxes](./images/ask-oracle-narrate.png =70%x*)
 
-1. Use the following script to refine your results in a conversation:
+  **Have an interactive conversation**
+
+  Select AI supports short-term, session based conversations, which are enabled in the AI profile by setting the `converstion` parameter to `true`. Refer to **Task 1 -> Step 2** of this lab.
+
+
+1. Uncheck **Narrate**. Use the following prompt:
 
   _How many customers do I have in each country?_
 
-2. Uncheck **Narrate**.
+  Ask another follow up question such as:
 
-  _How many customers do I have in each country?_
   _Break that out by gender_
+
+    ![Uncheck Narrate and have conversation](./images/ask-oracle-uncheck-narrate.png =70%x*)
 
 3. Click **Explain**. 
 
     ![Click Explain](./images/ask-oracle-explain.png =70%x*)
+
+  The following screen displays:
+
+    ![Explains the SQL](./images/ask-oracle-explain-sql.png)
 
   When finished viewing, click the back arrow and continue with the following script:
 
@@ -139,29 +152,33 @@ _Check the **Database** and **Narrate** checkbox_ to ask questions about your da
 
 
 - **Use RAG:**
-Click **+** and select **RAG** to ask questions using retrieval augmented generation (RAG). Ask questions relative to the corresponding vector index content for Select AI to augment your prompt with relevant content for the LLM. Here, we have a vector index created in **Lab 5** -> **Task 1**.
+Click **+** and select **RAG** to ask questions using retrieval augmented generation (RAG). Before you submit the prompt, ensure that the RAG profile `SALES_AGENT_RAG_PROFILE` created earlier in **Lab 5** is selected. Ask questions relative to the corresponding vector index content for Select AI to augment your prompt with relevant content for the LLM. We have created a vector index in **Lab 5** -> **Task 1**.
 
-1. First, we’ll just ask our LLM without RAG, so select the **Chat** checkbox.
+1. First, we’ll just ask our LLM without RAG, so select the **Chat** checkbox. The LLM returns a general response describing Select AI RAG capabilities based on its training, without using any content from your vector index
 
   _What are the benefits of Select AI for retrieval augmented generation (RAG)?_
 
     ![Select Chat](./images/ask-oracle-rag-chat.png =70%x*)
 
-2. Uncheck **Chat**
+2. Uncheck **Chat** and then ask:
 
   _what are alternatives for the smartphone case_
 
+  > **Tip**: Ask a question based on the RAG profile you selected, which references the documents stored in your vector database. 
+  
+  Select AI now uses retrieval augmented generation to ground the response in your vector index. The LLM returns recommendations based on the content of your documents, not general model knowledge.
+
 3. Let’s see the specific chunks provided to the LLM, so select the **Show chunk details** checkbox.
-
-  _How do I create a vector index in Select AI?_
-
-4. Uncheck **Show chunk details** checkbox.
 
   _What do I need to specify in my AI profile to enable RAG?_
 
-**This concludes the workshop.**
+  ![Show chunk details](./images/ask-oracle-show-chunk-details.png =70%x*)
 
-<!---Next, let’s see how you build an AI Agent and use various Select AI Agent tools. You may now proceed to the next lab.--->
+  Select AI splits source documents into smaller units called chunks and stores them in the vector index. During a RAG query, Select AI retrieves the most relevant chunks using semantic search and adds them to the prompt sent to the LLM. This process gives the model focused context from your documents and helps reduce hallucinations.
+
+
+  **This concludes the workshop.**
+
 
 ## Want to Learn More?
 
