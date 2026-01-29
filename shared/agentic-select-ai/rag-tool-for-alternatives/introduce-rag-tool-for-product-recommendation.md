@@ -28,7 +28,7 @@ You can ask questions using **`SELECT AI`** where **`AI`** is a special keyword 
 
 With this AI profile, define a RAG tool and update the task to use RAG to suggest alternative products. 
 
-Estimated Time: 20 minutes.
+Estimated Time: 20 minutes
 
 ### Objectives
 

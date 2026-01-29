@@ -39,16 +39,19 @@ Before we begin, let's review some important terms:
 >**NOTE:** This workshop requires access to a Large Language Model (LLM). You can use LLMs from a wide range of AI providers, including OCI GenAI, OpenAI, Azure, and Google Gemini, among others. See the [Select AI Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai-about.html#GUID-7574F1D1-CE6F-41BC-AE95-6281EB23C7BE) for more details.
 If you want to use OCI GenAI, ensure that your tenancy is subscribed to one of the following regions (at the time the workshop was last updated): **US Midwest (Chicago)** (default), **Germany Central (Frankfurt)**, **UK South (London)**, **Brazil East (Sao Paulo)**, or **Japan Central (Osaka)** regions in order to run this workshop.  For the current list of regions with **Generative AI**, see [Regions with Generative AI](https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm).
 
+
+Estimated Time : 1 hour 35 minutes.
+
 ### Objectives
 
 In this workshop, you will:
 
 * Configure your Autonomous AI Database to use AI models for querying data using natural language.
-* Interact with a Sales Return Agent using natural language through the **Ask Oracle** chatbot.
 * Build a Sales Return Agent that interacts with customers, gathers information, and updates database tables with return status.
 * Refine your agent to provide more personable customer interactions and generate email confirmations.
 * Define a function and tool to populate a standardized email form.
 * Create a RAG tool to provide alternative product recommendations.
+* Familiarize with **Ask Oracle** chatbot and interact with a Sales Return Agent using natural language..
 
 
 You may now proceed to the next lab.

@@ -4,7 +4,7 @@
 
 In this lab, you’ll inspect what happened during an agent run. You will read Select AI Agent history views to see team, task, and tool. You’ll also add a small helper procedure that prints the task, agent, prompt and prompt response for any conversation.
 
-Estimated Time: 10 minutes.
+Estimated Time: x
 
 ### Objectives
 

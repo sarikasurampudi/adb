@@ -5,7 +5,7 @@
 Before creating your own Select AI agents, this lab provides a hands-on tour of the “Ask Oracle” demo chatbot app. Here, you’ll use the chatbot to run the agent team created and enhanced in the previous labs. While we’ll focus on interacting with an agent team, this APEX-based app allows you to interact with your data using natural language prompts for RAG and NL2SQL with AI profiles already defined. You’ll open the app, review at the settings, specify NL2SQL   and RAG AI profiles, and pick an AI Agent. Then, try a few prompts - just click and chat.
 
 
-Estimated Time: 10 minutes.
+Estimated Time: x
 
 ### Objectives
 
@@ -45,7 +45,7 @@ BEGIN
   </copy>
   ```
 
-## Task 2 Access the Application
+## Task 2: Access the Application
 
 1. Launch the demo app. Paste the URL in a new tab in your Web browser, and then click **[ENTER]**. In the **Ask Oracle** page, enter the username and password, and then click **Sign In**. Refer to **Lab 1 -> Task 4**.
 

@@ -4,7 +4,7 @@
 
 This lab focuses on generating a consistent email form letter. In this lab, you’ll add a standardized email function so the agent can present a consistent confirmation message after a return is recorded.
 
-Estimated Time: 30 minutes.
+Estimated Time: 20 minutes
 
 ### Objectives
 

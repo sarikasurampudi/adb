@@ -4,7 +4,7 @@
 
 In this lab, you’ll turn a common customer service workflow - returning a purchased item - into an agentic workflow using Oracle Autonomous AI Database Select AI. The agent will converse with you the customer, collect the reason for return, and run an update to the order record.
 
-Estimated Time: 30 minutes.
+Estimated Time: X
 
 ### Objectives
 
