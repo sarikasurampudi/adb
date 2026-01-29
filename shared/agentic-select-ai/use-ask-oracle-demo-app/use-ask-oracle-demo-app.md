@@ -29,7 +29,7 @@ To create NL2SQL profile:
   <copy>
 BEGIN
   DBMS_CLOUD_AI.CREATE_PROFILE(
-      profile_name >'GENAI',
+      profile_name >'OCI_GENAI',
       attributes   =>'{"provider": "oci",
       "credential_name": "AI_CREDENTIAL",
       "conversation": "true",
@@ -78,7 +78,7 @@ For example, pick the agent team **`RETURN_AGENCY_TEAM`** and click the **X** in
 
       ![Bottom right shows RETURN_AGENCY_TEAM](./images/ask-oracle-enter-prompt-agents-bottom-right.png =70%x*)
 
-You are now ready to ask questions at the Ask question prompt!
+You are now ready to ask questions at the Enter prompt area!
 
 
 ## Task 3: Interact with the Sales Return Agent
@@ -154,7 +154,7 @@ _Check the **Database** and **Narrate** checkbox_ to ask questions about your da
 - **Use RAG:**
 Click **+** and select **RAG** to ask questions using retrieval augmented generation (RAG). Before you submit the prompt, ensure that the RAG profile `SALES_AGENT_RAG_PROFILE` created earlier in **Lab 5** is selected. Ask questions relative to the corresponding vector index content for Select AI to augment your prompt with relevant content for the LLM. We have created a vector index in **Lab 5** -> **Task 1**.
 
-1. First, we’ll just ask our LLM without RAG, so select the **Chat** checkbox. The LLM returns a general response describing Select AI RAG capabilities based on its training, without using any content from your vector index
+1. First, we’ll just ask our LLM without RAG, so select the **Chat** checkbox. The LLM returns a general response describing Select AI RAG capabilities based on its training, without using any content from your vector index.
 
   _What are the benefits of Select AI for retrieval augmented generation (RAG)?_
 
