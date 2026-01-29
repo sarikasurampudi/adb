@@ -51,7 +51,7 @@ In this workshop, you will:
 * Refine your agent to provide more personable customer interactions and generate email confirmations.
 * Define a function and tool to populate a standardized email form.
 * Create a RAG tool to provide alternative product recommendations.
-* Familiarize with **Ask Oracle** chatbot and interact with a Sales Return Agent using natural language..
+* Familiarize with **Ask Oracle** chatbot and interact with a Sales Return Agent using natural language.
 
 
 You may now proceed to the next lab.
