@@ -27,11 +27,11 @@ In this lab, you will:
 ```
 <copy>
 
-GRANT EXECUTE ON DBMS_CLOUD_AI TO <USER>;
-GRANT EXECUTE ON DBMS_CLOUD_AI_AGENT TO <USER>;
+GRANT EXECUTE ON DBMS_CLOUD_AI TO ADB_USER;
+GRANT EXECUTE ON DBMS_CLOUD_AI_AGENT TO ADB_USER;
 </copy>
 ```
-Replace _`USER`_ with your user name.
+Replace _`ADB_USER`_ with your user name.
 
 ## Task 1: Download and Import the Provided Notebook into OML
 
@@ -40,10 +40,10 @@ This notebook named **SelectAI4SQL - AI Agents - Sales Return Agent** contains a
 
 In this task, you will first download the **`SelectAI4SQL - AI Agents - Sales Return Agent.dsnb`** OML notebook to your local machine, and then import this notebook into OML. <!--You can import the provided notebook from a local disk or on GitHub-->.
 
-1. Click the button below to download the notebook:
+1. Click the button below to download the notebook to your local folder:
 
     <a href="https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/1C_VWEcNHyMoV10mPLbRvJmxDOyCR0ogX4LijMCidf5MxL5xuhnnMvwuQ5tll4uR/n/adwc4pm/b/oaiw25-select-ai-agent-notebook/o/SelectAI4SQL%20-%20AI%20Agents%20-%20Sales%20Return%20Agent.dsnb" class="tryit-button">Download Notebook</a>
-
+<!-- https://github.com/oracle-devrel/oracle-autonomous-database-samples/blob/main/select-ai-agent/notebooks/SelectAI4SQL%20-%20AI%20Agents%20-%20Sales%20Return%20Agent.dsnb-->
 2. To access the URL for the Oracle Machine Learning sign in page, go to your Autonomous AI Database details page and click **Tool configuration**.
 
 3. Go to the **Oracle Machine Learning user interface** section and click **Copy**. Paste the URL on the browser to sign into Oracle Machine Learning user interface.

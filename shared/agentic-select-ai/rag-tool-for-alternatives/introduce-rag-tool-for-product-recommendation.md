@@ -16,7 +16,7 @@ An AI profile captures the properties of your AI provider and the AI model(s) yo
 
 Here, you will create an AI profile for RAG. 
 
->**Note:** In this workshop, we are using OCI Generative AI. Before creating an AI profile, create credentials to access AI provider. See **Lab 1** of this workshop.
+>**Note:** In this workshop, we are using OCI Generative AI. Before creating an AI profile, create credentials to access AI provider. See **Lab 2 -> Task 6** of this workshop.
 
 To get started, you'll need to create a profile using the **`DBMS_CLOUD_AI.CREATE_PROFILE`** PL/SQL package that describes your _AI provider_ and use the _default_ LLM transformer. We’ll then create a vector index using content from object storage. For additional information, see the [CREATE\_PROFILE procedure](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-package.html#GUID-D51B04DE-233B-48A2-BBFA-3AAB18D8C35C) documentation.
 
@@ -50,27 +50,8 @@ This lab requires completion of the previous labs in the **Contents** menu on th
 ## Task 1: Create a profile for RAG
 Define an AI Profile that has your LLM and database objects and is ready to use RAG once a vector index exists.
 
-> Note: The default values are listed as comments.
 
-1. Create an AI profile for RAG usage.
-```
-    <copy>
-    BEGIN  
-      DBMS_CLOUD_AI.drop_profile(profile_name => 'SALES_AGENT_RAG_PROFILE');
-    
-      -- default LLM: meta.llama-3.1-70b-instruct
-      -- default transformer: cohere.embed-english-v3.0
-    BEGIN
-      DBMS_CLOUD_AI.create_profile(                                              
-          profile_name => 'SALES_AGENT_RAG_PROFILE',                                                                 
-          attributes   => '{"provider": "oci",   
-                            "credential_name": "AI_CREDENTIAL",          
-                            "vector_index_name": "SALES_AGENT_VECTOR_INDEX2"}');  
-    END;
-      </copy>
-```
-
-2. Create credentials to access Object Storage. If you haven't already created your credential, see **Lab 2** -> **Task 6** for instructions on how to create your OCI credential.
+1. First create credentials to access Object Storage. If you haven't already created your credential, see **Lab 2** -> **Task 6** for instructions on how to create your OCI credential.
 
 ```
 <copy>
@@ -92,6 +73,26 @@ DBMS_CLOUD.create_credential(
 END;
 </copy>
 ```
+2. Create an AI profile for RAG usage.
+```
+    <copy>
+    BEGIN  
+      DBMS_CLOUD_AI.drop_profile(profile_name => 'SALES_AGENT_RAG_PROFILE');
+    
+      -- default LLM: meta.llama-3.1-70b-instruct
+      -- default transformer: cohere.embed-english-v3.0
+    BEGIN
+      DBMS_CLOUD_AI.create_profile(                                              
+          profile_name => 'SALES_AGENT_RAG_PROFILE',                                                                 
+          attributes   => '{"provider": "oci",   
+                            "credential_name": "AI_CREDENTIAL",          
+                            "vector_index_name": "SALES_AGENT_VECTOR_INDEX2"}');  
+    END;
+      </copy>
+```
+> Note: The default values are listed as comments.
+
+
 3. List the document stored in the Object Storage.
 
 ```

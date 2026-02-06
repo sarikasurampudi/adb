@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Before creating your own Select AI agents, this lab provides a hands-on tour of the “Ask Oracle” demo chatbot app. Here, you’ll use the chatbot to run the agent team created and enhanced in the previous labs. While we’ll focus on interacting with an agent team, this APEX-based app allows you to interact with your data using natural language prompts for RAG and NL2SQL with AI profiles already defined. You’ll open the app, review at the settings, specify NL2SQL   and RAG AI profiles, and pick an AI Agent. Then, try a few prompts - just click and chat.
+This lab provides a hands-on tour of the “Ask Oracle” demo chatbot app. Here, you’ll use the chatbot to run the agent team created and enhanced in the previous labs. While we’ll focus on interacting with an agent team, this APEX-based app allows you to interact with your data using natural language prompts for RAG and NL2SQL with AI profiles already defined. You’ll open the app, review at the settings, specify NL2SQL   and RAG AI profiles, and pick an AI Agent. Then, try a few prompts - just click and chat.
 
 
 Estimated Time: x
@@ -27,27 +27,29 @@ To create NL2SQL profile:
 2. Create a NL2SQL Profile by pasting the following code.
   ```
   <copy>
-BEGIN
-  DBMS_CLOUD_AI.CREATE_PROFILE(
-      profile_name >'OCI_GENAI',
-      attributes   =>'{"provider": "oci",
-      "credential_name": "AI_CREDENTIAL",
-      "conversation": "true",
-      "object_list": [{"owner": "SH", "name": "customers"},
-                      {"owner": "SH", "name": "countries"},
-                      {"owner": "SH", "name": "supplementary_demographics"},
-                      {"owner": "SH", "name": "profits"},
-                      {"owner": "SH", "name": "promotions"},
-                      {"owner": "SH", "name": "products"}]
-        }');
- END;
- /
+
+  %script 
+  BEGIN
+    DBMS_CLOUD_AI.CREATE_PROFILE(
+        profile_name >'OCI_GENAI',
+        attributes   =>'{"provider": "oci",
+        "credential_name": "AI_CREDENTIAL",
+        "conversation": "true",
+        "object_list": [{"owner": "SH", "name": "customers"},
+                        {"owner": "SH", "name": "countries"},
+                        {"owner": "SH", "name": "supplementary_demographics"},
+                        {"owner": "SH", "name": "profits"},
+                        {"owner": "SH", "name": "promotions"},
+                        {"owner": "SH", "name": "products"}]
+          }');
+  END;
+  /
   </copy>
   ```
 
 ## Task 2: Access the Application
 
-1. Launch the demo app. Paste the URL in a new tab in your Web browser, and then click **[ENTER]**. In the **Ask Oracle** page, enter the username and password, and then click **Sign In**. Refer to **Lab 1 -> Task 4**.
+1. Launch the demo app. Paste the URL in a new tab in your Web browser, and then click **[ENTER]**. In the **Ask Oracle** page, enter the username and password, and then click **Sign In**. Refer to **Lab 1** -> **Task 4**.
 
   ![Enter Ask Oracle Chatbot credentials](./images/ask-oracle-login.png =70%x*)
 
