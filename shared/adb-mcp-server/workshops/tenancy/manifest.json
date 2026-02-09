@@ -1,5 +1,5 @@
 {
-    "workshoptitle": "Get started with AI Agents using Select AI on Autonomous Database",
+    "workshoptitle": "Get Started with Oracle Autonomous AI Database MCP Server",
     "help": "livelabs-help-db_us@oracle.com",
     "include": {
         "adb-provision-body.md":"/common/building-blocks/tasks/adb/provision-body.md"
@@ -9,7 +9,7 @@
         {
             "title": "Introduction",
             "description": "Introduction to the workshop",
-            "filename": "../../introduction/introduction-agentic-select-ai.md"
+            "filename": "../../introduction/introduction-mcp-server.md"
         },
         {
             "title": "Get Started",
@@ -23,34 +23,34 @@
             "filename": "../../setup-environment/setup-environment.md"
         },
         {
-            "title": "Lab 2: Build a Sales Return Agent",
+            "title": "Lab 2: Enable and Manage MCP Server",
             "type": "tenancy",
-            "filename": "../../build-sales-return-agent/build-sales-return-agent.md"
+            "filename": "../../enable-manage-mcp-server/enable-manage-mcp-server.md"
         },
         {
-            "title": "Lab 3: Refine your Agent",
+            "title": "Lab 3: Define Tools with Select AI Agent",
             "type": "tenancy",
-            "filename": "../../refine-your-agent/refine-your-agent.md"
+            "filename": "../../define-tools-with-select-ai"
         },
         {
-            "title": "Lab 4: Create a Function and an AI Agent Tool to Generate an Email Response",
+            "title": "Lab 4: Configure Claude Desktop to Use MCP Server",
             "type": "tenancy",
-            "filename": "../../create-function-tool-for-email/create-function-and-tool-for-email.md"
+            "filename": "../../configure-claude-desktop/configure-claude-desktop.md"
         },
         {
-            "title": "Lab 5: Introduce a RAG Tool for Alternate Product Recommendation",
+            "title": "Lab 5: Configure Cline in Visual Studio Code to Use MCP Server",
             "type": "tenancy",
-            "filename": "../../rag-tool-for-alternatives/introduce-rag-tool-for-product-recommendation.md"
+            "filename": "../../configure-cline/configure-cline.md"
         },
         {
-            "title": "Lab 6: Query Select AI Agent Views",
+            "title": "Lab 6: Explore Tools in MCP Server with Cline",
             "type": "tenancy",
-            "filename": "../../query-select-ai-agent-views/query-select-ai-agent-views.md"
+            "filename": "../../explore-tools-using-cline/explore-tools-using-cline.md"
         },
         {
-            "title": "Lab 7: Use the Ask Oracle Chatbot Demo Application",
+            "title": "Lab 7: Explore Tools in MCP Server with Claude Desktop",
             "type": "tenancy",
-            "filename": "../../use-ask-oracle-demo-app/use-ask-oracle-demo-app.md"
+            "filename": "../../explore-tools-using-claude-desktop/explore-tools-using-claude-desktop.md"
         },
         {
             "title": "Need Help?",
