@@ -6,13 +6,7 @@ comments syntax
 
 ## Introduction
 
-This workshop focuses on teaching you how to setup your Autonomous AI Database and install Select AI Ask Oracle Chatbot application to query your data using natural language. The **Ask Oracle** APEX application, powered by Select AI running on Autonomous AI Database, offers a conversational interface for interacting with your data. 
-
-This short demo showcases how the app leverages Natural Language to SQL (NL2SQL), Retrieval-Augmented Generation (RAG), and AI agents to transform natural language queries into actionable insights.
-
-[Ask Oracle Chatbot Demo](youtube:p595Io2cxyw:medium)
-
-
+This workshop focuses on teaching you how to setup your Autonomous AI Database.
 
 
 
@@ -22,9 +16,11 @@ Estimated Time: 5 minutes.
 
 In this lab, you will:
 
-* Provision your Autonomous AI Database instance
-* Install the Select AI Ask Oracle Chatbot application
+Provision your Autonomous AI Database instance
 
+
+## Task 1: (Optional) Create an OCI Compartment
+[](include:iam-compartment-create-body.md)
 
 ## Task 1: Create the Autonomous AI Database Instance
 [](include:adb-provision-body.md)
@@ -82,34 +78,6 @@ To create a user:
     </copy>
     ```
 > Replace `ADB_USER` with the schema user name.
-
-## Task 4: Install Ask Oracle Chatbot Application
-Here is a video that walks you through the **Ask Oracle** chatbot app installation:
-[Ask Oracle App Installation](youtube:kjeQ2AC3TFo:small)
-
-Perform the following steps to install the Ask Oracle Chatbot app. The application is available on GitHub.
-
-1. Download the `ADB-AskOracle-Chatbot-yyyy-mm-dd.sql` file from the [GitHub repository](https://github.com/oracle-devrel/oracle-autonomous-database-samples/tree/main/apex/Ask-Oracle) and store it in your local directory. 
-
-2. From your Autonomous AI Database console, navigate to **Tool configuration** and copy the APEX URL.
-
-3. Paste the URL in your web browser and **Sign In** with the workspace associated with the created schema.
-    > If you have not created an APEX workspace, the URL copied from **Tool Configuration** opens Administrative Services. Only the `ADMIN` user can access this page. The `ADMIN` user must first create an APEX workspace, along with a workspace username and password. For guidance, see [Get Started with Oracle APEX on the Oracle Autonomous AI Database](https://livelabs.oracle.com/pls/apex/dbpm/r/livelabs/view-workshop?wid=3509). Once the workspace exists, the **Tool Configuration** URL opens the APEX login screen, where a schema user can sign in.
-
-4. In APEX, go to **App Builder** → **Import**.
-
-5. Click the **Drag and Drop** selection and navigate to the `ADB-AskOracle-Chatbot-yyyy-mm-dd.sql` file that you stored in your local directory and click **Open**.
-
-6. Keep the defaults and click **Next**.
-
-7. Next screen, click **Install Application**. This may take a while. Once the application is installed, click **Next**.
-
-8. Review the supporting objects and click **Install Supporting Objects**.
-
-9. Next screen shows a confirmation screen with the supporting objects installed, click **Run Application**.
-
-10. You'll be prompted with a login screen. Enter the APEX username and password. You are ready with a prompt screen.
-
 
 
 
