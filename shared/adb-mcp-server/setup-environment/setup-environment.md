@@ -57,42 +57,19 @@ To create a user:
 
 7. After the user is created successfully, the message _User ADB\_USER created successfully_ is displayed.    
 
-## Task 3: Grant Privileges
-
-1. Click on your database instance and navigate to the **Tool Configuration** tab. 
-2. Click **Copy** to copy the **Database Actions** URL. 
-    ![Copy the Database Actions URL](./images/db-actions-url.png =70%x*)
-
-3. Paste the URL in your browser.
-4. Login as an `ADMIN` user. 
-5. Click **Development** tab and click **SQL** on the left-hand navigation in the Database    Actions|Launchpad screen. This opens the SQL worksheet.
-6. Grant the following to the schema user:
-
-    ```
-    <copy>
-    GRANT EXECUTE on DBMS_CLOUD_AI to ADB_USER;
-    GRANT EXECUTE on DBMS_CLOUD_AI_AGENT to ADB_USER;
-    GRANT EXECUTE on DBMS_CLOUD_PIPELINE to ADB_USER;
-    GRANT EXECUTE on DBMS_VECTOR to ADB_USER;
-    GRANT CREATE ANY INDEX to ADB_USER;
-    </copy>
-    ```
-> Replace `ADB_USER` with the schema user name.
-
-
 
 
 You may now proceed to the next lab.
 
 ## Learn More
 
-* [Using Oracle Autonomous AI Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/index.html)
-* [Select AI Examples](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai-examples.html#GUID-8BEF8CA8-D98D-41FB-A819-6C2F862099DC)
+[Using Oracle Autonomous AI Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsb/index.html)
+
 
 ## Acknowledgements
 
-* **Author:** Sarika Surampudi, Principal User Assistance Developer
-* **Contributor:** Mark Hornick, Product Manager
+* **Authors:** Sarika Surampudi, Principal User Assistance Developer; Dhanish Kumar, Member Technical Staff
+* **Contributors:** Chandrakanth Putha, Senior Product Manager; Mark Hornick, Senior Director, Machine Learning and AI Product Management
 <!--* **Last Updated By/Date:** Sarika Surampudi, August 2025
 -->
 

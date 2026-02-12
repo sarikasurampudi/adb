@@ -28,7 +28,7 @@ To create NL2SQL profile:
   ```
   <copy>
 
-  %script 
+    
   BEGIN
     DBMS_CLOUD_AI.CREATE_PROFILE(
         profile_name >'OCI_GENAI',
@@ -193,9 +193,8 @@ Click **+** and select **RAG** to ask questions using retrieval augmented genera
 ## Acknowledgements
 
 * **Author:** Sarika Surampudi, Principal User Assistance Developer
-* **Contributor:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
-<!--* **Last Updated By/Date:** Sarika Surampudi, August 2025
--->
+* **Contributors:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
+* **Last Updated By/Date:** Sarika Surampudi, February 2026
 
 Copyright (c) 2026 Oracle Corporation.
 

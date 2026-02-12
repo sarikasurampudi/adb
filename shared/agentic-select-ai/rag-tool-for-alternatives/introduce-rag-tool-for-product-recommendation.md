@@ -55,7 +55,7 @@ Define an AI Profile that has your LLM and database objects and is ready to use 
 
 ```
 <copy>
-%script
+ 
 
 begin
 DBMS_CLOUD.drop_credential(credential_name => 'AI_CREDENTIAL');
@@ -107,7 +107,7 @@ select * from
 4. Build a vector index over product docs stored in Object Storage. The index is used by RAG.
 ```
 <copy>
-%script
+ 
 
 BEGIN
   DBMS_CLOUD_AI.DROP_VECTOR_INDEX(
@@ -134,7 +134,7 @@ END;
 5. Set the AI profile in the current session.
   ```
   <copy>
-  %script
+   
   EXEC DBMS_CLOUD_AI.SET_PROFILE(profile_name => 'SALES_AGENT_RAG_PROFILE');
   </copy>
   ```
@@ -160,7 +160,7 @@ Define a RAG tool that the AI agent team can call to provide alternate product r
 Create the sales\_rag\_tool.
 ```
 <copy>
-%script
+ 
 
 BEGIN DBMS_CLOUD_AI_AGENT.drop_tool('sales_rag_tool');
 EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -184,7 +184,7 @@ Update the `Handle_Product_Return_Task`.
 >   **Note**: This version does not include email generation, only the product recommendation.
 ```
 <copy>
-%script
+ 
 
 BEGIN DBMS_CLOUD_AI_AGENT.drop_task('Handle_Product_Return_Task');
 EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -220,7 +220,7 @@ You'll update the agent team with the revised Product Return task.
 Update the `Return_Agent_Team`.
 ```
 <copy>
-%script
+ 
 
 BEGIN DBMS_CLOUD_AI_AGENT.clear_team();
 EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -242,7 +242,7 @@ Start interacting with the updated RAG agent with natural language prompts.
 1. Set the AI profile for RAG in the session.
 ```
 <copy>
-%script
+ 
 
 EXEC DBMS_CLOUD_AI_AGENT.set_team(team_name  => 'Return_Agency_Team');
 	</copy>
@@ -285,10 +285,8 @@ You may now proceed to the next lab.
 ## Acknowledgements
 
 * **Author:** Sarika Surampudi, Principal User Assistance Developer
-* **Contributor:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
-
-<!--* **Last Updated By/Date:** Sarika Surampudi, August 2025
--->
+* **Contributors:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
+* **Last Updated By/Date:** Sarika Surampudi, February 2026
 
 
 Copyright (c) 2026 Oracle Corporation.

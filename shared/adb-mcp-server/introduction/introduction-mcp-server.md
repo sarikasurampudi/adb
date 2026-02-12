@@ -59,7 +59,7 @@ You may now proceed to the next lab.
 **Authors:**
 
 * Sarika Surampudi, Principal User Assistance Developer; Dhanish Kumar, Member Technical Staff
-* Chandrakanth Putha, Senior Product Manager; Mark Hornick, Senior Director, Machine Learning and AI Product Management
+* **Contributors:** Chandrakanth Putha, Senior Product Manager; Mark Hornick, Senior Director, Machine Learning and AI Product Management
 <!--* **Last Updated By/Date:** Sarika Surampudi, August 2025
 -->
 

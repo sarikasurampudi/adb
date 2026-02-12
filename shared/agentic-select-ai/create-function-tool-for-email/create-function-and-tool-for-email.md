@@ -30,7 +30,7 @@ You'll create a function to return a confirmation email as a `CLOB` and test the
 
     ```
     <copy>
-    %script
+     
 
     CREATE OR REPLACE FUNCTION build_return_email (
         p_order_number      IN  VARCHAR2,
@@ -90,7 +90,7 @@ You'll create a function to return a confirmation email as a `CLOB` and test the
 2. Test the `build_return_email` function and verify the output.
 
     ```
-    <copy>%script
+    <copy> 
         DECLARE
             v_json CLOB;
         BEGIN
@@ -125,7 +125,7 @@ Create a build\_email\_tool that specifies the build\_return\_email function.
 
 ```
 <copy>
-%script
+ 
 
 BEGIN DBMS_CLOUD_AI_AGENT.drop_tool('build_email_tool');
 EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -149,7 +149,7 @@ You'll create an email task and add the build\_email\_tool to the task. The task
 Create a Build\_Email\_Task.
 
 ```
-<copy>%script
+<copy> 
 BEGIN DBMS_CLOUD_AI_AGENT.drop_task('Handle_Product_Return_Task');
 EXCEPTION WHEN OTHERS THEN NULL; END;
 /
@@ -182,7 +182,7 @@ Add the new task into your agent team, which now includes the email generation t
 Update the Return\_Agency\_Team.
 
 ```
-<copy>%script
+<copy> 
 
 BEGIN DBMS_CLOUD_AI_AGENT.clear_team();
 EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -205,7 +205,7 @@ You can start interacting with the refined Select AI agent team by using natural
 1. Set the agent team in the current session.
 
     ```
-    <copy>%script
+    <copy> 
 
     EXEC DBMS_CLOUD_AI.clear_conversation_id;
 
@@ -303,9 +303,9 @@ You may now proceed to the next lab.
 ## Acknowledgements
 
 * **Author:** Sarika Surampudi, Principal User Assistance Developer
-* **Contributor:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
-<!--* **Last Updated By/Date:** Sarika Surampudi, August 2025
--->
+* **Contributors:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
+* **Last Updated By/Date:** Sarika Surampudi, February 2026
+
 
 
 Copyright (c) 2026 Oracle Corporation.

@@ -29,7 +29,7 @@ You'll make the agent chatty and empathetic by refining the agent role.
     ```
     <copy>
 
-    %script
+     
 
     BEGIN DBMS_CLOUD_AI_AGENT.drop_agent('Customer_Return_Agent');
     EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -59,7 +59,7 @@ Create a `Generate_Email_Task`.
 ```
 <copy>
 
-%script
+ 
 
 BEGIN DBMS_CLOUD_AI_AGENT.drop_task('Generate_Email_Task');
 EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -85,7 +85,7 @@ Update the customer agent to include both the tasks.
 
 ```
 <copy>
-%script
+ 
 
 BEGIN DBMS_CLOUD_AI_AGENT.clear_team();
 EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -219,7 +219,8 @@ You may now proceed to the next lab.
 ## Acknowledgements
 
 * **Author:** Sarika Surampudi, Principal User Assistance Developer
-* **Contributor:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
+* **Contributors:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
+* **Last Updated By/Date:** Sarika Surampudi, February 2026
 
 
 Copyright (c) 2026 Oracle Corporation.

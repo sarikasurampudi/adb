@@ -65,11 +65,9 @@ You may now proceed to the next lab.
 * [Additional Autonomous AI Database Workshops](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/livelabs-workshop-cards?p100_workshop_series=222)
 
 ## Acknowledgements
-* **Authors:**
-    * Sarika Surampudi, Principal User Assistance Developer
-    * Mark Hornick, Product Manager
-<!--* **Last Updated By/Date:** Sarika Surampudi, August 2025
--->
+* **Authors:** Sarika Surampudi, Principal User Assistance Developer
+* **Contributor:** Mark Hornick, Product Manager
+* **Last Updated By/Date:** Sarika Surampudi, February 2026
 
 
 Copyright (c) 2026 Oracle Corporation.
