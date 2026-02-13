@@ -24,7 +24,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-- This lab requires completion of all the previous labs in the **Contents** menu on the left.
+This lab requires completion of all the previous labs in the **Contents** menu on the left.
 
 ## Task 1: Login to Database Actions
 You will run the code using Database Actions as your schema user (for example, `ADB_USER`).
