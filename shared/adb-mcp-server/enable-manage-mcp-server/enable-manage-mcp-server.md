@@ -38,11 +38,11 @@ To enable MCP Server:
 5. Click the Autonomous AI Database Serverless instance you created in the previous lab to enable MCP Server.
 6. Scroll to the right on the tools menu and click **Tags** and then click **Add**.
 7. Enter the following:
-  ```
-  Key: adb$feature
-  Value: {"name":"mcp_server","enable":true}
+    ```
+    Key: adb$feature
+    Value: {"name":"mcp_server","enable":true}
 
-  ```
+    ```
 8. Click **Add**. 
 MCP Server is enabled for this database instance.
 

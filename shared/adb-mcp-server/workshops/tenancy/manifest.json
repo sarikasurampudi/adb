@@ -30,7 +30,7 @@
         {
             "title": "Lab 3: Define Tools with Select AI Agent",
             "type": "tenancy",
-            "filename": "../../define-tools-with-select-ai"
+            "filename": "../../define-tools-with-select-ai/define-tools-with-select-ai.md"
         },
         {
             "title": "Lab 4: Configure Claude Desktop to Use MCP Server",
