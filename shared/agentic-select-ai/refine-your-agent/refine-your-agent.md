@@ -111,79 +111,95 @@ You can start interacting with the refined Select AI agent team by using natural
 
 1. Set the agent team in the current session.
 
-    ```
-    <copy>
-    EXEC DBMS_CLOUD_AI_AGENT.set_team(team_name  => 'Return_Agency_Team');
-    </copy>
-    ```
+```
+<copy>
+EXEC DBMS_CLOUD_AI_AGENT.set_team(team_name  => 'Return_Agency_Team');
+</copy>
+```
 
 2. Interact with the Return Agency Team in a series of natural language prompts.
 
-    ```
-    <copy>
-    select ai agent Hello Sales Return Agent;
-    </copy>
-    ```
-**Result:**
-    ```
-    RESPONSE
-    Hello! I'm happy to assist with your return request. Could you please tell me the reason for the return? Is it because the product is no longer needed, arrived too late, the box is broken, or is it defective?
-    ```
+**Prompt:**
 
-    ```
-    <copy>
-    select ai agent I want to return a smartphone cord;
-    </copy>
-    ```
-**Result:**
-    ```
-    RESPONSE
-    Thanks for letting me know you're returning a smartphone cord. Could you please clarify the reason for the return? Is it because the product is no longer needed, arrived too late, the box is broken, or is it defective?
-    ```
+```
+<copy>
+select ai agent Hello Sales Return Agent;
+</copy>
 
-    ```
-    <copy>
-    select ai agent The box was broken;
-    </copy>
-    ```
-**Result:**
-    ```
-    RESPONSE
-    I'm sorry to hear that the box was broken. Would you like a replacement for the smartphone cord, or would you prefer a refund?
-    ```
-
-    ```
-    <copy>
-    select ai agent I''ll take a refund; 
-    </copy>
-    ```
-    > SQL requires escaping single quotes with ''.
-
+```
 **Result:**
 
-    ```
-    RESPONSE
-    I'm happy to process your refund for the smartphone cord. Could you please confirm your name and order number so I can update the status and provide you with a return shipping label to send the   product back?
-    ```
+```
+RESPONSE
+Hello! I'm happy to assist with your return request. Could you please tell me the reason for the return? Is it because the product is no longer needed, arrived too late, the box is broken, or is it defective?
+```
+**Prompt:**
+
+```
+<copy>
+select ai agent I want to return a smartphone cord;
+</copy>
+```
+**Result:**
+
+```
+RESPONSE
+Thanks for letting me know you're returning a smartphone cord. Could you please clarify the reason for the return? Is it because the product is no longer needed, arrived too late, the box is broken, or is it defective?
+```
+**Prompt:**
+
+```
+<copy>
+select ai agent The box was broken;
+</copy>
+```
+**Result:**
+
+```
+RESPONSE
+I'm sorry to hear that the box was broken. Would you like a replacement for the smartphone cord, or would you prefer a refund?
+```
+**Prompt:**
+
+```
+<copy>
+select ai agent I''ll take a refund; 
+</copy>
+```
+> SQL requires escaping single quotes with ''.
+
+**Result:**
+
+```
+RESPONSE
+I'm happy to process your refund for the smartphone cord. Could you please confirm your name and order number so I can update the status and provide you with a return shipping label to send the   product back?
+```
+
+**Prompt:**
+
 ```
 <copy>
 select ai agent I''m Eva Green with order number 5019
-    </copy>
+</copy>
+
 ```
 
 **Result:**
 
-    ```
-    RESPONSE
-    Thank you, Eva. Your refund process has been initiated. Please print out the return shipping label that will be provided to you, and use it to send the defective product back to us. Once we receive it, the refund will be finalized. Is there anything else I can help you with?
-    ```
+```
+RESPONSE
+Thank you, Eva. Your refund process has been initiated. Please print out the return shipping label that will be provided to you, and use it to send the defective product back to us. Once we receive it, the refund will be finalized. Is there anything else I can help you with?
+```
+**Prompt:**
 
 ```
-    <copy>
-    select ai agent No, not at the moment
-    </copy>
+<copy>
+select ai agent No, not at the moment
+</copy>
 ```
+
 **Result:**
+
 ```
     RESPONSE
     Subject: Return Confirmation for Order #5019 - Smartphone Cord
