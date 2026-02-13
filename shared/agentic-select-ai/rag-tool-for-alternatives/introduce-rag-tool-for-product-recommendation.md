@@ -100,7 +100,7 @@ END;
 select * from
   DBMS_CLOUD.LIST_OBJECTS(
     credential_name => 'AI_CREDENTIAL',
-    location_uri    => 'https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/b9UsLs4CwZi9iorADMTK9c-ziXkhmME6m7kcdJ9ypjqFTzzZmHSLqNve0t_Vi1du/n/adwc4pm/b/oaiw25-sales-agent-rag-documents/o/')
+    location_uri    => 'https://objectstorage.us-ashburn-1.oraclecloud.com/p/OSllhv6ZOGUkG1pR7MIqUZqhJ0cwBxz0B6vzSbtHhQq7MqqbyU9Jn1iX2mtHrVTV/n/c4u04/b/sales-agent-rag-documents/o/')
 </copy>
 ```
 
