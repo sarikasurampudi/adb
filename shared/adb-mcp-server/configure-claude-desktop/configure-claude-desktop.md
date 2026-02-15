@@ -1,212 +1,138 @@
-# Refine Your Agent
+# Configure Claude Desktop
 
 ## Introduction
 
-This lab focuses on refining the solution of the previous lab to achieve a better customer experience. In this lab, you’ll make the return flow feel more personalized. After updating the order, the agent will compose a clear, polite confirmation email. But this has a problem, which we’ll address in the next lab.
+This lab guides you step-by-step through setting up Claude Desktop, an advanced AI assistant developed by Anthropic for natural language understanding and productivity support. You will learn how to connect Claude Desktop as an MCP client to the Oracle Autonomous AI Database MCP Server.
 
-Estimated Time: X
+Estimated Time: 15 Minutes
 
 ### Objectives
 
 In this lab, you will:
 
-* Refine the Customer Agent persona and response style.
-* Create a Generate Email task that produces a standard return-confirmation email.
-* Add the new task to the Return Agency Team.
-* Run an end-to-end test and review the generated email text.
+* Set up Node.js on your system
+* Install Claude Desktop
+* Set up Claude Desktop as an MCP Client
+* Select and manage tool access through Claude Desktop
 
 ### Prerequisites
 
-- This lab requires completion of Lab 1 in the **Contents** menu on the left.
+- This lab requires completion of Lab 1 and Lab 3 in the **Contents** menu on the left.
 
 
-## Task 1: Refine the Role of the Customer Agent
+## Task 1: Install Claude Desktop
 
-You'll make the agent chatty and empathetic by refining the agent role.
+You need to install Claude Desktop on your computer based on your operating system — Windows or Mac. Choose from:
 
-1. Refine the customer agent by changing the role description.
+#### On Windows
 
-    ```
-    <copy>
+1. Visit the [Claude Desktop download page](https://support.claude.com/en/articles/10065433-installing-claude-desktop).
+2. Download and run the Windows installer (.exe or .msix).
+3. Follow the installation wizard instructions.
+4. Open the Claude application from your Start Menu or desktop.
+5. Sign in to Claude with your Anthropic account (use two-factor authentication if prompted).
+6. Test Claude Desktop by asking it a question.
 
-    %script
+#### On Mac
 
-    BEGIN DBMS_CLOUD_AI_AGENT.drop_agent('Customer_Return_Agent');
-    EXCEPTION WHEN OTHERS THEN NULL; END;
-    /
-    BEGIN
-      DBMS_CLOUD_AI_AGENT.create_agent(
-        'Customer_Return_Agent',
-        '{"profile_name": "OCI_GENAI_GROK",
-          "role": "You are a convivial and chatty experienced customer return agent who deals with customers return requests."}');
-    END;
-        </copy>
-      ```
-2. Verify the change by querying the USER\_AI\_AGENTS view
+1. Visit the [Claude Desktop download page](https://support.claude.com/en/articles/10065433-installing-claude-desktop).
+2. Download the .dmg file and open it.
+3. Drag the Claude app into your Applications folder.
+4. Launch the app and sign in with your Anthropic account.
+5. Test the app by asking a simple question.
 
-    ```
-    <copy>
-    select * from USER_AI_AGENTS;
-    </copy>
-    ```
+## Task 2: Install Node.js
 
-## Task 2: Create a Task to Generate an Email Response
+You need to install Node.js because Claude Desktop uses Node.js-based tools and scripts to interact with the Autonomous AI Database MCP Server. Installing Node.js ensures these tools work correctly for the integration process.
 
-In this task, you will have the LLM produce a standard confirmation email using structured data from the product return. You’ll define a task with instructions on what to include as an email response.
+Install Node.js based on your computer based on your operating system — Windows or Mac. Choose from:
 
-Create a `Generate_Email_Task`.
-
-```
-<copy>
-
-%script
-
-BEGIN DBMS_CLOUD_AI_AGENT.drop_task('Generate_Email_Task');
-EXCEPTION WHEN OTHERS THEN NULL; END;
-/
-BEGIN
-    DBMS_CLOUD_AI_AGENT.create_task(
-    task_name => 'Generate_Email_Task',
-    attributes => '{"instruction": "Use the customer information and product details to generate an email in a professional format. The email should:' || 
-                    '1. Include a greeting to the customer by name' || 
-                    '2. Specify the item being returned, the order number, and the reason for the return' ||
-                    '3. If it is a refund, state the refund will be issued to the credit card on record.' ||
-                    '4. If it is a replacement, state that the replacement will be shipped in 3-5 business days."}'
-    );
-END;
-</copy>
-```
-
-## Task 3: Add the New Task to the Agent Team
-
-You'll add the Generate\_Email\_Task to the Return Agency team and see that the team runs processes the return first and then generates the email.
-
-Update the customer agent to include both the tasks.
-
-```
-<copy>
-%script
-
-BEGIN DBMS_CLOUD_AI_AGENT.clear_team();
-EXCEPTION WHEN OTHERS THEN NULL; END;
-/
-
-BEGIN DBMS_CLOUD_AI_AGENT.drop_team('Return_Agency_Team');
-EXCEPTION WHEN OTHERS THEN NULL; END;
-/
-
-BEGIN                                                                 
-  DBMS_CLOUD_AI_AGENT.create_team(  
-    team_name  => 'Return_Agency_Team',                                                
-    attributes => '{"agents": [{"name" : "Customer_Return_Agent", "task" : "Handle_Product_Return_Task"},
-                               {"name" : "Customer_Return_Agent", "task" : "Generate_Email_Task"}],
-                    "process": "sequential"}');                                                                 
-END;
-</copy>
-```
-
-## Task 4: Interact with the Refined Agent - Part 1
-
-You can start interacting with the refined Select AI agent team by using natural language prompt on the SQL paragraph. To do so, you first clear any previous conversation and then set the agent team for the current session.
-
-1. Set the agent team in the current session.
+#### On Windows
+1. Go to the [Node.js download page](https://nodejs.org/en/download).
+2. Download the Windows Installer (.msi) for the LTS version.
+3. Double-click the .msi file and follow the prompts to install, keeping default settings.
+4. Open Command Prompt or PowerShell, then type:
 
     ```
     <copy>
-    EXEC DBMS_CLOUD_AI_AGENT.set_team(team_name  => 'Return_Agency_Team');
+    node -v
+    npx -v
+    npm -v
     </copy>
     ```
 
-2. Interact with the Return Agency Team in a series of natural language prompts.
+    This should display the installed versions.
+
+#### On Mac
+1. Go to the [Node.js download page](https://nodejs.org/en/download).
+2. Download the macOS Installer (.pkg) from the Node.js site .
+3. Open the .pkg file and follow the on-screen instructions.
+4. Enter your Mac password if prompted.
+5. Open Terminal and check the installation by running:
 
     ```
     <copy>
-    select ai agent Hello Sales Return Agent;
+    node -v
+    npm -v
     </copy>
     ```
-**Result:**
-    ```
-    RESPONSE
-    Hello! I'm happy to assist with your return request. Could you please tell me the reason for the return? Is it because the product is no longer needed, arrived too late, the box is broken, or is it defective?
-    ```
+    
+    This should display the installed versions.
+
+
+## Task 3: Configure Claude Desktop as an MCP client
+
+You'll update the Claude Desktop configuration so it can connect to the Autonomous AI Database MCP Server. You will edit a configuration file and provide the necessary server details, enabling Claude Desktop to access tools and data from your database.
+
+1. Open the Claude Desktop application.
+       - If prompted, sign in using your account credentials.
+2. Go to **Settings**. ![Claude Desktop main window](../configure-claude-desktop/images/claude-desktop-main.png)
+3. In **Settings**, select the **Desktop App** section, then click **Developer**.![Claude Desktop main window](../configure-claude-desktop/images/claude-setting-developer.png)
+4. Click **Edit Config** to open or edit the `claude_desktop_config` JSON configuration file.![Claude Desktop main window](../configure-claude-desktop/images/claude-edit-config.png)
+5. Add the following JSON configuration to define your MCP server:
 
     ```
     <copy>
-    select ai agent I want to return a smartphone cord;
+    {
+      "mcpServers": {
+        "Autonomous_AI_database_mcp_server": {
+          "description": "Database containing application-related data",
+          "command": "npx",
+          "args": [
+            "-y",
+            "mcp-remote",
+            "https://dataaccess.adb.{region-identifier}.oraclecloud.com/adb/mcp/v1/databases/{database-ocid}",
+            "--allow-http"
+          ],
+          "transport": "streamable-http"
+        }
+      }
+    }
     </copy>
     ```
-**Result:**
-    ```
-    RESPONSE
-    Thanks for letting me know you're returning a smartphone cord. Could you please clarify the reason for the return? Is it because the product is no longer needed, arrived too late, the box is broken, or is it defective?
-    ```
+    - Replace `{region-identifier}` with your Oracle Cloud region.
+    - Replace `{database-ocid}` with the OCID of your Autonomous AI Database.
+6. **Save** the configuration file.
+7. **Completely quit** Claude Desktop and ensure it is not running in the background.  
+       - On Windows, open Task Manager, search for any running Claude processes, and end all of them before restarting the app.
+8. When prompted, enter your following database credentials:
+    - Username: **sales_user**
+    - Password: **QwertY#19_95**
+    ![Claude Desktop main window](../configure-claude-desktop/images/claude-oauth-authentication.png)
+9. Claude Desktop will detect the available database tools for your user profile.
 
-    ```
-    <copy>
-    select ai agent The box was broken;
-    </copy>
-    ```
-**Result:**
-    ```
-    RESPONSE
-    I'm sorry to hear that the box was broken. Would you like a replacement for the smartphone cord, or would you prefer a refund?
-    ```
 
-    ```
-    <copy>
-    select ai agent I''ll take a refund; 
-    </copy>
-    ```
-    > SQL requires escaping single quotes with ''.
+## Task 4: Review and Control Tool Access
 
-**Result:**
+Before you begin using Claude Desktop with your Autonomous AI Database, it's important to review and manage which tools the MCP client can access. In this step, you will learn how to view the available tools and control their permissions, ensuring that only approved tools are accessible through Claude Desktop.
 
-    ```
-    RESPONSE
-    I'm happy to process your refund for the smartphone cord. Could you please confirm your name and order number so I can update the status and provide you with a return shipping label to send the   product back?
-    ```
-```
-<copy>
-select ai agent I''m Eva Green with order number 5019
-    </copy>
-```
-
-**Result:**
-
-    ```
-    RESPONSE
-    Thank you, Eva. Your refund process has been initiated. Please print out the return shipping label that will be provided to you, and use it to send the defective product back to us. Once we receive it, the refund will be finalized. Is there anything else I can help you with?
-    ```
-
-```
-    <copy>
-    select ai agent No, not at the moment
-    </copy>
-```
-**Result:**
-```
-    RESPONSE
-    Subject: Return Confirmation for Order #5019 - Smartphone Cord
-
-    Dear Eva Green,
-
-    I hope this message finds you well. I’m writing to confirm the return of your smartphone cord associated with order number 5019. We understand that the box was broken, and we’re sorry for any inconvenience this may have caused.
-
-    As per your request, a refund will be issued to the credit card on record once we receive the returned item. Please use the provided return shipping label to send the product back to us. Once we have received and processed the return, the refund will be finalized.
-
-    If you have any questions or need further assistance, please don’t hesitate to reach out. We’re here to help!
-
-    Thank you for choosing us, and we hope to serve you again in the future.
-
-    Warm regards,  
-    [Your Name]  
-    Customer Return Agent  
-    [Company Name]  
-    [Contact Information]    
-
-```
-
-This result relied on the LLM to generate a form letter using its own *creativity*. The specific content may differ from customer to customer as is typical for LLMs. To ensure we have a consistent form letter response, you will define a function that generates exactly the text you want in the next lab.
+1. In Settings under Developer, confirm your MCP server connection is listed and running.
+Navigate to Connectors. ![Claude Desktop main window](../configure-claude-desktop/images/claude-dev-mcp-server.png)
+2. You should see "Autonomous\_AI\_database\_mcp\_server" (or the name you assigned in the config) listed as an MCP server. Click Configure.![Claude Desktop main window](../configure-claude-desktop/images/claude-connectors-configure.png)
+3. Review the tools available to Claude Desktop. ![Claude Desktop main window](../configure-claude-desktop/images/claude-connectors-tools.png)
+4. By default, all tools require your approval.
+5. To always allow a tool, click the circled checkmark.
+6. To block a tool, click the lined circle (the tool will not be visible to Claude Desktop).
 
 You may now proceed to the next lab.
 
@@ -218,9 +144,8 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 
-* **Author:** Sarika Surampudi, Principal User Assistance Developer
-* **Contributor:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
-
+* **Authors:** Sarika Surampudi, Principal User Assistance Developer; Dhanish Kumar, Senior Member of Technical Staff
+* **Contributors:** Chandrakanth Putha, Senior Product Manager; Mark Hornick, Senior Director, Machine Learning and AI Product Management
 
 Copyright (c) 2026 Oracle Corporation.
 

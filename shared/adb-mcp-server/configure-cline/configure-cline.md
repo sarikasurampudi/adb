@@ -1,278 +1,121 @@
-# Introduce a RAG Tool for Alternative Product Recommendation
+# Configure Cline on Visual Studio Code
 
 ## Introduction
 
-In this lab you’ll enrich the return flow with RAG (Retrieval Augmented Generation). We’ll use a couple of documents that provide product summary information: descriptions, pros, and cons, that can be used to offer alternative product recommendations. After recording a return, the agent can recommend alternative products based on your prompts from content indexed in Object Storage and present a standard confirmation email. You’ll set up an AI Profile for RAG, use content Object Storage, create a vector index, and insert a RAG-related task into your agent team.
+In this lab, you will learn how to set up and use the Cline extension within Visual Studio Code to act as an MCP (Model Control Protocol) client for Oracle Autonomous AI Database MCP Server. 
+Cline is a Visual Studio Code extension that enables seamless connection and interaction with Oracle MCP (Model Control Plane) servers, making it easier for developers to manage, test, and invoke AI models and tools from within their development environment.
 
-### Overview of Important Concepts
-Let's review some of the important concepts that you should know.
-
-### **Use AI profiles to access your LLM**
-
-An AI profile captures the properties of your AI provider and the AI model(s) you want to us, as well as other attributes depending on whether you are using it for SQL query generation or retrieval augmented generation (RAG). You can create multiple profiles for different purposes (NL2SQL, RAG, and the content you want them to access), although only one is active for a given session or a particular call.
-
-### **Create an AI Profile for RAG and a Vector Index**
-[comment]: # (MH: The LiveLab will need to tell the user how to create the credential as well. For the HOL, we'll have a predefined credential, but the general LiveLab will require users to create this. This will require a section on credential creation with OCI GenAI since it's far from easy. When we first use the OCI_CRED, much earlier in the workshop, this should be added. With a reference to that section here (rather than repeat it.)
-
-Here, you will create an AI profile for RAG. 
-
->**Note:** In this workshop, we are using OCI Generative AI. Before creating an AI profile, create credentials to access AI provider. See **Lab 2 -> Task 6** of this workshop.
-
-To get started, you'll need to create a profile using the **`DBMS_CLOUD_AI.CREATE_PROFILE`** PL/SQL package that describes your _AI provider_ and use the _default_ LLM transformer. We’ll then create a vector index using content from object storage. For additional information, see the [CREATE\_PROFILE procedure](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-package.html#GUID-D51B04DE-233B-48A2-BBFA-3AAB18D8C35C) documentation.
-
-### **Ask Natural Language Questions**
-
-You can ask questions using **`SELECT AI`** where **`AI`** is a special keyword in the `SELECT` statement that tells Autonomous Database to use Select AI on your natural language question. Select AI provides multiple ‘_actions_’ for interacting with the LLM. The one we will use is ‘_narrate_’ that, when paired with an AI profile configured with a vector index, will support RAG.
-
-### **Update your Task to Use the RAG Tool**
-
-With this AI profile, define a RAG tool and update the task to use RAG to suggest alternative products. 
-
-Estimated Time: 20 minutes
+Estimated Time: 15 Minutes
 
 ### Objectives
 
 In this lab, you will:
 
-* Create an AI Profile for RAG.
-* Create credentials for Object Storage access.
-* Build a vector index over your documents in Object Storage.
-* Set the RAG profile for the session.
-* Use natural-language prompts to get product suggestions (RAG in action).
-* Create a RAG tool the agent can call for recommendations.
-* Update the return task to include suggestions + email preview.
-* Update the team and interact with the refined agent.
+* Generate a bearer token using cURL
+* Integrate the Cline extension into Visual Studio Code as an MCP client
+* Configure Cline to securely connect to your Autonomous AI Database MCP Server using bearer token authorization
+* Select and manage tool access through Cline extension
 
 ### Prerequisites
 
-This lab requires completion of the previous labs in the **Contents** menu on the left.
+- Installed Visual Studio Code on your system
+- This lab requires completion of Lab 1 and Lab 3 in the **Contents** menu on the left.
 
-## Task 1: Create a profile for RAG
-Define an AI Profile that has your LLM and database objects and is ready to use RAG once a vector index exists.
+## Task 1:  Verify or Install Visual Studio Code 
 
+If you already have Visual Studio Code installed on your system, you may skip this step and proceed to Task 2.
 
-1. First create credentials to access Object Storage. If you haven't already created your credential, see **Lab 2** -> **Task 6** for instructions on how to create your OCI credential.
+If Visual Studio Code is not installed, follow the instructions below to install it. Install Visual Studio Code on your computer based on your operating system — Windows or Mac. Choose from:
 
-```
-<copy>
-%script
+#### For Windows:
 
-begin
-DBMS_CLOUD.drop_credential(credential_name => 'AI_CREDENTIAL');
-EXCEPTION WHEN OTHERS THEN NULL; END;
-end;
-/
-BEGIN
-DBMS_CLOUD.create_credential(
-  credential_name => 'AI_CREDENTIAL',
-  user_ocid       => '<ocid>',
-  tenancy_ocid    => '<tenancy ocid>',
-  private_key     => '<private key>',
-  fingerprint     => '<fingerprint>'
-);
-END;
-</copy>
-```
-2. Create an AI profile for RAG usage.
-```
+1. Go to the official [download page](https://code.visualstudio.com/download)
+2. Download the Windows installer (.exe file).
+3. Run the installer and follow the instructions in the setup wizard.
+4. Once installed, launch Visual Studio Code from the Start menu.
+
+#### For macOS:
+
+1. Go to the official [download page](https://code.visualstudio.com/download)
+2. Download the macOS installer (.dmg file).
+3. Open the .dmg file and drag Visual Studio Code into your Applications folder.
+4. Launch Visual Studio Code from Applications.
+
+## Task 2: Install the Cline Extension for Visual Studio Code
+
+In this task, you will install the Cline extension in Visual Studio Code
+
+1. In Visual Studio Code, click on the Extensions icon. ![Cline main window](../configure-cline/images/cline-vs-extension.png)
+2. In the Activity Bar (or use Ctrl+Shift+X) Search for "Cline".![Cline main window](../configure-cline/images/cline-install.png)
+3. Click Install next to the Cline extension.
+4. If prompted, click Trust Publisher & Install. ![Cline main window](../configure-cline/images/cline-trust-yes.png)
+5. Once installed, the Cline extension icon will appear in the Activity Bar. ![Cline main window](../configure-cline/images/cline-after-installation.png)
+6. If this is your first time using Cline, open the extension to complete any AI provider settings as instructed.
+
+## Task 3: Generate a Bearer Token Using cURL
+
+1. To authenticate with the MCP server, you must obtain a bearer token via an HTTP POST request to the OAuth 2.1 token endpoint of your Autonomous AI Database. 
+2. Use the following cURL command, replacing placeholders as appropriate.
+
+  > **Note:** You can also use the Cloud Shell or Cloud Editor available in OCI to run your cURL command directly. These environments come with cURL already installed and configured, making it convenient if local setup is not available or if you prefer to run commands securely in your cloud environment. ![Cline main window](../configure-cline/images/cline-oci-cloud-shell.png)
+
+  ```
+  <copy>
+  curl --location 'https://dataaccess.adb.{region-identifier}.oraclecloudapps.com/adb/auth/v1/databases/{database-ocid}/token' \
+    --header 'Content-Type: application/json' \
+    --header 'Accept: application/json' \
+    --data '{
+      "grant_type": "password",
+      "username": "<db-username>",
+      "password": "<db-password>"
+    }'
+  </copy>
+  ```
+
+    - Replace {region-identifier} with your Oracle Cloud region
+    - Replace {database-ocid} with your database’s OCID of your Autonomous AI Database
+    - Replace `<db-username>` and `<db-password>` with your databse credentials - Username: **hrm\_user** and Password: **QwertY#19\_95**
+
+3. Run the cURL command in Command Prompt (Windows), Terminal (macOS), or another CLI tool.
+4. The bearer token will be returned in the response. Copy and securely store this token.
+
+**Note:** 
+
+- Bearer tokens are valid for 1 hour.
+- Keep your credentials secure and do not share tokens publicly.
+- You may also generate tokens using Postman or similar tools.
+
+## Task 4: Configure Cline as an MCP Client Using Bearer Token Authorization
+
+1. In Visual Studio Code, click the Cline icon in the Activity Bar. ![Cline main window](../configure-cline/images/cline-available-taskbar.png)
+
+2. Go to MCP Servers and choose to add or modify a server connection. ![Cline main window](../configure-cline/images/cline-mcpserver-configuration.png)
+
+3. Use the following example as a template for MCP server configuration, cline_mcp_setting.json, replacing placeholders where necessary:
+    ```
     <copy>
-    BEGIN  
-      DBMS_CLOUD_AI.drop_profile(profile_name => 'SALES_AGENT_RAG_PROFILE');
-    
-      -- default LLM: meta.llama-3.1-70b-instruct
-      -- default transformer: cohere.embed-english-v3.0
-    BEGIN
-      DBMS_CLOUD_AI.create_profile(                                              
-          profile_name => 'SALES_AGENT_RAG_PROFILE',                                                                 
-          attributes   => '{"provider": "oci",   
-                            "credential_name": "AI_CREDENTIAL",          
-                            "vector_index_name": "SALES_AGENT_VECTOR_INDEX2"}');  
-    END;
-      </copy>
-```
-> Note: The default values are listed as comments.
-
-
-3. List the document stored in the Object Storage.
-
-```
-<copy>
-select * from
-  DBMS_CLOUD.LIST_OBJECTS(
-    credential_name => 'AI_CREDENTIAL',
-    location_uri    => 'https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/b9UsLs4CwZi9iorADMTK9c-ziXkhmME6m7kcdJ9ypjqFTzzZmHSLqNve0t_Vi1du/n/adwc4pm/b/oaiw25-sales-agent-rag-documents/o/')
-</copy>
-```
-
-4. Build a vector index over product docs stored in Object Storage. The index is used by RAG.
-```
-<copy>
-%script
-
-BEGIN
-  DBMS_CLOUD_AI.DROP_VECTOR_INDEX(
-  index_name  => 'SALES_AGENT_VECTOR_INDEX2',
-  include_data => TRUE);
-  EXCEPTION WHEN OTHERS THEN NULL;
-END;
-/
-BEGIN
-  DBMS_CLOUD_AI.CREATE_VECTOR_INDEX(
-    index_name  => 'SALES_AGENT_VECTOR_INDEX2',
-    attributes  => '{"vector_db_provider": "oracle",
-                    "location": "https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/b9UsLs4CwZi9iorADMTK9c-ziXkhmME6m7kcdJ9ypjqFTzzZmHSLqNve0t_Vi1du/n/adwc4pm/b/oaiw25-sales-agent-rag-documents/o/",
-                    "object_storage_credential_name": "AI_CREDENTIAL",
-                    "profile_name": "SALES_AGENT_RAG_PROFILE", 
-                    "vector_distance_metric": "cosine",
-                    "chunk_overlap":50,
-                    "chunk_size":450,
-                    "match_limit": 2}',
-      description => 'Vector index for sales return agent scenario');
-END;
-  </copy>
-```
-5. Set the AI profile in the current session.
-  ```
-  <copy>
-  %script
-  EXEC DBMS_CLOUD_AI.SET_PROFILE(profile_name => 'SALES_AGENT_RAG_PROFILE');
-  </copy>
-  ```
-6. Use natural language prompts to run a test using our LLM and specific content. Ask for alternate product recommendations.
-  ```
-  <copy>
-  select ai narrate what are alternatives for the smartphone case
+    {
+      "mcpServers": {
+        "OpsDatabase": {
+          "timeout": 300,
+          "type": "streamableHttp",
+          "url": "http://dataaccess.adb.{region-identifier}.oraclecloudapps.com/adb/mcp/v1/databases/{database-ocid}",
+          "headers": {
+            "Authorization": "Bearer <your-token>"
+          }
+        }
+      }
+    }
     </copy>
-  ```
-  **Result:**
-  ```
-RESPONSE
-Alternatives for smartphone cases include TitanGuard Pro, ClearEdge Ultra, and ArmorFlex Shield. TitanGuard Pro is a military-grade case with reinforced corners and dust-proof port covers, designed for rugged outdoor use. ClearEdge Ultra is a crystal-clear slim case made with hybrid polymer to resist scratches and yellowing, showcasing the phone's design while offering light protection. ArmorFlex Shield is built with a shock-absorbing TPU frame and scratch-resistant polycarbonate back, designed for maximum impact protection without adding unnecessary bulk.
+    ```
 
-Sources:
-  - Smartphone-R-US_Catalog.pdf (https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/b9UsLs4CwZi9iorADMTK9c-ziXkhmME6m7kcdJ9ypjqFTzzZmHSLqNve0t_Vi1du/n/adwc4pm/b/oaiw25-sales-agent-rag-documents/o/Smartphone-R-US_Catalog.pdf)
-  - ABC_Smartphone_Supply_Catalog.pdf (https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/b9UsLs4CwZi9iorADMTK9c-ziXkhmME6m7kcdJ9ypjqFTzzZmHSLqNve0t_Vi1du/n/adwc4pm/b/oaiw25-sales-agent-rag-documents/o/ABC_Smartphone_Supply_Catalog.pdf)
-```
+    - Replace {region-identifier}, {database-ocid}, and <your-token> with your actual values.
 
-## Task 2: Create a RAG Tool
-Define a RAG tool that the AI agent team can call to provide alternate product recommendations based on your prompt.
-
-Create the sales\_rag\_tool.
-```
-<copy>
-%script
-
-BEGIN DBMS_CLOUD_AI_AGENT.drop_tool('sales_rag_tool');
-EXCEPTION WHEN OTHERS THEN NULL; END;
-/
- BEGIN
-    DBMS_CLOUD_AI_AGENT.CREATE_TOOL(
-        tool_name => 'sales_rag_tool',
-        attributes => q'[{"tool_type": "RAG",
-                          "tool_params": {"profile_name": "SALES_AGENT_RAG_PROFILE"}}]',
-        description => 'Tool for doing RAG for product recommendations using supplier documents.'
-    );
-END;
-	</copy>
-```
-
-## Task 3: Update the Task to Handle the Product Return
-You'll update the Handle\_Product\_Return\_Task with the new RAG tool and define clear instructions. The task first updates the return status and then fetches the alternate product recommendations using RAG.
-
-Update the `Handle_Product_Return_Task`.
-  
->   **Note**: This version does not include email generation, only the product recommendation.
-```
-<copy>
-%script
-
-BEGIN DBMS_CLOUD_AI_AGENT.drop_task('Handle_Product_Return_Task');
-EXCEPTION WHEN OTHERS THEN NULL; END;
-/
-BEGIN
-  DBMS_CLOUD_AI_AGENT.create_task(
-    task_name => 'Handle_Product_Return_Task',
-    attributes => '{"instruction": "Process a product return request from a customer: {query} ' ||
-                    'Steps to be followed: ' ||
-                    '1. Ask customer the reason for return (no longer needed, arrived too late, box broken, or defective)' || 
-                    '2. If no longer needed:' ||
-                    '   a. Inform customer to ship the product at their expense back to us.' ||
-                    '   b. Update the order status to return_shipment_pending using Update_Order_Status_Tool.' ||
-                     '3. If it arrived too late:' ||
-                    '   a. Ask customer if they want a refund.' ||
-                    '   b. If the customer wants a refund, then confirm refund processed and update the order status to refund_completed' || 
-                    '4. If the product was defective or the box broken:' ||
-                    '   a. Ask customer if they want a replacement or a refund or if they would like to consider alternative recommendations' ||
-                    '   b. If a replacement, inform customer replacement is on its way and they will receive a return shipping label for the defective product, then update the order status to replaced' ||
-                    '   c. If a refund, inform customer to print out the return shipping label for the defective product, return the product, and update the order status to refund' ||
-                    '   d. If consider alternative recommendations, use the RAG tool to present 2 alternatives to the customer and let them decide if they want this product or the original one' || 
-                    '5. After the completion of a return or refund, ask if you can help with anything else.' ||
-                    '   End the task and generate a a final answer only if user does not need help on anything else",
-                    "tools": ["Update_Order_Status_Tool","sales_rag_tool"]}'
-  );
-END;
-	</copy>
-```
-
-## Task 4: Update the Agent Team
-You'll update the agent team with the revised Product Return task.
-
-Update the `Return_Agent_Team`.
-```
-<copy>
-%script
-
-BEGIN DBMS_CLOUD_AI_AGENT.clear_team();
-EXCEPTION WHEN OTHERS THEN NULL; END;
-/
-
-BEGIN DBMS_CLOUD_AI_AGENT.drop_team('Return_Agency_Team');
-EXCEPTION WHEN OTHERS THEN NULL; END;
-/
-BEGIN                                                                 
-  DBMS_CLOUD_AI_AGENT.create_team(  
-    team_name  => 'Return_Agency_Team',                                                            
-    attributes => '{"agents": [{"name" : "Customer_Return_Agent", "task" : "Handle_Product_Return_Task"}],
-                    "process": "sequential"}');
-END;
-	</copy>
-```
-## Task 5: Interact with your Updated RAG Agent
-Start interacting with the updated RAG agent with natural language prompts.
-1. Set the AI profile for RAG in the session.
-```
-<copy>
-%script
-
-EXEC DBMS_CLOUD_AI_AGENT.set_team(team_name  => 'Return_Agency_Team');
-	</copy>
-```
-
-2. Interact with the new RAG agent.
-```
-<copy>
-select ai agent I want to return a smartphone case just received
-</copy>
-```
-**RESULT**
-```
-RESPONSE
-Can you please tell me the reason for returning the smartphone case? Is it no longer needed, did it arrive too late, is the box broken, or is the product defective?
-```
-
-You may continue with the following prompts as per the below sequence:
-
-_select ai agent Hi, unforunately, it is defective_
-
-_select ai agent Sure, what are some alternatives you could recommend_
-
-_select ai agent A refund please_
-
-_select ai agent Carol Chen order number 7635_
-
-_select ai agent no, thank you_
-
-You may now proceed to the next lab.
+4. Save and close the configuration file.
+5. After saving the configuration file, cline extension may ask to authenticate. If prompted, complete the authentication process to enable full functionality of the extension. ![Cline main window](../configure-cline/images/cline-authenticate.png)
+5. Restart your AI agent application if necessary.
+6. In the MCP Servers panel, you should now see "OpsDatabase" listed.
+7. Expand the "OpsDatabase" entry to view available tools, parameters, and definitions.
 
 ## Learn More
 
@@ -284,11 +127,8 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 
-* **Author:** Sarika Surampudi, Principal User Assistance Developer
-* **Contributor:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
-
-<!--* **Last Updated By/Date:** Sarika Surampudi, August 2025
--->
+* **Authors:** Sarika Surampudi, Principal User Assistance Developer; Dhanish Kumar, Senior Member of Technical Staff
+* **Contributors:** Chandrakanth Putha, Senior Product Manager; Mark Hornick, Senior Director, Machine Learning and AI Product Management
 
 
 Copyright (c) 2026 Oracle Corporation.
