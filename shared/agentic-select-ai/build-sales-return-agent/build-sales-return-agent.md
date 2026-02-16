@@ -27,11 +27,11 @@ In this lab, you will:
 ```
 <copy>
 
-GRANT EXECUTE ON DBMS_CLOUD_AI TO <USER>;
-GRANT EXECUTE ON DBMS_CLOUD_AI_AGENT TO <USER>;
+GRANT EXECUTE ON DBMS_CLOUD_AI TO ADB_USER;
+GRANT EXECUTE ON DBMS_CLOUD_AI_AGENT TO ADB_USER;
 </copy>
 ```
-Replace _`USER`_ with your user name.
+Replace _`ADB_USER`_ with your user name.
 
 ## Task 1: Download and Import the Provided Notebook into OML
 
@@ -40,10 +40,10 @@ This notebook named **SelectAI4SQL - AI Agents - Sales Return Agent** contains a
 
 In this task, you will first download the **`SelectAI4SQL - AI Agents - Sales Return Agent.dsnb`** OML notebook to your local machine, and then import this notebook into OML. <!--You can import the provided notebook from a local disk or on GitHub-->.
 
-1. Click the button below to download the notebook:
+1. Click the button below to download the notebook to your local folder:
 
     <a href="https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/1C_VWEcNHyMoV10mPLbRvJmxDOyCR0ogX4LijMCidf5MxL5xuhnnMvwuQ5tll4uR/n/adwc4pm/b/oaiw25-select-ai-agent-notebook/o/SelectAI4SQL%20-%20AI%20Agents%20-%20Sales%20Return%20Agent.dsnb" class="tryit-button">Download Notebook</a>
-
+<!-- https://github.com/oracle-devrel/oracle-autonomous-database-samples/blob/main/select-ai-agent/notebooks/SelectAI4SQL%20-%20AI%20Agents%20-%20Sales%20Return%20Agent.dsnb-->
 2. To access the URL for the Oracle Machine Learning sign in page, go to your Autonomous AI Database details page and click **Tool configuration**.
 
 3. Go to the **Oracle Machine Learning user interface** section and click **Copy**. Paste the URL on the browser to sign into Oracle Machine Learning user interface.
@@ -68,8 +68,7 @@ You'll view the sample table for the scenario.
 1. Run the paragraph that creates `customers` table. 
     ```
     <copy>
-      %script
-
+  
     BEGIN EXECUTE IMMEDIATE 'DROP TABLE customers';
     EXCEPTION WHEN OTHERS THEN NULL; END;
     /
@@ -103,8 +102,7 @@ You'll view the sample table for the scenario.
 
     ```
     <copy>
-      %script
-
+  
     BEGIN EXECUTE IMMEDIATE 'DROP TABLE customer_order_status';
     EXCEPTION WHEN OTHERS THEN NULL; END;
     /
@@ -156,8 +154,7 @@ You will create a SQL function to update a customer’s order status and return 
 
     ```
     <copy>
-    %script
-
+    
     CREATE OR REPLACE FUNCTION update_customer_order_status (
     p_customer_name IN VARCHAR2,
     p_order_number  IN VARCHAR2,
@@ -194,8 +191,7 @@ You will create a SQL function to update a customer’s order status and return 
 
     ```
     <copy>
-    %script
-
+    
     DECLARE
       v_result CLOB;
     BEGIN
@@ -222,8 +218,7 @@ Tools are what allow agents to perform tasks in the "real" world. You'll create 
 
     ```
     <copy>
-    %script
-
+    
     BEGIN DBMS_CLOUD_AI_AGENT.drop_tool('Update_Order_Status_Tool');
     EXCEPTION WHEN OTHERS THEN NULL; END;
     /
@@ -254,8 +249,7 @@ Create Handle\_Product\_Return\_Task.
 
   ```
   <copy>
-  %script
-
+  
   BEGIN DBMS_CLOUD_AI_AGENT.drop_task('Handle_Product_Return_Task');
   EXCEPTION WHEN OTHERS THEN NULL; END;
   /
@@ -339,10 +333,10 @@ Follow these steps to create your OCI credentials:
      -----END PRIVATE KEY-----
      ```
 5. Create an OCI Gen AI credential.
+
     ```
     <copy>
-    %script
-
+    
     begin
       DBMS_CLOUD.drop_credential(credential_name => 'AI_CREDENTIAL');
       EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -364,7 +358,6 @@ You'll create an AI profile with LLM of your choice, to use in the next step to 
 
 ```
 <copy>
-%script
 
 BEGIN
   BEGIN DBMS_CLOUD_AI.drop_profile(profile_name => 'OCI_GENAI_GROK'); 
@@ -392,7 +385,6 @@ Create the Customer\_Return\_Agent.
 
 ```
 <copy>
-%script
 
 BEGIN DBMS_CLOUD_AI_AGENT.drop_agent('Customer_Return_Agent');
 EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -414,7 +406,7 @@ Create the Return\_Agency\_Team.
 
 ```
 <copy>
-%script
+
 BEGIN DBMS_CLOUD_AI_AGENT.drop_team('Return_Agency_Team');
 EXCEPTION WHEN OTHERS THEN NULL; END;
 /
@@ -438,8 +430,7 @@ Let's test it:
 
     ```
     <copy>
-    %script
-
+    
     BEGIN DBMS_CLOUD_AI_AGENT.clear_team();
     EXCEPTION WHEN OTHERS THEN NULL; END;
     / 
@@ -512,8 +503,7 @@ The RUN_TEAM procedure enables you to use your agent team from PL/SQL - as oppos
 
     ```
     <copy>
-    %script
-
+    
     CREATE OR REPLACE PACKAGE my_globals IS
       l_team_cov_id varchar2(4000);
     END my_globals;
@@ -531,8 +521,7 @@ The RUN_TEAM procedure enables you to use your agent team from PL/SQL - as oppos
 2. Call the `DBMS_CLOUD_AI_AGENT.RUN_TEAM` function. Interact with the Return Agency team in a series of prompts provided within the function. This function holds your conversation ID so that Select AI does not lose the context and prompt history.
     ```
     <copy>
-    %script
-
+    
     DECLARE
       v_response VARCHAR2(4000);
     BEGIN
@@ -552,8 +541,7 @@ The RUN_TEAM procedure enables you to use your agent team from PL/SQL - as oppos
 
     ```
     <copy>
-    %script
-
+    
     DECLARE
       v_response VARCHAR2(4000);
     BEGIN
@@ -594,8 +582,7 @@ The RUN_TEAM procedure enables you to use your agent team from PL/SQL - as oppos
 
     ```
     <copy>
-    %script
-
+    
     DECLARE
       v_response VARCHAR2(4000);
     BEGIN
@@ -615,8 +602,7 @@ The RUN_TEAM procedure enables you to use your agent team from PL/SQL - as oppos
 
     ```
     <copy>
-    %script
-
+    
     DECLARE
       v_response VARCHAR2(4000);
     BEGIN

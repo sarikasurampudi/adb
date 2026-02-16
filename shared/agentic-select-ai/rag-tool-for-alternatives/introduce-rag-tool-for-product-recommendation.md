@@ -16,7 +16,7 @@ An AI profile captures the properties of your AI provider and the AI model(s) yo
 
 Here, you will create an AI profile for RAG. 
 
->**Note:** In this workshop, we are using OCI Generative AI. Before creating an AI profile, create credentials to access AI provider. See **Lab 1** of this workshop.
+>**Note:** In this workshop, we are using OCI Generative AI. Before creating an AI profile, create credentials to access AI provider. See **Lab 2 -> Task 6** of this workshop.
 
 To get started, you'll need to create a profile using the **`DBMS_CLOUD_AI.CREATE_PROFILE`** PL/SQL package that describes your _AI provider_ and use the _default_ LLM transformer. We’ll then create a vector index using content from object storage. For additional information, see the [CREATE\_PROFILE procedure](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-package.html#GUID-D51B04DE-233B-48A2-BBFA-3AAB18D8C35C) documentation.
 
@@ -50,31 +50,12 @@ This lab requires completion of the previous labs in the **Contents** menu on th
 ## Task 1: Create a profile for RAG
 Define an AI Profile that has your LLM and database objects and is ready to use RAG once a vector index exists.
 
-> Note: The default values are listed as comments.
 
-1. Create an AI profile for RAG usage.
-```
-    <copy>
-    BEGIN  
-      DBMS_CLOUD_AI.drop_profile(profile_name => 'SALES_AGENT_RAG_PROFILE');
-    
-      -- default LLM: meta.llama-3.1-70b-instruct
-      -- default transformer: cohere.embed-english-v3.0
-    BEGIN
-      DBMS_CLOUD_AI.create_profile(                                              
-          profile_name => 'SALES_AGENT_RAG_PROFILE',                                                                 
-          attributes   => '{"provider": "oci",   
-                            "credential_name": "AI_CREDENTIAL",          
-                            "vector_index_name": "SALES_AGENT_VECTOR_INDEX2"}');  
-    END;
-      </copy>
-```
-
-2. Create credentials to access Object Storage. If you haven't already created your credential, see **Lab 2** -> **Task 6** for instructions on how to create your OCI credential.
+1. First create credentials to access Object Storage. If you haven't already created your credential, see **Lab 2** -> **Task 6** for instructions on how to create your OCI credential.
 
 ```
 <copy>
-%script
+ 
 
 begin
 DBMS_CLOUD.drop_credential(credential_name => 'AI_CREDENTIAL');
@@ -92,6 +73,26 @@ DBMS_CLOUD.create_credential(
 END;
 </copy>
 ```
+2. Create an AI profile for RAG usage.
+```
+    <copy>
+    BEGIN  
+      DBMS_CLOUD_AI.drop_profile(profile_name => 'SALES_AGENT_RAG_PROFILE');
+    
+      -- default LLM: meta.llama-3.1-70b-instruct
+      -- default transformer: cohere.embed-english-v3.0
+    BEGIN
+      DBMS_CLOUD_AI.create_profile(                                              
+          profile_name => 'SALES_AGENT_RAG_PROFILE',                                                                 
+          attributes   => '{"provider": "oci",   
+                            "credential_name": "AI_CREDENTIAL",          
+                            "vector_index_name": "SALES_AGENT_VECTOR_INDEX2"}');  
+    END;
+      </copy>
+```
+> Note: The default values are listed as comments.
+
+
 3. List the document stored in the Object Storage.
 
 ```
@@ -99,14 +100,14 @@ END;
 select * from
   DBMS_CLOUD.LIST_OBJECTS(
     credential_name => 'AI_CREDENTIAL',
-    location_uri    => 'https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/b9UsLs4CwZi9iorADMTK9c-ziXkhmME6m7kcdJ9ypjqFTzzZmHSLqNve0t_Vi1du/n/adwc4pm/b/oaiw25-sales-agent-rag-documents/o/')
+    location_uri    => 'https://objectstorage.us-ashburn-1.oraclecloud.com/p/OSllhv6ZOGUkG1pR7MIqUZqhJ0cwBxz0B6vzSbtHhQq7MqqbyU9Jn1iX2mtHrVTV/n/c4u04/b/sales-agent-rag-documents/o/')
 </copy>
 ```
 
 4. Build a vector index over product docs stored in Object Storage. The index is used by RAG.
 ```
 <copy>
-%script
+ 
 
 BEGIN
   DBMS_CLOUD_AI.DROP_VECTOR_INDEX(
@@ -119,7 +120,7 @@ BEGIN
   DBMS_CLOUD_AI.CREATE_VECTOR_INDEX(
     index_name  => 'SALES_AGENT_VECTOR_INDEX2',
     attributes  => '{"vector_db_provider": "oracle",
-                    "location": "https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/b9UsLs4CwZi9iorADMTK9c-ziXkhmME6m7kcdJ9ypjqFTzzZmHSLqNve0t_Vi1du/n/adwc4pm/b/oaiw25-sales-agent-rag-documents/o/",
+                    "location": "https://objectstorage.us-ashburn-1.oraclecloud.com/p/OSllhv6ZOGUkG1pR7MIqUZqhJ0cwBxz0B6vzSbtHhQq7MqqbyU9Jn1iX2mtHrVTV/n/c4u04/b/sales-agent-rag-documents/o/",
                     "object_storage_credential_name": "AI_CREDENTIAL",
                     "profile_name": "SALES_AGENT_RAG_PROFILE", 
                     "vector_distance_metric": "cosine",
@@ -133,7 +134,7 @@ END;
 5. Set the AI profile in the current session.
   ```
   <copy>
-  %script
+   
   EXEC DBMS_CLOUD_AI.SET_PROFILE(profile_name => 'SALES_AGENT_RAG_PROFILE');
   </copy>
   ```
@@ -159,7 +160,7 @@ Define a RAG tool that the AI agent team can call to provide alternate product r
 Create the sales\_rag\_tool.
 ```
 <copy>
-%script
+ 
 
 BEGIN DBMS_CLOUD_AI_AGENT.drop_tool('sales_rag_tool');
 EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -183,7 +184,7 @@ Update the `Handle_Product_Return_Task`.
 >   **Note**: This version does not include email generation, only the product recommendation.
 ```
 <copy>
-%script
+ 
 
 BEGIN DBMS_CLOUD_AI_AGENT.drop_task('Handle_Product_Return_Task');
 EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -219,7 +220,7 @@ You'll update the agent team with the revised Product Return task.
 Update the `Return_Agent_Team`.
 ```
 <copy>
-%script
+ 
 
 BEGIN DBMS_CLOUD_AI_AGENT.clear_team();
 EXCEPTION WHEN OTHERS THEN NULL; END;
@@ -241,7 +242,7 @@ Start interacting with the updated RAG agent with natural language prompts.
 1. Set the AI profile for RAG in the session.
 ```
 <copy>
-%script
+ 
 
 EXEC DBMS_CLOUD_AI_AGENT.set_team(team_name  => 'Return_Agency_Team');
 	</copy>
@@ -284,10 +285,8 @@ You may now proceed to the next lab.
 ## Acknowledgements
 
 * **Author:** Sarika Surampudi, Principal User Assistance Developer
-* **Contributor:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
-
-<!--* **Last Updated By/Date:** Sarika Surampudi, August 2025
--->
+* **Contributors:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
+* **Last Updated By/Date:** Sarika Surampudi, February 2026
 
 
 Copyright (c) 2026 Oracle Corporation.

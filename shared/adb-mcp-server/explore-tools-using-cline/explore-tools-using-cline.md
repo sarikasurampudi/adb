@@ -74,7 +74,7 @@ Run the following script:
 
 ```
 <copy>
- 
+%script
 
 describe USER_AI_AGENT_TOOL_HISTORY;
 describe USER_AI_AGENT_TASK_HISTORY;
@@ -126,8 +126,9 @@ You may now proceed to the next lab.
 ## Acknowledgements
 
 * **Author:** Sarika Surampudi, Principal User Assistance Developer
-* **Contributors:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
-* **Last Updated By/Date:** Sarika Surampudi, February 2026
+* **Contributor:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
+<!--* **Last Updated By/Date:** Sarika Surampudi, August 2025
+-->
 
 
 Copyright (c) 2026 Oracle Corporation.

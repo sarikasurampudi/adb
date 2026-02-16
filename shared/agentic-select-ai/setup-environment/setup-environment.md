@@ -74,18 +74,18 @@ To create a user:
 
     ```
     <copy>
-    GRANT EXECUTE on DBMS_CLOUD_AI to <ADB_USER>;
-    GRANT EXECUTE on DBMS_CLOUD_AI_AGENT to <ADB_USER>;
-    GRANT EXECUTE on DBMS_CLOUD_PIPELINE to <ADB_USER>;
-    GRANT EXECUTE on DBMS_VECTOR to <ADB_USER>;
-    GRANT CREATE ANY INDEX to <ADB_USER>;
+    GRANT EXECUTE on DBMS_CLOUD_AI to ADB_USER;
+    GRANT EXECUTE on DBMS_CLOUD_AI_AGENT to ADB_USER;
+    GRANT EXECUTE on DBMS_CLOUD_PIPELINE to ADB_USER;
+    GRANT EXECUTE on DBMS_VECTOR to ADB_USER;
+    GRANT CREATE ANY INDEX to ADB_USER;
     </copy>
     ```
-> Replace `<ADB_USER>` with the schema user name.
+> Replace `ADB_USER` with the schema user name.
 
 ## Task 4: Install Ask Oracle Chatbot Application
 Here is a video that walks you through the **Ask Oracle** chatbot app installation:
-[Ask Oracle App Installation](youtube:kjeQ2AC3TFo:medium)
+[Ask Oracle App Installation](youtube:kjeQ2AC3TFo:small)
 
 Perform the following steps to install the Ask Oracle Chatbot app. The application is available on GitHub.
 
