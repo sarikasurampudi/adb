@@ -43,7 +43,7 @@ You need to install Claude Desktop on your computer based on your operating syst
 
 ## Task 2: Install Node.js
 
-You need to install Node.js because Claude Desktop uses Node.js-based tools and scripts to interact with the Autonomous AI Database MCP Server. Installing Node.js ensures these tools work correctly for the integration process.
+You need to install Node.js because Claude Desktop uses Node.js-based tools and scripts to interact with the Autonomous AI Database MCP Server. Installing Node.js ensures these tools work correctly for the integration process. xyz
 
 Install Node.js based on your computer based on your operating system — Windows or Mac. Choose from:
 
