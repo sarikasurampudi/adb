@@ -3,7 +3,7 @@
 ## Introduction
 
 In this lab, you will learn how to set up and use the Cline extension within Visual Studio Code to act as an MCP (Model Control Protocol) client for Oracle Autonomous AI Database MCP Server. 
-Cline is a Visual Studio Code extension that enables seamless connection and interaction with Oracle MCP (Model Control Plane) servers, making it easier for developers to manage, test, and invoke AI models and tools from within their development environment. testing SARIKA
+Cline is a Visual Studio Code extension that enables seamless connection and interaction with Oracle MCP (Model Control Plane) servers, making it easier for developers to manage, test, and invoke AI models and tools from within their development environment.
 
 Estimated Time: 15 Minutes
 
