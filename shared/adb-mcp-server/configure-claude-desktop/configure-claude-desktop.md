@@ -2,7 +2,8 @@
 
 ## Introduction
 
-This lab guides you step-by-step through setting up Claude Desktop, an advanced AI assistant developed by Anthropic for natural language understanding and productivity support. You will learn how to connect Claude Desktop as an MCP client to the Oracle Autonomous AI Database MCP Server.
+This lab guides you step-by-step through setting up Claude Desktop, an advanced AI assistant developed by Anthropic for natural language understanding and productivity support. You will learn how to configure Claude Desktop as an MCP client for Oracle Autonomous AI Database MCP Server. After configuration, Claude Desktop discovers and invokes tools exposed by your database instance.
+This lab enables natural language interaction between Claude Desktop and Autonomous AI Database tools.
 
 Estimated Time: 15 Minutes
 
@@ -10,19 +11,20 @@ Estimated Time: 15 Minutes
 
 In this lab, you will:
 
-* Set up Node.js on your system
-* Install Claude Desktop
-* Set up Claude Desktop as an MCP Client
+* Install and verify Claude Desktop
+* Install and verify Node.js runtime
+* Configure Claude Desktop as an MCP Client
+* Authenticate Claude Desktop with Autonomous AI Database
 * Select and manage tool access through Claude Desktop
 
 ### Prerequisites
 
-- This lab requires completion of Lab 1 and Lab 3 in the **Contents** menu on the left.
+- This lab requires completion of all previous labs in the **Contents** menu on the left.
 
 
 ## Task 1: Install Claude Desktop
 
-You need to install Claude Desktop on your computer based on your operating system — Windows or Mac. Choose from:
+Claude Desktop acts as an MCP client and provides an interface for calling database tools. Install Claude Desktop on your computer based on your operating system — Windows or Mac. Choose from:
 
 #### On Windows
 
@@ -31,7 +33,7 @@ You need to install Claude Desktop on your computer based on your operating syst
 3. Follow the installation wizard instructions.
 4. Open the Claude application from your Start Menu or desktop.
 5. Sign in to Claude with your Anthropic account (use two-factor authentication if prompted).
-6. Test Claude Desktop by asking it a question.
+6. Test Claude Desktop by asking a simple question.
 
 #### On Mac
 
@@ -43,9 +45,9 @@ You need to install Claude Desktop on your computer based on your operating syst
 
 ## Task 2: Install Node.js
 
-You need to install Node.js because Claude Desktop uses Node.js-based tools and scripts to interact with the Autonomous AI Database MCP Server. Installing Node.js ensures these tools work correctly for the integration process. xyz
+Claude Desktop uses Node.js utilities to connect to and interact with the Autonomous AI Database MCP Server. Installing Node.js ensures the tools work correctly for the integration process.
 
-Install Node.js based on your computer based on your operating system — Windows or Mac. Choose from:
+Install Node.js on your computer based on your operating system — Windows or Mac. Choose from:
 
 #### On Windows
 1. Go to the [Node.js download page](https://nodejs.org/en/download).
@@ -65,7 +67,7 @@ Install Node.js based on your computer based on your operating system — Window
 
 #### On Mac
 1. Go to the [Node.js download page](https://nodejs.org/en/download).
-2. Download the macOS Installer (.pkg) from the Node.js site .
+2. Download the macOS Installer (.pkg) from the Node.js site.
 3. Open the .pkg file and follow the on-screen instructions.
 4. Enter your Mac password if prompted.
 5. Open Terminal and check the installation by running:
@@ -79,16 +81,35 @@ Install Node.js based on your computer based on your operating system — Window
     
     This should display the installed versions.
 
+## Task 3: Obtain Autonomous AI Database MCP Server Endpoint
 
-## Task 3: Configure Claude Desktop as an MCP client
+Recall that you have enabled MCP Server and obtained the database instance OCID. After enabling the MCP Server, the database exposes a REST endpoint that you can configure in your MCP-compliant client application.
+The endpoint format is as follows:
 
-You'll update the Claude Desktop configuration so it can connect to the Autonomous AI Database MCP Server. You will edit a configuration file and provide the necessary server details, enabling Claude Desktop to access tools and data from your database.
+  ```
+  <copy>
+  https://dataaccess.adb.<region-identifier>.oraclecloudapps.com/adb/mcp/v1/databases/{database-ocid}
+  
+  </copy>
+  ```
+
+Replace the placeholders with your actual information:
+
+  - {`region-identifier`}: The specific Oracle Cloud region
+  - {`database-ocid`}: The OCID of your Autonomous AI Database
+
+
+## Task 4: Configure Claude Desktop as an MCP client
+
+You'll update the Claude Desktop configuration so it can connect to the Autonomous AI Database MCP Server. You will edit a configuration file and provide the MCP server configuration details, enabling Claude Desktop to access tools and data from your database.
 
 1. Open the Claude Desktop application.
        - If prompted, sign in using your account credentials.
-2. Go to **Settings**. ![Claude Desktop main window](../configure-claude-desktop/images/claude-desktop-main.png)
-3. In **Settings**, select the **Desktop App** section, then click **Developer**.![Claude Desktop main window](../configure-claude-desktop/images/claude-setting-developer.png)
-4. Click **Edit Config** to open or edit the `claude_desktop_config` JSON configuration file.![Claude Desktop main window](../configure-claude-desktop/images/claude-edit-config.png)
+2. Go to **Settings**.
+![Claude Desktop main window](../configure-claude-desktop/images/claude-desktop-main.png)
+3. In **Settings**, under the **Desktop app** section, click **Developer**.![Claude Desktop main window](../configure-claude-desktop/images/claude-setting-developer.png)
+4. Click **Edit Config** to open or edit the `claude_desktop_config` JSON configuration file.
+![Claude Desktop main window](../configure-claude-desktop/images/claude-edit-config.png)
 5. Add the following JSON configuration to define your MCP server:
 
     ```
@@ -110,16 +131,17 @@ You'll update the Claude Desktop configuration so it can connect to the Autonomo
     }
     </copy>
     ```
-    - Replace `{region-identifier}` with your Oracle Cloud region.
+    - Replace `{region-identifier}` with your Oracle Cloud region. For example, if your database instance is in Chicago region, the `region-identifier` is `us-chicago-1`.
     - Replace `{database-ocid}` with the OCID of your Autonomous AI Database.
 6. **Save** the configuration file.
-7. **Completely quit** Claude Desktop and ensure it is not running in the background.  
-       - On Windows, open Task Manager, search for any running Claude processes, and end all of them before restarting the app.
-8. When prompted, enter your following database credentials:
+7. Completely quit Claude Desktop and ensure it is not running in the background.  
+       - On Windows, open **Task Manager**, search for any running Claude processes, and end all of them.
+8. Restart Claude Desktop app.
+9. When prompted, enter your following database credentials:
     - Username: **sales_user**
     - Password: **QwertY#19_95**
     ![Claude Desktop main window](../configure-claude-desktop/images/claude-oauth-authentication.png)
-9. Claude Desktop will detect the available database tools for your user profile.
+10. Claude Desktop will detect the available database tools for your user profile.
 
 
 ## Task 4: Review and Control Tool Access

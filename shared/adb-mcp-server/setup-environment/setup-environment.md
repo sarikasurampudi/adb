@@ -36,6 +36,7 @@ To create a user:
     ![Click Training-Database](./images/click-dbinstance.png =70%x*)
 
 3. On the Autonomous AI Database details page, click **Database Actions**, and then select the **SQL** option.
+    ![Select SQL](./images/db-actions-sql.png =70%x*)
 
 4. Before you get to the Oracle Database Actions Launchpad page, you might be asked to log in, depending on the browser you are using. If this is the case make sure to enter `ADMIN` and the password you gave the administrator user.
 5. In the SQL Worksheet, copy and paste the following code:
@@ -52,11 +53,37 @@ To create a user:
     ```
 6. Click **Run Script**.
 
-## Task 3: Create HR Tables and Data
 
-1. On the Database Actions screen, open the user menu. Click **Sign Out**.
+## Task 3: Enable ORDS REST Endpoint to the Schema Users
+To enable ORDS endpoint to the schema users:
+
+1. Go back to the database instance details page and click **Database Actions** -> **Database Users**.
+    ![Select Database Users](./images/db-actions-db-users.png =70%x*)
+
+2. On the User Management page, locate `HRM_USER`. Click the three dots (⋮) next to the user name and click **Enable REST**. 
+    ![Enable REST endpoint for `HRM_USER`](./images/db-actions-db-user-enable-rest.png =70%x*)
+
+3. Review the **REST Enable User** dialog and click **REST Enable User**. 
+    ![Click REST Enable User](./images/db-actions-db-user-rest-enable-user.png =70%x*)
+
+4. A confirmation dialog displays. Click **X** to close it.
+
+5. Repeat steps 2, 3, and 4 for the `SALES_USER`.
+
+
+## Task 4: Create HR Tables and Data
+
+1. Go back to the Database Actions tab and on the Database Actions screen, open the user menu. Click **Sign Out**.
+    ![Click Sign Out on the User menu](./images/db-actions-sql-signout.png =70%x*)
+
 2. Login as the schema user (`HRM_USER`) and password (`QwertY#19_95`) on the Sign-in page.
-3. In the SQL Worksheet, copy and paste the following code to create Human Resource related data:
+    ![Login as `HRM_USER`](./images/db-actions-sql-signin.png =70%x*)
+    
+3. In the Database Actions Launchpad screen, click **SQL**. 
+    ![Click SQL](./images/db-actions-launchpad-sql.png =70%x*)
+
+4. In the SQL Worksheet, copy and paste the following code to create Human Resource related data:
+
     ```
     <copy>
     CREATE TABLE departments (
@@ -154,13 +181,20 @@ To create a user:
 
     </copy>
     ```
-4. Click **Run**.
+4. Click **Run Script**.
+    ![Click Run Script](./images/create-hr-data.png)
+
+The data is successfully inserted.
 
 ## Task 4: Create Sales Tables and Data
 
 1. On the Database Actions screen, open the user menu. Click **Sign Out**.
 2. Login as the schema user (`SALES_USER`) and password (`QwertY#19_95`) on the Sign-in page.
-3. In the SQL Worksheet, copy and paste the following code to create Sales related data:
+3. In the Database Actions Launchpad screen, click **SQL**. 
+    ![Click SQL](./images/db-actions-launchpad-sql.png =70%x*)
+
+4. In the SQL Worksheet, copy and paste the following code to create Sales related data:
+
     ```
     <copy>
     CREATE TABLE customers (
@@ -272,8 +306,9 @@ To create a user:
 
     </copy>
     ```
-4. Click **Run**.
+4. Click **Run Script**.
 
+The data is successfully inserted.
 
 You may now proceed to the next lab.
 

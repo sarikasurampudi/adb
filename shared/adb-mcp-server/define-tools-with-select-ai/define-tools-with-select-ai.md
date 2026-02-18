@@ -31,7 +31,7 @@ You will run the code using Database Actions as your schema user (for example, `
 
 1. On your OCI console, click **Database Actions** > **SQL**. The **Database Actions** app logs you as an `ADMIN`.
 2. Open the user menu. Click **Sign Out**.
-3. Login as the schema user (`ADB_USER`) and password on the Sign-in page.
+3. Login as the schema user (`HRM_USER`) and password (QwertY#19_95) on the Sign-in page.
 4. On the Database Actions | Launchpad screen, click **Development**. 
 5. Click **SQL**. The SQL Worksheet opens.
 
@@ -79,7 +79,7 @@ END;
 /
     </copy>
     ```
-2. Click **Run**.
+2. Click **Run Script**.
 
 ## Task 3: Create `LIST_OBJECTS` Tool
 
@@ -126,7 +126,7 @@ END;
 
     </copy>
     ```
-2. Click **Run**.
+2. Click **Run Script**.
 
 
 ## Task 4: Create `GET_OBJECT_DETAILS` Tool
@@ -183,13 +183,13 @@ END;
 
 </copy>
 ```
-2. Click **Run**.
+2. Click **Run Script**.
 
-## Task 3: Create `EXECUTE_SQL` Tool
+## Task 5: Create `EXECUTE_SQL` Tool
 
 This tool runs read-only SQL queries.
 
-1. Copy and run the following code to create and register the `EXECUTE_SQL tool:
+1. Copy and run the following code to create and register the `EXECUTE_SQL` tool:
 
 ```
 <copy>
@@ -230,7 +230,10 @@ END;
 /
 </copy>
 ```
-2. Click **Run**.
+2. Click **Run Script**.
+3. Now open the user menu and click **Sign Out**.
+4. On the Sign-In page, enter username `SALES_USER` and password (QwertY#19_95).
+5. Repeat **Task 2** through **Task 5** for the `SALES_USER` schema as well. 
 
 These tools enable AI-driven interaction with enterprise database metadata and business data.
 
