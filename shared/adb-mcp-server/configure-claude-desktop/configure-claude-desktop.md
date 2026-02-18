@@ -2,8 +2,8 @@
 
 ## Introduction
 
-This lab guides you step-by-step through setting up Claude Desktop, an advanced AI assistant developed by Anthropic for natural language understanding and productivity support. You will learn how to configure Claude Desktop as an MCP client for Oracle Autonomous AI Database MCP Server. After configuration, Claude Desktop discovers and invokes tools exposed by your database instance.
-This lab enables natural language interaction between Claude Desktop and Autonomous AI Database tools.
+This lab guides you step-by-step walk through of setting up Claude Desktop, an advanced AI assistant developed by Anthropic for natural language understanding and productivity support. You will learn how to configure Claude Desktop as an MCP client for Oracle Autonomous AI Database MCP Server. After configuration, Claude Desktop discovers and invokes tools exposed by your database instance.
+This lab will install and verify required components and enables natural language interaction between Claude Desktop and Autonomous AI Database tools.
 
 Estimated Time: 15 Minutes
 
@@ -14,7 +14,7 @@ In this lab, you will:
 * Install and verify Claude Desktop
 * Install and verify Node.js runtime
 * Configure Claude Desktop as an MCP Client
-* Authenticate Claude Desktop with Autonomous AI Database
+* Authenticate Claude Desktop with Autonomous AI Database credentials
 * Select and manage tool access through Claude Desktop
 
 ### Prerequisites
@@ -95,7 +95,7 @@ The endpoint format is as follows:
 
 Replace the placeholders with your actual information:
 
-  - {`region-identifier`}: The specific Oracle Cloud region
+  - {`region-identifier`}: The specific Oracle Cloud region. For example, if your database instance is in Chicago region, the region-identifier is us-chicago-1.
   - {`database-ocid`}: The OCID of your Autonomous AI Database
 
 
@@ -106,63 +106,145 @@ You'll update the Claude Desktop configuration so it can connect to the Autonomo
 1. Open the Claude Desktop application.
        - If prompted, sign in using your account credentials.
 2. Go to **Settings**.
-![Claude Desktop main window](../configure-claude-desktop/images/claude-desktop-main.png)
-3. In **Settings**, under the **Desktop app** section, click **Developer**.![Claude Desktop main window](../configure-claude-desktop/images/claude-setting-developer.png)
+![Claude Desktop main window](../configure-claude-desktop/images/claude-desktop-main.png =70%x*)
+3. In **Settings**, under the **Desktop app** section, click **Developer**.
+  ![Click Developer under Settings](./images/claude-setting-developer.png =70%x*)
 4. Click **Edit Config** to open or edit the `claude_desktop_config` JSON configuration file.
-![Claude Desktop main window](../configure-claude-desktop/images/claude-edit-config.png)
+  ![Edit config file](./images/claude-edit-config.png =70%x*)
 5. Add the following JSON configuration to define your MCP server:
 
     ```
     <copy>
-    {
-      "mcpServers": {
-        "Autonomous_AI_database_mcp_server": {
-          "description": "Database containing application-related data",
-          "command": "npx",
-          "args": [
-            "-y",
-            "mcp-remote",
-            "https://dataaccess.adb.{region-identifier}.oraclecloud.com/adb/mcp/v1/databases/{database-ocid}",
-            "--allow-http"
-          ],
-          "transport": "streamable-http"
-        }
+      {
+    "mcpServers": {
+      "Autonomous_AI_database_mcp_server": {
+        "description": "Database containing application-related data",
+        "command": "npx",
+        "args": [
+          "-y",
+          "mcp-remote",
+          "https://dataaccess.adb.{region-identifier}.oraclecloudapps.com/adb/mcp/v1/databases/{database-ocid}"
+        ],
+        "transport": "streamable-http"
       }
     }
+  }
+
     </copy>
     ```
     - Replace `{region-identifier}` with your Oracle Cloud region. For example, if your database instance is in Chicago region, the `region-identifier` is `us-chicago-1`.
-    - Replace `{database-ocid}` with the OCID of your Autonomous AI Database.
+    - Replace `{database-ocid}` with the OCID of your Autonomous AI Database that you copied in **Lab 2**.
 6. **Save** the configuration file.
-7. Completely quit Claude Desktop and ensure it is not running in the background.  
+7. Completely quit Claude Desktop and ensure it is not running in the background.
        - On Windows, open **Task Manager**, search for any running Claude processes, and end all of them.
-8. Restart Claude Desktop app.
-9. When prompted, enter your following database credentials:
-    - Username: **sales_user**
+8. Restart Claude Desktop app. 
+9. When prompted, enter your database credentials:
+    - Username: **hrm_user**
     - Password: **QwertY#19_95**
-    ![Claude Desktop main window](../configure-claude-desktop/images/claude-oauth-authentication.png)
-10. Claude Desktop will detect the available database tools for your user profile.
+    ![Claude Desktop main window](../configure-claude-desktop/images/claude-oauth-authentication.png =70%x*)
+10. Claude connects to MCP Server and retrieves available tools for your user profile.
 
+## Task 5: Validate MCP Server is Running
+Before proceeding, confirm that the MCP Server is running.
+1. Return to Claude Desktop **Settings** → **Desktop app** → **Developer**.
+2. You should see "Autonomous\_AI\_database\_mcp\_server" (or the name you assigned in the config) listed as an MCP server and the MCP Server in **running** state.
+  ![MCP Server status](./images/claude-mcp-running.png =70%x*)
 
-## Task 4: Review and Control Tool Access
+## Task 6: Review and Control Tool Access
 
-Before you begin using Claude Desktop with your Autonomous AI Database, it's important to review and manage which tools the MCP client can access. In this step, you will learn how to view the available tools and control their permissions, ensuring that only approved tools are accessible through Claude Desktop.
+Before you begin using Claude Desktop with your Autonomous AI Database, it's important to review if Claude has successfully retrieved the registered database tools and manage the tools the MCP client can access. 
 
-1. In Settings under Developer, confirm your MCP server connection is listed and running.
-Navigate to Connectors. ![Claude Desktop main window](../configure-claude-desktop/images/claude-dev-mcp-server.png)
-2. You should see "Autonomous\_AI\_database\_mcp\_server" (or the name you assigned in the config) listed as an MCP server. Click Configure.![Claude Desktop main window](../configure-claude-desktop/images/claude-connectors-configure.png)
-3. Review the tools available to Claude Desktop. ![Claude Desktop main window](../configure-claude-desktop/images/claude-connectors-tools.png)
-4. By default, all tools require your approval.
-5. To always allow a tool, click the circled checkmark.
+To view the available tools and control their permissions, ensuring that only approved tools are accessible through Claude Desktop:
+
+1. In **Settings** → Click **Connectors**  → Click **Configure** next to the MCP Server name.
+  ![Claude Desktop main window](../configure-claude-desktop/images/claude-connectors-configure.png =70%x*)
+2. Click and expand **Other tools**. 
+  ![Click Other tools](./images/mcp-connectors-configure-othertools.png =70%x*)
+3. Review the tools available to Claude Desktop. 
+  ![Claude Desktop main window](../configure-claude-desktop/images/claude-connectors-tools.png =70%x*)
+4. By default, all tools require your approval. Here in this lab, leave the defaults.
+5. To always allow a tool, click the circled checkmark. 
 6. To block a tool, click the lined circle (the tool will not be visible to Claude Desktop).
+
+Claude Desktop is now fully integrated with your Autonomous AI Database.
+
+## Troubleshooting
+
+### Claude Does Not Prompt for Database Credentials
+
+If Claude Desktop does not prompt for database login credentials after restart, the issue is usually caused by cached authentication data.
+
+Try the following steps in order.
+
+#### Option 1: Clear Claude Cache (Recommended First Step)
+
+2. Open Claude Desktop.
+
+3. Click **Menu**.
+
+4. Select **Help**.
+
+5. Click **Troubleshooting**.
+
+6. Choose **Clear Cache and Restart**.
+
+After restart, Claude should prompt for database credentials again.
+
+#### Option 2: Clean MCP Authentication Cache
+
+#### On macOS or Linux, run:
+
+  ```
+  <copy>
+  rm -rf ~/.mcp_auth
+  </copy>
+  ```
+
+
+#### On Windows, delete the folder:
+
+```C:\Users\<your-username>\.mcp_auth```
+
+Then restart Claude Desktop.
+
+#### Option 3: Clear Browser Cookie for MCP Domain
+
+Delete cookies for your MCP server domain:
+
+```dataaccess.adb.{region-identifier}.oraclecloudapps.com```
+
+Example:
+
+```dataaccess.adb.us-chicago-1.oraclecloudapps.com```
+
+Then restart Claude Desktop.
+
+#### Option 4: Reinstall Claude Desktop
+
+If the issue persists:
+
+1. Uninstall Claude Desktop.
+
+2. Delete:
+
+  ```%AppData%\Claude```
+
+3. Reinstall Claude.
+4. Restart and try again.
+
+After performing one of the above steps, Claude Desktop prompts you for:
+
+* Database username
+* Database password
+
+and then connects to MCP Server successfully.
 
 You may now proceed to the next lab.
 
 ## Learn More
 
-* [OML Notebooks](https://docs.oracle.com/en/database/oracle/machine-learning/oml-notebooks/index.html)
-* [Using Oracle Autonomous AI Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/index.html)
-* [How to help AI models generate better natural language queries](https://blogs.oracle.com/datawarehousing/post/how-to-help-ai-models-generate-better-natural-language-queries-in-autonomous-database)
+[Configuring MCP-Compliant clients](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/use-mcp-server.html#GUID-B540AEF5-FB92-4091-9519-289C1B52B690)
+
 
 ## Acknowledgements
 

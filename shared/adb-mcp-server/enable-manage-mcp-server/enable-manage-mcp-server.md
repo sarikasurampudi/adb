@@ -17,6 +17,7 @@ In this lab, you will:
 * Enable MCP Server using OCI free-form tags
 * Disable MCP Server
 * Re-enable MCP Server
+* Obtain Autonomous AI Database instance OCID
 
 ### Prerequisites
 
@@ -90,16 +91,15 @@ You will now re-enable MCP Server using the same tag.
   ![](./images/mcp-re-enable.png)
 
 
-You may now proceed to the next lab.
-
 ## Task 4: Obtain Autonomous AI Database OCID
 Obtain the database instance OCID. You will use this in **Lab 4** and **Lab 5**.
+
 To obtain the OCID:
 1. Navigate (Scroll to the left on the Tool menu) back to the Autonomous AI Database instance details page.
 2. Click **Copy** next to the **OCID**.
   ![Copy OCID](./images/db-ocid-copy.png)
 
-
+You may now proceed to the next lab.
 
 ## Learn More
 

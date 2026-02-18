@@ -27,7 +27,7 @@ In this lab, you will:
 This lab requires completion of all the previous labs in the **Contents** menu on the left.
 
 ## Task 1: Login to Database Actions
-You will run the code using Database Actions as your schema user (for example, `ADB_USER`).
+You will run the code using Database Actions as your schema user (for example, `HRM_USER` and `SALES_USER`).
 
 1. On your OCI console, click **Database Actions** > **SQL**. The **Database Actions** app logs you as an `ADMIN`.
 2. Open the user menu. Click **Sign Out**.
@@ -84,7 +84,7 @@ END;
 ## Task 3: Create `LIST_OBJECTS` Tool
 
 This tool lists database objects in a specified schema.
-1. Copy and run the following code to create and register `LIST_OBJECTS` tool:
+1. Copy and replace the earlier code with the following code to create and register `LIST_OBJECTS` tool:
 
     ```
     <copy>
@@ -133,7 +133,7 @@ END;
 
 This tool returns metadata for a specified object.
 
-1. Copy and run the following code to create and register `GET_OBJECT_DETAILS` tool:
+1. Copy and replace the earlier code with the following code to create and register `GET_OBJECT_DETAILS` tool:
 
 ```
 <copy>
@@ -189,7 +189,7 @@ END;
 
 This tool runs read-only SQL queries.
 
-1. Copy and run the following code to create and register the `EXECUTE_SQL` tool:
+1. Copy and replace the earlier code with the following code to create and register the `EXECUTE_SQL` tool:
 
 ```
 <copy>
