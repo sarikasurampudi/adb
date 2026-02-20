@@ -1,4 +1,4 @@
-# Configure Claude Desktop
+# Configure Claude Desktop to Use MCP Server
 
 ## Introduction
 

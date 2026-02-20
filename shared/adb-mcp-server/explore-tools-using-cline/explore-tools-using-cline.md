@@ -1,119 +1,103 @@
-# Query Select AI Agent Views
+# Explore Tools in MCP Server Using Cline Extension
 
 ## Introduction
 
-In this lab, you’ll inspect what happened during an agent run. You will read Select AI Agent history views to see team, task, and tool. You’ll also add a small helper procedure that prints the task, agent, prompt and prompt response for any conversation.
+In the previous lab, you configured Visual Studio Code with the Cline extension to connect to the Autonomous AI Database MCP Server.
 
-Estimated Time: x
+In this lab, you use Cline to process natural language prompts and call the database tools created in *Lab 3*.
+
+You will review tool call requests, approve tool usage, and analyze structured results returned from the database.
+
+This lab demonstrates how Cline processes requests and loads database results using the MCP Server.
+
+Estimated Time:x
 
 ### Objectives
 
 In this lab, you will:
 
-* Create a helper procedure that prints team processing (task → agent → prompt → response).
-* Explore the schemas of the Select AI Agent history views.
-* Run focused queries on:
-    * `USER_AI_AGENT_TOOL_HISTORY`
-    * `USER_AI_AGENT_TASK_HISTORY`
-    * `USER_AI_AGENT_TEAM_HISTORY`
+* Issue natural language prompts in Cline
+* Review tool call requests
+* Approve tool usage
+* Observe how Cline processes multi-step requests
+* Analyze formatted database results
 
 ### Prerequisites
 
-- This lab requires completion of the previous labs in the **Contents** menu on the left.
-- Typical grants to run DBMS\_CLOUD\_AI\_AGENT Package are (run as ADMIN once):
+- This lab requires completion of Lab 1 through Lab 3 and Lab 6 in the **Contents** menu on the left.
 
-```
-<copy>
-GRANT EXECUTE ON DBMS_CLOUD_AI TO <USER>;
-GRANT EXECUTE ON DBMS_CLOUD_AI_AGENT TO <USER>;
-</copy>
-```
-Replace _`USER`_ with your user name.
 
-## Task 1: Query the Latest Team Processing Details
+## Task 1: Discover Available Schemas
+In this task, you ask Cline to retrieve the list of schemas available in your Autonomous AI Database. Cline processes your natural language prompt, selects the appropriate tool, and calls the database to load schema information.
+1. In the **Type your task here...** chat field, type the following prompt and press **Enter** :
 
-You are building a quick debugging query that shows a readable timeline of a conversation: team, agent, task, prompt, and final response.
+    _What schemas are available in the database?_
 
-Run the following query:
-```
-<copy>
-WITH latest_team AS (
-  SELECT team_exec_id, team_name, start_date
-  FROM user_ai_agent_team_history
-  ORDER BY start_date DESC
-  FETCH FIRST 1 ROW ONLY
-),
-latest_task AS (
-    SELECT team_exec_id, task_name, agent_name, conversation_params, start_date,
-           ROW_NUMBER() OVER (PARTITION BY team_exec_id, task_name, agent_name 
-                             ORDER BY start_date DESC) as rn
-  FROM user_ai_agent_task_history
-)
-SELECT
---  team.team_name,
-  task.task_name,
-  task.agent_name,
-  p.prompt,
-  p.prompt_response
-FROM latest_team team
-JOIN latest_task task
-  ON team.team_exec_id = task.team_exec_id
- AND task.rn = 1
-LEFT JOIN user_cloud_ai_conversation_prompts p
-  ON p.conversation_id = JSON_VALUE(task.conversation_params, '$.conversation_id')
-ORDER BY task.start_date DESC NULLS LAST,
-         p.created     DESC NULLS LAST;
-</copy>
-```
+![Enter prompt to list schemas](./images/cline-list-schemas.png =70%x*)
 
-## Task 2: View the Schema of Select AI Agent Views
+2. Cline selects the LIST_SCHEMAS tool. Review the tool call details.
+3. Click **Approve**.
+    ![Approve the list schemas tool](./images/cline-list-schemas-approve.png =70%x*)
+4. A formatted list of schemas is displayed.
+![List schemas result](./images/cline-list-schemas-result.png =70%x*)
 
-You'll inspect columns and data types so you know what you can filter and display.
 
-Run the following script:
+## Task 2: List Objects in a Schema
 
-```
-<copy>
-%script
+In this task, you ask Cline to retrieve database objects within a specific schema. Cline processes the prompt and calls the appropriate tool to load object information.
+1. Type the following prompt in the chat field and press **Enter**:
 
-describe USER_AI_AGENT_TOOL_HISTORY;
-describe USER_AI_AGENT_TASK_HISTORY;
-describe USER_AI_AGENT_TEAM_HISTORY;
-</copy>
-```
+    _What objects exist in the sales\_user schema?_
+    ![Enter prompt to list objects](./images/cline-list-objects.png =70%x*)
+2. Cline selects LIST_OBJECTS.
+3. Click **Approve**.
+    ![Approve the list objects tool](./images/cline-list-objects-approve.png =70%x*)
+4. Object names and types are returned that match the `SALES_USER` schema.
+    ![List objects result](./images/cline-list-objects-result.png =70%x*)
 
-## Task 3: Query the `USER_AI_AGENT_` Views
 
-See each tool call the agent made which tool, with what inputs, and what came back. Review task-level flow: which tasks ran, their order, what inputs were used, what were the results, were there any error messages, and what parameters were used. Summarize each end-to-end run: when it started, their status, and conversation context used.
+## Task 3: Retrieve Object Metadata
+In this task, you request detailed metadata for a specific table. Cline processes the request and calls the metadata tool to load structural information.
 
-1. Query `USER_AI_AGENT_TOOL_HISTORY`.
+1. Issue a new prompt and press **Enter**:
 
-```
-<copy>
-select * from USER_AI_AGENT_TOOL_HISTORY
-order by START_DATE desc
-</copy>
-```
+    _Show the metadata details of the customer table_
+    ![Enter prompt to list objects](./images/cline-get-object-details.png =70%x*)
+2. Cline selects GET\_OBJECT\_DETAILS.
+3. Click **Approve**.
+    ![Approve the list objects tool](./images/cline-get-object-details-approve.png =70%x*)
+4. Structured metadata is displayed.
+    ![GET\_OBJECT\_DETAILS result](./images/cline-get-object-details-result.png =70%x*)
 
-2. Query `USER_AI_AGENT_TASK_HISTORY`.
 
-```
-<copy>
-select * from USER_AI_AGENT_TASK_HISTORY
- order by START_DATE desc
-</copy>
-```
+## Task 4: Process a Business Query
+In this task, you ask Cline to retrieve business data using a natural language query. Cline processes the request, selects the SQL tool, and calls the database to load the required data.
+1. Issue a new prompt and press **Enter**:
 
-3. Query `USER_AI_AGENT_TEAM_HISTORY`
+    _Show top 3 customers by revenue in each region_
 
-```
-<copy>
-select * from USER_AI_AGENT_TEAM_HISTORY
-order by START_DATE desc
-</copy>
-```
+    ![Enter prompt to for top 3 customers](./images/cline-top3-customers-prompt.png =70%x*)
+2. Cline selects LIST\_OBJECTS first. This step may vary and the LLM may present other options.
+    ![Approve `LIST_OBJECTS`](./images/cline-top3-customers-list-objects.png =70%x*)
 
-You may now proceed to the next lab.
+3. Click **Approve**.
+4. Now, Cline selects EXECUTE\_SQL.
+    ![Approve `EXECUTE_SQL`](./images/cline-top3-customers-execute-sql.png =70%x*)
+5. Click **Approve**.
+6. Then, Cline wants to use GET\_OBJECT\_DETAILS.
+    ![Approve `GET_OBJECT_DETAILS`](./images/cline-top3-customers-get-object-details.png =70%x*)
+7. Click **Approve**.
+8. Cline again uses GET_OBJECT_DETAILS for ORDER_ITEMS.
+    ![Approve `GET_OBJECT_DETAILS`](./images/cline-order-items-approve.png =70%x*)
+9. Click **Approve**.
+10. Cline finally uses EXECUTE_SQL.
+    ![Approve `EXECUTE_SQL`](./images/cline-execute-sql-order-items-approve.png =70%x*)
+11. Click **Approve**.
+12. Cline displays a summarized and structured result and completes the task.
+    ![Approve `EXECUTE_SQL`](./images/cline-execute-sql2-result.png =70%x*)
+
+
+**This concludes your workshop**
 
 ## Learn More
 
