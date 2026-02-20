@@ -1,4 +1,4 @@
-# Enable and Manage Autonomous AI Database MCP Server
+# Enable and Manage MCP Server
 
 ## Introduction
 
@@ -98,6 +98,51 @@ To obtain the OCID:
 1. Navigate (Scroll to the left on the Tool menu) back to the Autonomous AI Database instance details page.
 2. Click **Copy** next to the **OCID**.
   ![Copy OCID](./images/db-ocid-copy.png)
+
+
+## Quiz
+```quiz score
+
+Q: How is the MCP Server enabled on an Autonomous AI Database instance?
+
+- By running a PL/SQL package
+- By editing the database initialization parameter file
+* By adding a free-form tag in the OCI Console
+- By installing a client extension
+>The MCP Server is enabled by adding a free-form tag (adb$feature) in the OCI Console with the appropriate JSON value.
+
+Q: What is the correct JSON value to enable the MCP Server?
+
+- {"mcp_server":"true"}
+- {"name":"mcp","enable":true}
+- {"feature":"mcp_server","status":"on"}
+* {"name":"mcp_server","enable":true}
+>The correct tag value is {"name":"mcp_server","enable":true}. This activates the MCP feature for the database instance.
+
+Q: What happens when the MCP Server is disabled?
+
+- The database shuts down
+- Existing database connections are terminated
+* New MCP client connections are blocked
+- All tools are deleted automatically
+>Disabling the MCP Server prevents new MCP client connections, but the database itself continues running normally.
+
+Q: Where do you manage the MCP Server configuration?
+
+- Database Actions → SQL Worksheet
+* OCI Console → Autonomous AI Database → Tags
+- SQL Developer
+- Cline Extension
+>MCP Server lifecycle management is handled in the OCI Console under the database instance’s Free-form Tags section.
+
+Q: After modifying the MCP free-form tag, what should you verify?
+
+- That Node.js is installed
+* That the tag value reflects the correct enable state
+- That all schemas are visible
+- That the database password is reset
+>After updating the tag, verify that the value reflects "enable":true or "enable":false and that the database remains in the Available state.
+```
 
 You may now proceed to the next lab.
 

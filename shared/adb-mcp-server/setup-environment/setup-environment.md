@@ -1,4 +1,4 @@
-# Set up the Workshop Environment
+# Set up Your Workshop Environment
 
 <!---
 comments syntax

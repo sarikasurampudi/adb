@@ -1,4 +1,4 @@
-# Explore Tools in MCP Server Using Claude Desktop
+# Explore Tools in MCP Server with Claude Desktop
 
 ## Introduction
 
@@ -94,11 +94,110 @@ In this task, you ask Claude to retrieve business data using a natural language 
 
 You have now completed the full MCP workflow from tool creation to conversational database interaction.
 
+## Quiz
+```quiz score
+Q: What happens when you click “Allow once” in Claude Desktop?
+
+- The tool is permanently approved
+- The tool runs automatically for all future requests
+* The tool runs only for the current request
+- The tool is disabled
+>“Allow once” permits the tool to run only for the current request. Future requests will require approval again unless set to “Always allow.”
+
+Q: If Claude processes a table from an unexpected schema, what should you do?
+
+- Restart Claude
+* Qualify the table name with the schema
+- Generate a new token
+- Disable EXECUTE_SQL
+>If the same table name exists in multiple schemas, specify the schema explicitly (for example, SALES_USER.CUSTOMERS).
+
+Q: Why is manual tool approval important in Claude Desktop?
+
+- It increases SQL performance
+- It reduces network latency
+- It enables caching
+* It enforces governance and control
+>Manual approval ensures controlled access to database tools and prevents unintended operations.
+
+Q: Which tool retrieves structured metadata about a table?
+
+* GET_OBJECT_DETAILS
+- EXECUTE_SQL
+- LIST_SCHEMAS
+- LIST_OBJECTS
+>GET_OBJECT_DETAILS loads structural metadata such as columns and constraints for a specified table.
+```
 
 You may now proceed to the next lab.
 
+## Troubleshooting
+If tool calls do not return expected results, review the following checks:
 
-## Want to Learn More?
+*Issue 1: Claude Does Not Prompt for Database Credentials*
+
+**Possible Cause**
+
+Cached authentication data is interfering.
+
+**Resolution**
+
+1. In Claude, click **Menu** → **Help** → **Troubleshooting** → **Clear Cache and Restart**.
+2. Restart Claude.
+3. Retry connection.
+
+If needed:
+
+Delete the `.mcp_auth` folder.
+
+Clear browser cookies for:
+  ```
+  dataaccess.adb.<region>.oraclecloudapps.com
+  ```
+
+*Issue 2: Metadata Cannot Be Retrieved*
+
+**Possible Causes**
+
+- Stale session
+- Table exists in multiple schemas
+- Insufficient privileges
+
+**Resolution**
+
+1. Start a new chat session.
+2. Retry the prompt.
+3. Qualify the table with schema:
+  ```
+  Show metadata for SALES_USER.CUSTOMERS
+  ```
+
+*Issue 3: Tools Do Not Appear*
+
+Check for the following:
+
+1. MCP Server is enabled (Lab 2).
+2. You logged in using the schema user from Lab 3.
+3. Tools exist:
+  ```
+  SELECT tool_name FROM user_cloud_ai_tools;
+  ```
+4. Restart Claude Desktop after verification.
+
+*Issue 5: Claude Stops Working Mid-Session*
+
+**Possible Causes**
+
+- Session timeout
+- MCP reconnection required
+
+**Resolution**
+
+- Restart Claude Desktop.
+- Reconnect to MCP Server.
+- Reissue the prompt.
+
+## Learn More
 
 * [Select AI Agent](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai-agent1.html) 
 * [Select AI Agent Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)

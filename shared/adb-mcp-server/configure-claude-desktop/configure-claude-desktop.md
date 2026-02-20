@@ -168,9 +168,43 @@ To view the available tools and control their permissions, ensuring that only ap
 
 Claude Desktop is now fully integrated with your Autonomous AI Database.
 
-## Troubleshooting
 
-### Claude Does Not Prompt for Database Credentials
+
+## Quiz
+```quiz score
+Q: What component enables Claude Desktop to connect to the MCP Server?
+
+- Oracle SQL Developer
+- Python runtime
+- Docker Desktop
+* Node.js with npx
+>Claude uses the npx command (from Node.js) to run the MCP client connector (mcp-remote) and establish communication with the MCP Server.
+
+Q: Where is the MCP configuration stored in Claude Desktop?
+
+- In the Windows Registry
+- In the browser cookies
+- In the SQL Worksheet
+* In the claude_desktop_config.json file
+>Claude reads MCP configuration from the claude_desktop_config.json file located in the Claude AppData directory.
+
+Q: What happens if you click “Always Allow” for a tool?
+
+- The tool is permanently disabled
+* The tool runs automatically without approval in future requests
+- The tool is removed from the list
+- The tool runs only once
+>“Always Allow” enables automatic tool execution without manual approval for subsequent requests.
+
+```
+
+You may now proceed to the next lab.
+
+## Troubleshooting
+If Claude Desktop does not connect or authenticate correctly, review the following checks:
+
+
+*Claude Does Not Prompt for Database Credentials*
 
 If Claude Desktop does not prompt for database login credentials after restart, the issue is usually caused by cached authentication data.
 
@@ -239,7 +273,7 @@ After performing one of the above steps, Claude Desktop prompts you for:
 
 and then connects to MCP Server successfully.
 
-You may now proceed to the next lab.
+
 
 ## Learn More
 

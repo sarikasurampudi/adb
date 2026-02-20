@@ -237,12 +237,38 @@ END;
 
 These tools enable AI-driven interaction with enterprise database metadata and business data.
 
+## Quiz
+```quiz score
+Q: Which package is used to register custom tools for use with the MCP Server?
+
+- DBMS_DATA_MINING
+- DBMS_VECTOR
+- DBMS_CLOUD
+* DBMS_CLOUD_AI_AGENT
+>DBMS_CLOUD_AI_AGENT is used to create and register tools that become available through the MCP Server.
+
+Q: In which schema should tools typically be created for this lab?
+
+- SYS
+* The schema user (for example, HRM_USER)
+- ADMIN
+- SYSTEM
+>Tools should be created by the schema user who owns or accesses the data. This ensures proper visibility and governance.
+
+Q: What is the purpose of the EXECUTE_SQL tool in this lab?
+- To modify database structure
+- To drop tables
+* To run controlled read-only queries
+- To create new schemas
+>EXECUTE_SQL is designed to run read-only SELECT queries and return structured results without allowing destructive operations.
+```
 You may now proceed to the next lab.
 
 ## Learn More
 
 * [Select AI Agent](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai-agent1.html)
 * [Select AI Agent Package](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-agent-package.html)
+* [Sample Custom Tools for MCP Server](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/use-mcp-server.html#GUID-257D9C9C-D88A-43E7-AB72-C1E05A8E97BE)
 
 ## Acknowledgements
 

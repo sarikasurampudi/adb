@@ -96,15 +96,16 @@ To authenticate with the MCP server, you must obtain a bearer token through an H
     - Username: **sales\_user** 
     - Password: **QwertY#19\_95**
 
-
   > **Note:** You can also use the Cloud Shell or Cloud Editor available in OCI to run your cURL command directly. These environments come with cURL already installed and configured, making it convenient if local setup is not available or if you prefer to run commands securely in your cloud environment. ![Access Cloud Shell](../configure-cline/images/cline-oci-cloud-shell.png)
+
 3. Run the cURL command in Command Prompt (Windows), Terminal (macOS), or another CLI tool.
 4. The response contains `access_token` and `refresh_token`. Copy and store the `access_token` value in a text editor.
 
   > **Note:** 
-  - Bearer tokens are valid for 1 hour.
+  - Bearer tokens are valid for 1 hour. Bearer tokens expire after approximately one hour. If you receive a 401 error, generate a new token and update the MCP configuration.
   - Keep your credentials secure and do not share tokens publicly.
   - You may also generate tokens using Postman or similar tools.
+
 
 ## Task 4: Configure MCP Server in Cline Using Bearer Token
 
@@ -158,6 +159,94 @@ You have now configured two MCP clients:
 Both clients connect to the same Autonomous AI Database MCP Server and load the same set of database tools that were created for `hrm_user` and `sales_user`.
 
 In the next lab, you will use Cline to process natural language prompts and review tool calls within Visual Studio Code.
+
+## Quiz
+```quiz score
+Q: What authentication method does Cline use to connect to the MCP Server?
+- Basic authentication
+- API key in URL
+* OAuth bearer token
+- Kerberos ticket
+>Cline connects to the MCP Server using an OAuth bearer token that is included in the Authorization header.
+
+Q: Where is the bearer token added in the MCP configuration?
+- Query parameter in the URL
+- Body of the JSON configuration
+- Transport type field
+* Authorization header
+>The bearer token must be placed in the Authorization header.
+
+Q: After updating the MCP configuration with a new token, what should you do next?
+
+- Refresh the browser
+* Save and restart Visual Studio Code
+- Reinstall Node.js
+- Delete the MCP server
+>Save the configuration file and Visual Studio Code must be restarted so Cline reloads the updated configuration.
+```
+
+## Troubleshooting
+If Cline does not connect to the MCP Server or tools do not load.
+
+*Issue 1: Streamable HTTP error – 401*
+
+Review the following checks:
+```
+Streamable HTTP error: Server returned 401 after successful authentication
+```
+**Cause**
+
+The bearer token has expired or is invalid.
+
+Bearer tokens are valid for approximately one hour.
+
+**Solution**
+1. Generate a new token using the OAuth endpoint. Refer to Task 3.
+2. Replace the Authorization header value in the MCP configuration. Refer to Task 4.
+3. Restart Visual Studio Code.
+4. Retry connection.
+
+
+*Issue 2: Fetch Failed*
+
+**Cause**
+
+The MCP URL is incorrect or using HTTP instead of HTTPS.
+
+**Solution**
+
+Use:
+```
+https://dataaccess.adb.<region>.oraclecloudapps.com
+```
+Not:
+```
+http://
+oraclecloud.com
+```
+
+*Issue 3: Tools Do Not Appear*
+
+Check the Following:
+
+1. MCP Server is enabled (Lab 2).
+2. Free-form tag shows:
+```
+{"name":"mcp_server","enable":true}
+```
+3. You are using the correct schema user.
+4. Tools were created successfully in Lab 3.
+5. Token was generated using the same schema user.
+6. Restart Cline after verification.
+
+*Issue 4: Token Generated but Connection Still Fails*
+
+Check the following:
+
+1. Port 443 is open.
+2. Corporate firewall is not blocking outbound HTTPS.
+3. VPN or proxy configuration is correct.
+4. `npx -v` works in terminal.
 
 ## Learn More
 

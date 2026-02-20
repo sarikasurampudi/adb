@@ -9,7 +9,7 @@ In this workshop, you learn how to use Oracle Autonomous AI Database as a **Mode
 
 Enterprise AI applications increasingly require secure and governed access to operational data, metadata, and database logic. Traditional integration approaches often require custom APIs, middleware layers, or manual orchestration, which increases complexity and operational overhead.
 
-Oracle Autonomous AI Database MCP Server provides a standardized and managed interface that enables AI agents and client applications to interact directly with database tools using the Model Context Protocol (MCP). The MCP Server exposes both built-in and user-defined tools that are dynamically discoverable by AI clients. These tools support workflows such as schema discovery, metadata exploration, and SQL query execution through natural language prompts.
+Oracle Autonomous AI Database MCP Server provides a standardized and managed interface that enables AI agents and client applications to interact directly with database tools using the Model Context Protocol (MCP). The MCP Server exposes user-defined tools that are dynamically discoverable by AI clients. These tools support workflows such as schema discovery, metadata exploration, and SQL query execution through natural language prompts.
 
 Because the MCP Server integrates with Oracle Cloud Identity, authorization, governance, auditing, and compliance frameworks, it provides secure and scalable AI integration without requiring customers to deploy or maintain separate MCP infrastructure.
 
@@ -57,7 +57,7 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 * **Authors:** Sarika Surampudi, Principal User Assistance Developer; Dhanish Kumar, Member Technical Staff
-* **Contributors:** Chandrakanth Putha, Senior Product Manager; Mark Hornick, Senior Director, Machine Learning and AI Product Management*
+* **Contributors:** Chandrakanth Putha, Senior Product Manager; Mark Hornick, Senior Director, Machine Learning and AI Product Management
 <!--* **Last Updated By/Date:** Sarika Surampudi, August 2025
 -->
 
