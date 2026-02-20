@@ -20,9 +20,6 @@ In this lab, you will:
 * Create Autonomous AI Database Users as ADMIN
 * Login as schema users and create Human Resource and Sales data
 
-<!--
-[](include:iam-compartment-create-body.md)-->
-
 
 ## Task 1: Create the Autonomous AI Database Instance
 [](include:adb-provision-body.md)
