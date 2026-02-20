@@ -183,7 +183,7 @@ To enable ORDS endpoint to the schema users:
 
 The data is successfully inserted.
 
-## Task 4: Create Sales Tables and Data
+## Task 5: Create Sales Tables and Data
 
 1. On the Database Actions screen, open the user menu. Click **Sign Out**.
 2. Login as the schema user (`SALES_USER`) and password (`QwertY#19_95`) on the Sign-in page.
