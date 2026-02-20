@@ -124,7 +124,7 @@ Q: Which tool runs business queries?
 >EXECUTE_SQL runs read-only SELECT statements to retrieve business data.
 ```
 
-**This concludes your workshop**
+**This concludes the workshop**
 
 ## Troubleshooting
 If tool calls fail or results are not returned correctly, review the following checks:
