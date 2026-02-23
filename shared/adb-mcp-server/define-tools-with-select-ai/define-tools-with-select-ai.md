@@ -2,16 +2,16 @@
 
 ## Introduction
 
-In this lab, you create custom database tools using the Select AI Agent framework and register them using the `DBMS_CLOUD_AI_AGENT` package. These tools become available to MCP clients and can be called through natural language prompts. Select AI Agent is an autonomous agent framework that lets you build interactive and autonomous agents within Autonomous AI Database by combining planning, tool usage, reflection, and memory to support multi-turn workflows.
+In this lab, you create custom database tools using the Select AI Agent framework by using the `DBMS_CLOUD_AI_AGENT` package. These tools are immediately  available to MCP clients. Select AI Agent is an autonomous agent framework that lets you build interactive and autonomous agents within Autonomous AI Database by combining planning, tool usage, reflection, and memory to support multi-turn workflows. When used for creating MCP tools, only the tool creation capability is used.
 
-You create PL/SQL-based tools that allow AI clients to:
+You create PL/SQL-based based functions and the corresponding tools that allow AI clients to:
 
 - Discover database schemas
 - Retrieve schema objects
 - Inspect object metadata
 - Run read-only SQL queries
 
-These tools demonstrate how Autonomous AI Database integrates enterprise data into agentic AI workflows.
+These tools are used to demonstrate how Autonomous AI Database integrates enterprise data into agentic AI workflows.
 
 Estimated Time:x
 
@@ -27,9 +27,9 @@ In this lab, you will:
 This lab requires completion of all the previous labs in the **Contents** menu on the left.
 
 ## Task 1: Login to Database Actions
-You will run the code using Database Actions as your schema user (for example, `HRM_USER` and `SALES_USER`).
+You will run the code using Database Actions logged in as your schema user.
 
-1. On your OCI console, click **Database Actions** > **SQL**. The **Database Actions** app logs you as an `ADMIN`.
+1. On your OCI console, click **Database Actions** → **SQL**. The **Database Actions** app logs you as an `ADMIN`.
 2. Open the user menu. Click **Sign Out**.
 3. Login as the schema user (`HRM_USER`) and password (QwertY#19_95) on the Sign-in page.
 4. On the Database Actions | Launchpad screen, click **Development**. 
@@ -40,7 +40,7 @@ You will run the code using Database Actions as your schema user (for example, `
 
 This tool returns database schemas visible to the user.
 
-1. Copy and run the following code to create and register the `LIST_SCHEMAS` tool:
+1. Copy and run the following code to create and use the `LIST_SCHEMAS` tool:
 
     ```
     <copy>
@@ -84,7 +84,7 @@ END;
 ## Task 3: Create `LIST_OBJECTS` Tool
 
 This tool lists database objects in a specified schema.
-1. Copy and replace the earlier code with the following code to create and register `LIST_OBJECTS` tool:
+1. Copy and replace the earlier code with the following code to create and use `LIST_OBJECTS` tool:
 
     ```
     <copy>
@@ -133,7 +133,7 @@ END;
 
 This tool returns metadata for a specified object.
 
-1. Copy and replace the earlier code with the following code to create and register `GET_OBJECT_DETAILS` tool:
+1. Copy and replace the earlier code with the following code to create and use `GET_OBJECT_DETAILS` tool:
 
 ```
 <copy>
@@ -189,7 +189,7 @@ END;
 
 This tool runs read-only SQL queries.
 
-1. Copy and replace the earlier code with the following code to create and register the `EXECUTE_SQL` tool:
+1. Copy and replace the earlier code with the following code to create and use the `EXECUTE_SQL` tool:
 
 ```
 <copy>
@@ -239,7 +239,7 @@ These tools enable AI-driven interaction with enterprise database metadata and b
 
 ## Quiz
 ```quiz score
-Q: Which package is used to register custom tools for use with the MCP Server?
+Q: Which package is used to create custom tools for use with the MCP Server?
 
 - DBMS_DATA_MINING
 - DBMS_VECTOR

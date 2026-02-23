@@ -87,7 +87,7 @@ In this task, you ask Claude to retrieve business data using a natural language 
   _Find all employees working in the Engineering department_
   ![Enter the prompt](./images/execute_sql.png =70%x*)
 2. You can see that Claude requests permission to use `EXECUTE_SQL`.
-3. 3. Review the tool request. Click the drop down and click **Allow once**.
+3. Review the tool request. Click the drop down and click **Allow once**.
   ![GET_OBJECT_DETAILS allow once](./images/execute_sql_allowonce.png =70%x*)
 4. Claude runs a read-only SQL query and returns summarized results.
   ![Structured result for requested table](./images/execute_sql_result.png =70%x*)

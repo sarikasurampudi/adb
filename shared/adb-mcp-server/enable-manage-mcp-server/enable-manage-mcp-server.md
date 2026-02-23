@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you enable, disable, and re-enable the MCP Server for an Oracle Autonomous AI Database Serverless instance. The MCP Server exposes database tools that AI clients can discover and invoke using natural language prompts.
+In this lab, you enable, disable, and re-enable MCP server for an Oracle Autonomous AI Database Serverless instance. The MCP Server exposes database tools that MCP clients can discover and invoke using natural language prompts.
 
 You manage MCP Server using OCI free-form tags and verify its operational state. This lab focuses strictly on lifecycle management of the MCP feature.
 
@@ -49,9 +49,9 @@ MCP Server is enabled for this database instance.
 
 ## Task 2: Disable MCP Server
 
-Disabling MCP Server stops new MCP client connections and tool invocations. Any requests already in progress complete successfully. 
+Disabling MCP Server stops new MCP client connections and tool calls. Any requests already in progress will be allowed to complete. 
 
-You will now modify the same free-form tag created in Task 1.
+You will now modify the same free-form tag created in **Task 1**.
 
 1. On the **Tags** tab, click the three dots (...) next to the **Free-form** tag.
 
@@ -103,7 +103,7 @@ To obtain the OCID:
 ## Quiz
 ```quiz score
 
-Q: How is the MCP Server enabled on an Autonomous AI Database instance?
+Q: How is MCP Server enabled on an Autonomous AI Database instance?
 
 - By running a PL/SQL package
 - By editing the database initialization parameter file

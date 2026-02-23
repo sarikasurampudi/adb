@@ -83,11 +83,11 @@ In this task, you ask Cline to retrieve business data using a natural language q
 3. Review and click **Approve**.
 4. Now, Cline selects EXECUTE\_SQL.
     ![Approve `EXECUTE_SQL`](./images/cline-top3-customers-execute-sql.png =70%x*)
-5. Click **Approve**.
+5. Review and click **Approve**.
 6. Then, Cline wants to use GET\_OBJECT\_DETAILS for ORDERS table.
     ![Approve `GET_OBJECT_DETAILS`](./images/cline-top3-customers-get-object-details.png =70%x*)
 7. Review and click **Approve**.
-8. Cline again uses GET_OBJECT_DETAILS for ORDER\_ITEMS table.
+8. Cline again uses GET\_OBJECT\_DETAILS for ORDER\_ITEMS table.
     ![Approve `GET_OBJECT_DETAILS`](./images/cline-order-items-approve.png =70%x*)
 9. Review and click **Approve**.
 10. Cline finally uses EXECUTE\_SQL.

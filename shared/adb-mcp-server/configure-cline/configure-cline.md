@@ -4,7 +4,7 @@
 
 In the previous lab, you used Claude Desktop to call database tools exposed through the MCP Server.
 
-Cline is a Visual Studio Code extension that enables seamless connection and interaction with Oracle MCP (Model Control Plane) servers, making it easier for developers to manage, test, and call AI models and tools from within their development environment.
+Cline is a Visual Studio Code extension that enables seamless connection and interaction with Oracle MCP (Model Context Protocol) servers, making it easier for developers to manage, test, and call AI models and tools from within their development environment.
 
 In this lab, you will learn how to set up and use Visual Studio Code with the Cline extension as another MCP client. You generate a bearer token, configure MCP connectivity, and verify that Cline can load and process the same database tools created earlier.
 
@@ -138,7 +138,7 @@ To authenticate with the MCP server, you must obtain a bearer token through an H
     - {database-ocid} with the OCID of your Autonomous AI Database that you copied in **Lab 2**.
     - `<your-token>` with the `access_token` you copied in **Task 3**.
   ![Configure Cline](../configure-cline/images/cline-configuration.png =70%x*)
-5. Save the file and close it.
+5. **Save** the file and close it.
 6. Close Visual Studio Code.
 7. Reopen it.
 8. Open Cline again → Click **MCP Servers** icon → Click **Configure** tab.
