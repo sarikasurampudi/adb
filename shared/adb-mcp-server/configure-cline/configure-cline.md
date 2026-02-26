@@ -62,7 +62,7 @@ In this task, you will install the Cline extension in Visual Studio Code.
 5. Once installed, the Cline extension icon appears in the Activity Bar. 
   ![Cline main window](../configure-cline/images/cline-after-installation.png)
 6. Click the Cline icon and confirm the interface loads without error.
-7. Optionally, if this is your first time using Cline, open the extension to complete any AI provider settings as instructed.
+7. Optionally, if this is your first time using Cline, open the extension to complete creating a Cline account by following the prompts on the screen.
 
 ## Task 3: Generate a Bearer Token Using cURL
 
@@ -111,11 +111,11 @@ To authenticate with the MCP server, you must obtain a bearer token through an H
 
 1. Return to Cline extension in Visual Studio Code. Click the Cline icon in the Activity Bar. ![Cline main window](../configure-cline/images/cline-available-taskbar.png)
 
-2. Click **MCP Servers** and click the **Configure** tab to add or modify a server connection. ![Cline main window](../configure-cline/images/cline-mcpserver-configuration.png)
+2. If prompted, login to your Cline account by following the prompts on the screen.
+3. Click **MCP Servers** and click the **Configure** tab to add or modify a server connection. ![Cline main window](../configure-cline/images/cline-mcpserver-configuration.png)
 
-3. Click **Configure MCP Servers**. This opens up `cline_mcp_settings.json` file in Visual Studio Code.
-
-4. Use the following example as a template for MCP server configuration and replace the code in `cline_mcp_setting.json`. Provide your actual values in the placeholders:
+4. Click **Configure MCP Servers**. This opens up `cline_mcp_settings.json` file in Visual Studio Code.
+5. Use the following example as a template for MCP server configuration and replace the code in `cline_mcp_setting.json`. Provide your actual values in the placeholders:
     ```
     <copy>
     {
@@ -138,18 +138,19 @@ To authenticate with the MCP server, you must obtain a bearer token through an H
     - {database-ocid} with the OCID of your Autonomous AI Database that you copied in **Lab 2**.
     - `<your-token>` with the `access_token` you copied in **Task 3**.
   ![Configure Cline](../configure-cline/images/cline-configuration.png =70%x*)
-5. **Save** the file and close it.
-6. Close Visual Studio Code.
-7. Reopen it.
-8. Open Cline again → Click **MCP Servers** icon → Click **Configure** tab.
-9. Cline extension may ask to authenticate. If prompted, complete the authentication process to enable full functionality of the extension. 
+6. **Save** the file and close it.
+7. Close Visual Studio Code.
+8. Reopen it.
+9. Open Cline again → Click **MCP Servers** icon → Click **Configure** tab.
+10. Cline extension may ask to authenticate. If prompted, complete the authentication process to enable full functionality of the extension. 
 ![Cline main window](../configure-cline/images/cline-authenticate.png =70%x*)
-10. Restart Visual Studio Code if necessary.
-11. Return to the MCP Servers **Configure** tab, you should now see **OpsDatabase** listed and running indicated with a *Green* light.
+11. Restart Visual Studio Code if necessary.
+12. Return to the MCP Servers **Configure** tab, you should now see **OpsDatabase** listed and running indicated with a *Green* light.
 ![MCP Server name visible and running](../configure-cline/images/mcp-server-running.png =70%x*)
-12. Expand **OpsDatabase** to view the tools created in **Lab 3** are visible displaying tools, parameters, and definitions.
+13. Expand **OpsDatabase** to view the tools created in **Lab 3** are visible displaying tools, parameters, and definitions.
 ![List of tools](../configure-cline/images/tools-visible.png =70%x*)
-13. Click **Done** in the top right of the configuration screen to close the screen and return to the Cline chat panel.
+14. Click **Done** in the top right of the configuration screen to close the screen and return to the Cline chat panel.
+
 
 You have now configured two MCP clients:
 
@@ -184,6 +185,8 @@ Q: After updating the MCP configuration with a new token, what should you do nex
 - Delete the MCP server
 >Save the configuration file and Visual Studio Code must be restarted so Cline reloads the updated configuration.
 ```
+
+You may now proceed to the next lab.
 
 ## Troubleshooting
 If Cline does not connect to the MCP Server or tools do not load.

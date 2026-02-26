@@ -95,7 +95,7 @@ You will now re-enable MCP Server using the same tag.
 Obtain the database instance OCID. You will use this in **Lab 4** and **Lab 5**.
 
 To obtain the OCID:
-1. Navigate (Scroll to the left on the Tool menu) back to the Autonomous AI Database instance details page.
+1. Navigate (Scroll to the left on the Tool menu) back to the Autonomous AI Database information page.
 2. Click **Copy** next to the **OCID**.
   ![Copy OCID](./images/db-ocid-copy.png)
 
@@ -148,7 +148,7 @@ You may now proceed to the next lab.
 
 ## Learn More
 
-* [Using Oracle Autonomous AI Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsb/index.html)
+* [Using Oracle Autonomous AI Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/autonomous-intro-adb.html)
 * [Oracle Autonomous AI Database MCP Server Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/mcp-server.html#GUID-22D738E1-BC06-47F0-9684-CD698DD8C492)
 
 

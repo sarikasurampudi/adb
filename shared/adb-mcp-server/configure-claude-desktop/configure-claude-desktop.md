@@ -95,7 +95,7 @@ The endpoint format is as follows:
 
 Replace the placeholders with your actual information:
 
-  - {`region-identifier`}: The specific Oracle Cloud region. For example, if your database instance is in Chicago region, the region-identifier is us-chicago-1.
+  - {`region-identifier`}: The specific Oracle Cloud region. For example, if your database instance is in Chicago region, the `region-identifier` is `us-chicago-1`.
   - {`database-ocid`}: The OCID of your Autonomous AI Database
 
 
@@ -105,13 +105,14 @@ You'll update the Claude Desktop configuration so it can connect to the Autonomo
 
 1. Open the Claude Desktop application.
        - If prompted, sign in using your account credentials.
-2. Click the **Menu** on the top and go to **Settings**.
-![Claude Desktop main window](../configure-claude-desktop/images/claude-desktop-main.png =70%x*)
-3. In **Settings**, under the **Desktop app** section, click **Developer**.
+2. Click **Open Sidebar** on the top left.
+3. Click on your username in the left bottom and then click **Settings**.
+  ![Claude Desktop main window](../configure-claude-desktop/images/claude-desktop-main.png =70%x*)
+4. In **Settings**, under the **Desktop app** section, click **Developer**.
   ![Click Developer under Settings](./images/claude-setting-developer.png =70%x*)
-4. Click **Edit Config** to open or edit the `claude_desktop_config` JSON configuration file.
+5. Click **Edit Config** to open or edit the `claude_desktop_config` JSON configuration file.
   ![Edit config file](./images/claude-edit-config.png =70%x*)
-5. Add the following JSON configuration to define your MCP server:
+6. Replace the `{}` in the configuration file with the following JSON configuration to define your MCP server:
 
     ```
     <copy>
@@ -134,15 +135,16 @@ You'll update the Claude Desktop configuration so it can connect to the Autonomo
     ```
     - Replace `{region-identifier}` with your Oracle Cloud region. For example, if your database instance is in Chicago region, the `region-identifier` is `us-chicago-1`.
     - Replace `{database-ocid}` with the OCID of your Autonomous AI Database that you copied in **Lab 2**.
-6. **Save** the configuration file.
-7. Quit Claude Desktop by clicking the **X** on Claude Desktop screen and ensure it is not running in the background.
-       - On Windows, open **Task Manager**, search for any running Claude processes. Click on the processes and click **End Task** and end all of them.
-8. Restart Claude Desktop app. 
-9. When prompted, enter your database credentials:
+7. **Save** the configuration file.
+8. Quit Claude Desktop by clicking the **X** on Claude Desktop screen and ensure it is not running in the background.
+       - On Windows, open **Task Manager**, search for any running Claude processes. 
+       - Click on the processes and click **End Task** and end all of them.
+9. Restart Claude Desktop app. 
+10. When prompted, enter your database credentials:
     - Username: **hrm_user**
     - Password: **QwertY#19_95**
     ![Claude Desktop main window](../configure-claude-desktop/images/claude-oauth-authentication.png =70%x*)
-10. Claude connects to MCP Server and retrieves available tools for your user profile.
+11. Claude connects to MCP Server and retrieves available tools for your user profile.
 
 ## Task 5: Validate MCP Server is Running
 Before proceeding, confirm that the MCP Server is running.

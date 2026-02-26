@@ -178,8 +178,9 @@ To enable ORDS endpoint to the schema users:
 
     </copy>
     ```
+    ![Click Run Script](./images/create-hr-data.png =70%x*)
 4. Click **Run Script**.
-    ![Click Run Script](./images/create-hr-data.png)
+    ![Click Run Script](./images/create-hr-data-output.png =70%x*)
 
 The data is successfully inserted.
 
@@ -304,6 +305,7 @@ The data is successfully inserted.
     </copy>
     ```
 4. Click **Run Script**.
+    ![Click SQL](./images/create-sales-data-output.png =70%x*)
 
 The data is successfully inserted.
 
@@ -311,7 +313,7 @@ You may now proceed to the next lab.
 
 ## Learn More
 
-[Using Oracle Autonomous AI Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsb/index.html)
+[Using Oracle Autonomous AI Database Serverless](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/autonomous-intro-adb.html)
 
 
 ## Acknowledgements
