@@ -8,7 +8,7 @@ You manage MCP Server using OCI free-form tags and verify its operational state.
 
 This lab establishes the foundation for integrating AI clients with Autonomous AI Database tools.
 
-Estimated Time: X
+Estimated Time: 5 minutes
 
 ### Objectives
 

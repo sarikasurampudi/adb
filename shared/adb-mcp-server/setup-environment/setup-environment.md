@@ -10,7 +10,7 @@ This workshop focuses on teaching you how to setup your Autonomous AI Database.
 
 
 
-Estimated Time: 5 minutes.
+Estimated Time: 10 minutes
 
 ### Objectives
 

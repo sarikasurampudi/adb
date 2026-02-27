@@ -33,7 +33,7 @@ Examples of MCP clients used in this workshop include:
 - Visual Studio Code with the Cline extension
 
 
-Estimated Time: x
+Estimated Time: 1 hour 15 minutes
 
 ### Objectives
 
