@@ -88,7 +88,7 @@ You will now re-enable MCP Server using the same tag.
     </copy>
     ```
 4. Click **Update**.
-  ![](./images/mcp-re-enable.png)
+  ![Re-enable MCP Server](./images/mcp-re-enable.png)
 
 
 ## Task 4: Obtain Autonomous AI Database OCID
