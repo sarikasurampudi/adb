@@ -272,7 +272,7 @@ You may now proceed to the next lab.
 
 ## Acknowledgements
 
-* **Authors:** Sarika Surampudi, Principal User Assistance Developer; Dhanish Kumar, Member Technical Staff
+* **Authors:** Sarika Surampudi, Principal User Assistance Developer
 * **Contributors:** Chandrakanth Putha, Senior Product Manager; Mark Hornick, Senior Director, Machine Learning and AI Product Management
 <!--* **Last Updated By/Date:** Sarika Surampudi, August 2025
 -->
