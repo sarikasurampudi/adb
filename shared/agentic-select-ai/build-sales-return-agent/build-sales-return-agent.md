@@ -71,9 +71,9 @@ In this task, you will first download the **`SelectAI4SQL - AI Agents - Sales Re
    Go to the **Oracle Machine Learning user interface** section and click **Copy**. Paste the URL on the browser to sign into Oracle Machine Learning user interface.
   ![Access OML User Interface URL](../build-sales-return-agent/images/oml-notebook-url.png)
 
-3. To sign in, write the ADB username and password.  Click **Sign In**.
+3. To sign in, type your ADB schema username (`ADB_USER`) and password. Click **Sign In**.
 
-   ![Sign in with SELECT_AI_USER and paste the password](../build-sales-return-agent/images/sandbox-login-to-oml-ui.png)
+   ![Sign in with ADB_USER and paste the password](../build-sales-return-agent/images/tenancy-login-to-oml-ui.png)
    
 
 </if>
@@ -83,20 +83,20 @@ In this task, you will first download the **`SelectAI4SQL - AI Agents - Sales Re
 
    ![Click on View Login Info at the top left](../build-sales-return-agent/images/sandbox-view-login-info.png)
 
-   Scroll down in the list of optins on the right. Make sure to click on Button (1) to copy the ADB User password, and then click on Button (2) to go to the Oracle Machine Learning UI.
+   Scroll down in the list of options on the right. Make sure to click on Button (1) to copy the ADB User password, and then click on Button (2) to go to the Oracle Machine Learning UI.
    ![Click on ADB User password and Login to OML UI](../build-sales-return-agent/images/sandbox-copy-pass-and-click-url.png)
 
-3. To sign in, write the username **SELECT\_AI\_USER** and paste the copied password.  Click **Sign In**.
+3. To sign in, type the username **SELECT\_AI\_USER** and paste the copied password.  Click **Sign In**.
 
    ![Sign in with SELECT_AI_USER and paste the password](../build-sales-return-agent/images/sandbox-login-to-oml-ui.png)
 
 </if>
 
 4. From the OML UI Home page, click on **Notebooks**
-   ![Sign in with SELECT_AI_USER and paste the password](../build-sales-return-agent/images/sandbox-oml-home.png) 
+   ![Sign in with SELECT_AI_USER and paste the password](../build-sales-return-agent/images/tenancy-oml-home.png) 
 
-5. From the Notebooks listing page, click on **Import** => **File**
-   ![Sign in with SELECT_AI_USER and paste the password](../build-sales-return-agent/images/sandbox-notebooks-import.png) 
+5. From the Notebooks listing page, click on **Import** → **File**
+   ![Sign in with SELECT_AI_USER and paste the password](../build-sales-return-agent/images/tenancy-notebooks-import.png) 
 
 <if type="tenancy">
 6. The **Open** dialog box is displayed. Navigate to your local folder where you downloaded the OML notebook, and select the **`SelectAI4SQL - AI Agents - Sales Return Agent.dsnb`** notebook file. The file is displayed in the **File Name** field. Make sure that the **Custom Files (*.dsnb;\*.ipynb;\*.json;\*.zpln)** type is selected in the second drop-down field, and then click **Open**.
@@ -120,7 +120,7 @@ In this task, you will first download the **`SelectAI4SQL - AI Agents - Sales Re
 
 7. Open the imported notebook. Click the notebook's name link. The notebook is displayed in the Notebook **Editor**. Read the paragraphs in this notebook.
 
-  ![The notebook is opened and the editor shown.](../build-sales-return-agent/images/sandbox-notebook-open.png " ")
+  ![The notebook is opened and the editor shown.](../build-sales-return-agent/images/tenancy-notebook-open.png " ")
 
      >**Note:** If a **User Action Required** message is displayed when you open the notebook, click **Allow Run**.
 
@@ -696,8 +696,8 @@ You may now proceed to the next lab.
 
 * **Author:** Sarika Surampudi, Principal User Assistance Developer
 * **Contributor:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
-<!--* **Last Updated By/Date:** Sarika Surampudi, August 2025
--->
+* **Last Updated By/Date:** Sarika Surampudi, June 2026
+
 
 
 Copyright (c) 2026 Oracle Corporation.
