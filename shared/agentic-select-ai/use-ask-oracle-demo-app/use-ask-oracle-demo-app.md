@@ -55,34 +55,15 @@ To create NL2SQL profile:
 
   ![Enter Ask Oracle Chatbot credentials](./images/ask-oracle-login.png =70%x*)
 
-2. The **Ask Oracle Chatbot using Select AI** chatbot application is displayed. On the top right-hand corner, click the user icon. 
-    ![Enter Ask Oracle user icon](./images/ask-oracle-user-icon.png =70%x*)
+2. The **Set Admin Users** window in the **Ask Oracle Select AI** application is displayed. Type the schema name that has access to Select AI Profiles. For example, `ADB_USER` in the **Admin usernames** field and click **Save Admin Users**.
+   ![Enter comma separated usernames as Admin users](./images/ask-oracle-set-admin-users.png =70%x*)
 
-3. Click **Settings** from the menu. 
-    ![Select Settings](./images/settings.png =70%x*)
+3. The **Ask Oracle Select AI Chatbot** application is displayed.
+    
+4. In the **Ask Question** prompt field, click the **+** menu and select **Agent Team**.  Notice that the bottom right indicates that agent team is `RETURN_AGENCY_TEAM`. You will see a section on the right of the conversation prompt that allows you to switch the Agent Team Profile. If you have configured other agent profiles using Select AI Agent framework, click the pull-down menu and select `RETURN_AGENCY_TEAM` profile. This profile was created in **Task 9 of Lab 2**.
+   ![Select OCI_GENAI profile](./images/ask-oracle-enter-prompt-agents.png =70%x*)
 
-4. The **Settings** screen pops up with different tabs: **NL2SQL Profile**, **RAG Profile**, **AI Agents Teams**, **Account**, and **About**. Choose the following by clicking each tab and selecting the corresponding object:
-
-  a. NL2SQL Profile – `OCI_GENAI[NL2SQL]`
-
-      ![Select OCI_GENAI in NL2SQL Profile tab](./images/ask-oracle-nl2sql.png =70%x*)
-
-  b. RAG Profile – `SALES_AGENT_RAG_PROFILE`
-      ![Select SALES_AGENT_RAG_PROFILE in RAG Profile tab](./images/ask-oracle-rag.png =70%x*)
-
-  c. AI Agent Teams – `RETURN_AGENCY_TEAM`
-      ![Select RETURN_AGENCY_TEAM in AI Agent Teams tab](./images/ask-oracle-ai-agent-teams.png =70%x*)
-
-For example, pick the agent team **`RETURN_AGENCY_TEAM`** and click the **X** in the upper right to close the **Settings** screen.
-
-5. In the **Enter prompt** text area, click the **+** and select **Agent Team**. 
-      ![Select Agents at the Enter prompt text area](./images/ask-oracle-enter-prompt-agents.png =70%x*)
-
-    Notice that the bottom right indicates that agent team is `RETURN_AGENCY_TEAM`.
-
-      ![Bottom right shows RETURN_AGENCY_TEAM](./images/ask-oracle-enter-prompt-agents-bottom-right.png =70%x*)
-
-You are now ready to ask questions at the Enter prompt area!
+You are now ready to ask questions at the prompt area!
 
 
 ## Task 3: Interact with the Sales Return Agent
@@ -96,90 +77,122 @@ For example, follow this script:
 
 ## Task 4: (Optional) Ask Natural Language and Database Questions Using the Application
 
-You can use this application to interact with the LLM and your database in a variety of ways:
+You use the Ask Oracle Select AI chatbot application to interact with both a large language model (LLM) and your Autonomous AI Database through a single conversational interface.
+The application supports two modes of interaction:
 
 - **Ask the LLM Directly:**
-Click the **+** and select **NL2SQL**. _Uncheck the  **Database** checkbox_ to provide direct prompts to your LLM about anything such as:
+Click the **+** and select **NL2SQL**. _Uncheck the  **Database** checkbox_ ask general free form questions (internet-based) about anything such as:
 
-  _What is Oracle Autonomous Database?_
+  _Give me a recipe for french toast._
   
   This prompt is sent to the LLM that you selected when you created the profile and returns the response.
-
-  ![Ask the LLM](./images/ask-oracle-llm.png =70%x*)
+  ![Ask the LLM](./images/ask-oracle-uncheck-database.png =70%x*)
 
 - **Ask your Database :**
-Click the **+** and select **NL2SQL**. _Select the **Database** checkbox_ to ask questions about your database data based on the user and tables in the database that you specified when you created the profile such as:
+Click the **+** and select **NL2SQL**. _Select the **Database** checkbox_ to ask questions about your database data based on the user and tables in the database that you specified when you created the profile.
+  
+  ![Ask your database](./images/ask-oracle-check-database.png =70%x*)
 
-  _How many customers do I have in each country?_
 
-  ![Ask your database](./images/ask-oracle-database.png =70%x*)
+Let's experiment a bit with both general data from the _internet_ and also from the schema tables in the database.
 
-- **Generate narrated result:**
+1. Let's find out how to make french toast. Enter your question using a free form format in the **Ask Question** text box, and make sure that the **Database** checkbox is _not checked_ since this is a general internet question that will be handled by your LLM provider. Next, click the **Run** icon, or press **[ENTER]**.
+   
+    > You can type your own natural language question. You don't have to use the exact question that we show in our examples.
+  
+  ![Ask the LLM](./images/ask-oracle-french-toast-recipe.png =70%x*)
+
+  A French toast recipe is displayed.
+
+  ![LLM's response](./images/ask-oracle-french-toast-recipe-display.png =70%x*)
+
+<!-- - **Generate narrated result:**
 _Check the **Database** and **Narrate** checkbox_ to ask questions about your database data based on the user and tables in the database specified in the AI profile such as:
 
   _How many customers are females?_
 
-    ![Select Database and Narrate checkboxes](./images/ask-oracle-narrate.png =70%x*)
+    ![Select Database and Narrate checkboxes](./images/ask-oracle-narrate.png =70%x*) -->
 
-  **Have an interactive conversation**
+2. Let's find out _How many customers do I have in each country?_ Enter your question using a free form format in the **Ask Question** text box, and select the **Database** checkbox since this is a question about the tables present in the OCI_GENAI profile. Next, press **[ENTER]**. 
+   The number of customers along with the countries are displayed.
+  ![Select Database and ask database tables related question](./images/ask-oracle-database.png =70%x*)
 
-  Select AI supports short-term, session based conversations, which are enabled in the AI profile by setting the `converstion` parameter to `true`. Refer to **Task 1 -> Step 2** of this lab.
+3. Click **Explain** to view and explain the SQL query behind this natural language question.
+   ![Click Explain to view the explanation of the generated SQL](./images/ask-oracle-explain.png =70%x*)
+4. When you finish reviewing, click the Back icon (left arrow) to return to the conversation on Home page.
+   ![Click Explain to view the generated SQL](./images/ask-oracle-explain-sql.png =70%x*)
+5. Now, click **Explore**.
+   ![Select Explore](./images/ask-oracle-explore.png =70%x*)
+   The **Explore** page is displayed.
+   ![Select Explore](./images/ask-oracle-explore-display.png =70%x*)
+6. Click the **Actions** drop-down list to perform several tasks on the generated data such as sorting, downloading, formatting, charting and much more. For details on using the actions tasks, see the embedded video in the **Introduction** section of this lab. 
+  ![Select Actions and explore various options](./images/ask-oracle-explore-actions.png =70%x*)
+7. When you finish exploring, click the **Back** icon (left arrow) to return to the conversation on Home page. Now, click **Show SQL**.
+  ![Select Show SQL](./images/ask-oracle-showsql.png =70%x*)
+8. You can now see the SQL code generated by Select AI.
+   ![View generated SQL](./images/ask-oracle-showsql-display.png =70%x*)
+9. Finally, there is also a button to **Show Charts** that enables you to play interactively with the data.
+    ![Select Show Charts](./images/ask-oracle-show-charts.png =70%x*)
+   
+   The chart is displayed:
+   ![Displays a bar chart of the data](./images/ask-oracle-show-charts-display.png =70%x*)
 
-
-1. Uncheck **Narrate**. Use the following prompt:
-
-  _How many customers do I have in each country?_
-
-  Ask another follow up question such as:
-
-  _Break that out by gender_
-
-    ![Uncheck Narrate and have conversation](./images/ask-oracle-uncheck-narrate.png =70%x*)
-
-3. Click **Explain**. 
-
-    ![Click Explain](./images/ask-oracle-explain.png =70%x*)
-
-  The following screen displays:
-
-    ![Explains the SQL](./images/ask-oracle-explain-sql.png)
-
-  When finished viewing, click the back arrow and continue with the following script:
-
-  _Can you change that to have the country in one column and other columns such as male, female and total?_
-
-  _Display this result in a bar chart_
-
-  _Put the results in descending_
-
-  _How many customers do I have in each country?_
-
-
-- **Use RAG:**
-Click **+** and select **RAG** to ask questions using retrieval augmented generation (RAG). Before you submit the prompt, ensure that the RAG profile `SALES_AGENT_RAG_PROFILE` created earlier in **Lab 5** is selected. Ask questions relative to the corresponding vector index content for Select AI to augment your prompt with relevant content for the LLM. We have created a vector index in **Lab 5** -> **Task 1**.
-
-1. First, we’ll just ask our LLM without RAG, so select the **Chat** checkbox. The LLM returns a general response describing Select AI RAG capabilities based on its training, without using any content from your vector index.
-
-  _What are the benefits of Select AI for retrieval augmented generation (RAG)?_
-
-    ![Select Chat](./images/ask-oracle-rag-chat.png =70%x*)
-
-2. Uncheck **Chat** and then ask:
-
-  _what are alternatives for the smartphone case_
-
-  > **Tip**: Ask a question based on the RAG profile you selected, which references the documents stored in your vector database. 
+  > LLMs are remarkable at inferring intent from the human language and they are getting better all the time; however, they are not perfect! It is very important to verify the results.
+   
+  <!--  Uncheck **Narrate**. Use the following prompt:
   
-  Select AI now uses retrieval augmented generation to ground the response in your vector index. The LLM returns recommendations based on the content of your documents, not general model knowledge.
-
-3. Let’s see the specific chunks provided to the LLM, so select the **Show chunk details** checkbox.
-
-  _What do I need to specify in my AI profile to enable RAG?_
-
-  ![Show chunk details](./images/ask-oracle-show-chunk-details.png =70%x*)
-
-  Select AI splits source documents into smaller units called chunks and stores them in the vector index. During a RAG query, Select AI retrieves the most relevant chunks using semantic search and adds them to the prompt sent to the LLM. This process gives the model focused context from your documents and helps reduce hallucinations.
-
+    _How many customers do I have in each country?_
+  
+    Ask another follow up question such as:
+  
+    _Break that out by gender_
+  
+      ![Uncheck Narrate and have conversation](./images/ask-oracle-uncheck-narrate.png =70%x*)
+  
+  3. Click **Explain**. 
+  
+      ![Click Explain](./images/ask-oracle-explain.png =70%x*)
+  
+    The following screen displays:
+  
+      ![Explains the SQL](./images/ask-oracle-explain-sql.png)
+  
+    When finished viewing, click the back arrow and continue with the following script:
+  
+    _Can you change that to have the country in one column and other columns such as male, female and total?_
+  
+    _Display this result in a bar chart_
+  
+    _Put the results in descending_
+  
+    _How many customers do I have in each country?_
+  
+  
+  - **Use RAG:**
+  Click **+** and select **RAG** to ask questions using retrieval augmented generation (RAG). Before you submit the prompt, ensure that the RAG profile `SALES_AGENT_RAG_PROFILE` created earlier in **Lab 5** is selected. Ask questions relative to the corresponding vector index content for Select AI to augment your prompt with relevant content for the LLM. We have created a vector index in **Lab 5** -> **Task 1**.
+  
+  1. First, we’ll just ask our LLM without RAG, so select the **Chat** checkbox. The LLM returns a general response describing Select AI RAG capabilities based on its training, without using any content from your vector index.
+  
+    _What are the benefits of Select AI for retrieval augmented generation (RAG)?_
+  
+      ![Select Chat](./images/ask-oracle-rag-chat.png =70%x*)
+  
+  2. Uncheck **Chat** and then ask:
+  
+    _what are alternatives for the smartphone case_
+  
+    > **Tip**: Ask a question based on the RAG profile you selected, which references the documents stored in your vector database. 
+    
+    Select AI now uses retrieval augmented generation to ground the response in your vector index. The LLM returns recommendations based on the content of your documents, not general model knowledge.
+  
+  3. Let’s see the specific chunks provided to the LLM, so select the **Show chunk details** checkbox.
+  
+    _What do I need to specify in my AI profile to enable RAG?_
+  
+    ![Show chunk details](./images/ask-oracle-show-chunk-details.png =70%x*)
+  
+    Select AI splits source documents into smaller units called chunks and stores them in the vector index. During a RAG query, Select AI retrieves the most relevant chunks using semantic search and adds them to the prompt sent to the LLM. This process gives the model focused context from your documents and helps reduce hallucinations.
+   -->
 
   **This concludes the workshop.**
 
@@ -196,7 +209,7 @@ Click **+** and select **RAG** to ask questions using retrieval augmented genera
 
 * **Author:** Sarika Surampudi, Principal User Assistance Developer
 * **Contributors:** Mark Hornick, Product Manager; Laura Zhao, Member of Technical Staff
-* **Last Updated By/Date:** Sarika Surampudi, February 2026
+* **Last Updated By/Date:** Sarika Surampudi, August 2026
 
 Copyright (c) 2026 Oracle Corporation.
 
