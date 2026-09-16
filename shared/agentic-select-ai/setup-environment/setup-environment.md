@@ -89,7 +89,7 @@ Here is a video that walks you through the **Ask Oracle** chatbot app installati
 
 Perform the following steps to install the Ask Oracle Chatbot app. The application is available on GitHub.
 
-1. Download the `ADB-AskOracle-Chatbot-yyyy-mm-dd.sql` file from the [GitHub repository](https://github.com/oracle-devrel/oracle-autonomous-database-samples/tree/main/apex/Ask-Oracle) and store it in your local directory. 
+1. Download the `ADB-AskOracle-Chatbot-yyyy-mm-dd.sql` file from the [GitHub repository](https://github.com/oracle-devrel/oracle-autonomous-database-samples/tree/main/apex/Ask-Oracle-Select-AI-Chatbot) and store it in your local directory. 
 
 2. From your Autonomous AI Database console, navigate to **Tool configuration** and copy the APEX URL.
 
