@@ -340,6 +340,17 @@ Create Handle\_Product\_Return\_Task.
   ```
 
 ## Task 6: Create OCI Credentials
+<if type="sandbox">
+Because you are using an Oracle LiveLabs-provided sandbox environment, a credential named `AI_CREDENTIAL` is already defined for you.
+
+Let's confirm that the OCI Credential named `AI_CREDENTIAL` is available for the user. You should see it listed when you run the following query.
+
+  ```sql
+  SELECT OWNER, CREDENTIAL_NAME, ENABLED FROM ALL_CREDENTIALS WHERE CREDENTIAL_NAME='AI_CREDENTIAL';
+  ```
+</if>
+
+<if type="tenancy">
 Before you create and use an AI profile, you must create your OCI credential. In this task you will gather the required parameters for OCI Gen AI credential and create a credential that will be used in the next task to create an AI profile.
 
 Follow these steps to create your OCI credentials:
@@ -416,6 +427,8 @@ Follow these steps to create your OCI credentials:
     END;
     </copy>
     ```
+</if>
+
 ## Task 7: Create an AI Profile
 You'll create an AI profile with LLM of your choice, to use in the next step to create an agent. In this task, you are using xAi's GROK model with OCI Gen AI credential.
 
