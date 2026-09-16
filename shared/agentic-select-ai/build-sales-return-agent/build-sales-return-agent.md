@@ -90,7 +90,14 @@ In this task, you will first download the **`SelectAI4SQL - AI Agents - Sales Re
 
    ![Sign in with SELECT_AI_USER and paste the password](../build-sales-return-agent/images/sandbox-login-to-oml-ui.png)
 
+4. From the OML UI Home page, click on **Notebooks**
+   ![Sign in with SELECT_AI_USER and paste the password](../build-sales-return-agent/images/sandbox-oml-home.png) 
+
+5. From the Notebooks listing page, click on **Import** → **File**
+   ![Sign in with SELECT_AI_USER and paste the password](../build-sales-return-agent/images/sandbox-notebooks-import.png) 
 </if>
+
+<if type="tenancy">
 
 4. From the OML UI Home page, click on **Notebooks**
    ![Sign in with SELECT_AI_USER and paste the password](../build-sales-return-agent/images/tenancy-oml-home.png) 
@@ -98,7 +105,6 @@ In this task, you will first download the **`SelectAI4SQL - AI Agents - Sales Re
 5. From the Notebooks listing page, click on **Import** → **File**
    ![Sign in with SELECT_AI_USER and paste the password](../build-sales-return-agent/images/tenancy-notebooks-import.png) 
 
-<if type="tenancy">
 6. The **Open** dialog box is displayed. Navigate to your local folder where you downloaded the OML notebook, and select the **`SelectAI4SQL - AI Agents - Sales Return Agent.dsnb`** notebook file. The file is displayed in the **File Name** field. Make sure that the **Custom Files (*.dsnb;\*.ipynb;\*.json;\*.zpln)** type is selected in the second drop-down field, and then click **Open**.
 
   ![The Open dialog box is displayed](../build-sales-return-agent/images/notebook-open-dialog.png " ")
@@ -116,13 +122,20 @@ In this task, you will first download the **`SelectAI4SQL - AI Agents - Sales Re
   If the import is successful, a notification is displayed and the **`SelectAI4SQL - AI Agents - Sales Return Agent`** notebook is displayed in the list of available notebooks.
 
   ![The newly imported notebook is displayed.](../build-sales-return-agent/images/sandbox-notebook-imported.png " ")
+7. Open the imported notebook. Click the notebook's name link. The notebook is displayed in the Notebook **Editor**. Read the paragraphs in this notebook.
+
+![The notebook is opened and the editor shown.](../build-sales-return-agent/images/sandbox-notebook-open.png " ")
+
+    >**Note:** If a **User Action Required** message is displayed when you open the notebook, click **Allow Run**.
 </if>
 
+<if type="tenancy">
 7. Open the imported notebook. Click the notebook's name link. The notebook is displayed in the Notebook **Editor**. Read the paragraphs in this notebook.
 
   ![The notebook is opened and the editor shown.](../build-sales-return-agent/images/tenancy-notebook-open.png " ")
 
      >**Note:** If a **User Action Required** message is displayed when you open the notebook, click **Allow Run**.
+</if>
 
 ## Task 2: Review the Customer Table
 
