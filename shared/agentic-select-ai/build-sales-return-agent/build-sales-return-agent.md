@@ -339,18 +339,16 @@ Create Handle\_Product\_Return\_Task.
   </copy>
   ```
 
-## Task 6: Create OCI Credentials
+
 <if type="sandbox">
-Because you are using an Oracle LiveLabs-provided sandbox environment, a credential named `AI_CREDENTIAL` is already defined for you.
-
-Let's confirm that the OCI Credential named `AI_CREDENTIAL` is available for the user. You should see it listed when you run the following query.
-
-  ```sql
-  SELECT OWNER, CREDENTIAL_NAME, ENABLED FROM ALL_CREDENTIALS WHERE CREDENTIAL_NAME='AI_CREDENTIAL';
-  ```
+## Task 6: Check OCI Credentials
+Because you are using an Oracle LiveLabs-provided sandbox environment, a credential named **AI_CREDENTIAL** is already defined for you.
 </if>
 
 <if type="tenancy">
+
+## Task 6: Create OCI Credentials
+
 Before you create and use an AI profile, you must create your OCI credential. In this task you will gather the required parameters for OCI Gen AI credential and create a credential that will be used in the next task to create an AI profile.
 
 Follow these steps to create your OCI credentials:
@@ -427,10 +425,22 @@ Follow these steps to create your OCI credentials:
     END;
     </copy>
     ```
+
+6. Let's confirm that the OCI Credential named **AI_CREDENTIAL** is available for the user.  You should see it listed when you run the following query.
 </if>
 
+<if type="sandbox">
+1. Let's confirm that the OCI Credential named **AI_CREDENTIAL** is available for the user.  You should see it listed when you run the following query.
+</if>
+
+    ```
+    <copy>
+    SELECT OWNER, CREDENTIAL_NAME, ENABLED FROM ALL_CREDENTIALS WHERE CREDENTIAL_NAME='AI_CREDENTIAL';
+    </copy>
+    ```
+
 ## Task 7: Create an AI Profile
-You'll create an AI profile with LLM of your choice, to use in the next step to create an agent. In this task, you are using xAi's GROK model with OCI Gen AI credential.
+You'll create an AI profile with LLM of your choice, to use in the next step to create an agent. In this task, you are using xAi's GROK Reasoning model with the OCI Gen AI credential.
 
 ```
 <copy>
@@ -444,8 +454,8 @@ BEGIN
       attributes   => '{
           "provider": "oci",
           "credential_name": "AI_CREDENTIAL",
-          "model": "xai.grok-3",
-          "embedding_model": "cohere.embed-english-v3.0"
+          "model": "xai.grok-4.20-reasoning",
+          "embedding_model": "cohere.embed-v4.0"
       }',
       description  => 'Supports the Select AI Sales Return Agent scenario.'
   ); 
