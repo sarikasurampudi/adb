@@ -137,7 +137,7 @@ In this task, you will first download the **`SelectAI4SQL - AI Agents - Sales Re
      >**Note:** If a **User Action Required** message is displayed when you open the notebook, click **Allow Run**.
 </if>
 
-## Task 2: Review the Customer Table
+## Task 2: Create and Review Customer and Order Status Tables
 
 You'll view the sample table for the scenario.
 
@@ -453,7 +453,7 @@ Follow these steps to create your OCI credentials:
     ```
 
 ## Task 7: Create an AI Profile
-You'll create an AI profile with LLM of your choice, to use in the next step to create an agent. In this task, you are using xAi's GROK Reasoning model with the OCI Gen AI credential.
+You'll create an AI profile with LLM of your choice, to use in the next step to create an agent. In this task, you are using xAi's GROK Reasoning model with the OCI Gen AI credential. 
 
 ```
 <copy>

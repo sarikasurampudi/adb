@@ -51,7 +51,7 @@ To create NL2SQL profile:
 
 ## Task 2: Access the Application
 
-1. Launch the demo app. Paste the URL in a new tab in your Web browser, and then click **[ENTER]**. In the **Ask Oracle** page, enter the username and password, and then click **Sign In**. Refer to **Lab 1** -> **Task 4**.
+1. Launch the demo app. Paste the URL in a new tab in your Web browser, and then click **[ENTER]**. In the **Ask Oracle** page, enter the username and password, and then click **Sign In**. The application and its URL were created during the installation of the Ask Oracle Select AI Chatbot Application in **Lab 1** -> **Task 4**.
 
   ![Enter Ask Oracle Chatbot credentials](./images/ask-oracle-login.png =70%x*)
 

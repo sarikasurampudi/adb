@@ -37,7 +37,7 @@ Before we begin, let's review some important terms:
 <!--* **RAG Tool**: A retrieval mechanism that lets the agent pull in external or domain-specific knowledge to make better decisions.-->
 
 >**NOTE:** This workshop requires access to a Large Language Model (LLM). You can use LLMs from a wide range of AI providers, including OCI GenAI, OpenAI, Azure, and Google Gemini, among others. See the [Select AI Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai-about.html#GUID-7574F1D1-CE6F-41BC-AE95-6281EB23C7BE) for more details.
-If you want to use OCI GenAI, ensure that your tenancy is subscribed to one of the following regions (at the time the workshop was last updated): **US Midwest (Chicago)** (default), **Germany Central (Frankfurt)**, **UK South (London)**, **Brazil East (Sao Paulo)**, or **Japan Central (Osaka)** regions in order to run this workshop.  For the current list of regions with **Generative AI**, see [Regions with Generative AI](https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm).
+If you want to use OCI GenAI, ensure that your tenancy is subscribed to one of the following regions (at the time the workshop was last updated): **US Midwest (Chicago)** (default), **US East (Ashburn)**, **US West (Phoenix)**,**Germany Central (Frankfurt)**, **UK South (London)**, **Brazil East (Sao Paulo)**, **Saudi Arabia Central (Riyadh)**, **UAE Central (Abu Dhabi)**, **UAE East (Dubai)**, **India South (Hyderabad)** or **Japan Central (Osaka)** regions in order to run this workshop.  For the current list of regions with **Generative AI**, see [Regions with Generative AI](https://docs.oracle.com/en-us/iaas/Content/generative-ai/overview.htm).
 
 
 Estimated Time : 1 hour 35 minutes.
@@ -58,11 +58,11 @@ You may now proceed to the next lab.
 
 ## Learn more
 
-* [Oracle Autonomous AI Database Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/index.html)
+* [Oracle Autonomous AI Database Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/index.html)
 * [Oracle Select AI Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai.html)
-* [Oracle Select AI Agent Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai-agents1.html)
+* [Oracle Select AI Agent Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/select-ai-agent1.html)
 * [`DBMS_CLOUD_AI` Package Documentation](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-ai-package.html#GUID-000CBBD4-202B-4E9B-9FC2-B9F2FF20F246)
-* [Additional Autonomous AI Database Workshops](https://apexapps.oracle.com/pls/apex/dbpm/r/livelabs/livelabs-workshop-cards?p100_workshop_series=222)
+* [Additional Autonomous AI Database Workshops](https://livelabs.oracle.com/adb)
 
 ## Acknowledgements
 * **Authors:** Sarika Surampudi, Principal User Assistance Developer
